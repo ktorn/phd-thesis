@@ -1,0 +1,19 @@
+\begin{figure}[H]
+  \centering
+    \scalebox{1}
+    {  \begin{sequencediagram}
+    \newinst{browser}{\shortstack{User \\ Browser }}{}
+    \newinst{marketUI}{\shortstack{Marketplace \\ UI }}{}
+    \newinst{indexer}{\shortstack{Blockchain \\  Indexer }}{}    
+    \newinst{ipfs}{\shortstack{IPFS \\  Gateway}}{} 
+    \begin{call}{browser}{ }{marketUI}{1. page UI}
+    \end{call}
+    \begin{call}{browser}{ }{indexer}{2. OBJKT metadata}
+    \end{call}
+    \begin{call}{browser}{ }{ipfs}{3. OBJKT payload}
+    \end{call}
+    
+  \end{sequencediagram}
+  }
+\caption{Loading a non-networked OBJKT - HTTP request sequence} 
+\end{figure}

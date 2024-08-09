@@ -1,0 +1,120 @@
+
+% define entry in default 'main' glossary:
+\newglossaryentry{sample}{name={sample},description={an example}}
+
+% define entry in 'acronym' glossary:
+\newacronym{ex}{EX}{example}
+
+
+
+% Adding Ethereum
+\newglossaryentry{ethereum}{
+    name={Ethereum},
+    description={A decentralized, open-source blockchain platform that enables the creation of smart contracts and decentralized applications (DApps)},
+    sort={Ethereum}
+}
+
+
+
+
+% define entry in 'symbols' glossary:
+\newglossaryentry{fx}{name={\ensuremath{f(x)}},
+ description={a function of $x$},
+ type=symbols
+}
+
+
+
+
+\newglossaryentry{code is law}{
+	name={code is law},
+	description={a term coined by Lessig \citeyear{lessigCodeOtherLaws2009}, represents a philosophical stance where aspects of governance and the rules that determine human interactions are encoded as software and are executed algorithmically},
+	sort={codeislaw}
+}
+
+
+\newglossaryentry{conceptual art}{
+	name={conceptual art},
+	description={an art movement where the concept or idea behind an artwork is more important than the aesthetics of the finished piece},
+	sort={conceptualart}
+}
+
+
+
+\newacronym{defi}{DeFi}{decentralised finance}
+\newglossaryentry{decentralisedfinance}{
+    name={decentralised finance},
+    description={an ecosystem of financial instruments, platforms and services, which are built upon blockchains and decentralisation principles, such as transparency, no central authority, trustlessness, censorship-resistence, self-custody, and others},
+    sort={DeFi},
+    type={main},
+    first={\glsentrydesc{defi} (\glsentryshort{defi})},
+    see=[see also]{defi}
+}
+
+
+
+\newglossaryentry{emulation}{
+	name={emulation},
+	description={the process of imitating the behavior of one system using another system},
+	sort={emulation}
+}
+
+\newglossaryentry{off-chain}{
+	name={off-chain},
+	description={anything related to a blockchain, but which happens outside of the blockchain itself},
+	sort={off-chain}
+}
+
+\newglossaryentry{minting}{
+	name={minting},
+	description={the act of creating a new token on a blockchain, which can either be a fungible token (such as a new coin), or a non-fungible token (NFT) which represents a particular asset, such as an artwork },
+	sort={minting}
+}
+
+
+% define entry in 'acronym' glossary and link it to the full form:
+\newacronym{nft}{NFT}{non-fungible token}
+\newglossaryentry{nonfungibletoken}{
+    name={non-fungible token},
+    description={a digital and cryptographically signed record created and stored on a blockchain which contains meta-data relating to a unique asset, which it represents. This token is often used as a title of ownership of said asset, which can be traded, transferred, or destroyed},
+    sort={NFT},
+    type={main},
+    first={\glsentrydesc{nft} (\glsentryshort{nft})},
+    see=[see also]{nft}
+}
+
+
+\newglossaryentry{primary market}{
+	name={primary market},
+	description={the market where an artwork is sold for the first time, from the artist directly to the first collectors of that artwork, such that the artist sets the price and receives the full proceeds of the sale, minus any marketplace fees},
+	sort={primarymarket}
+}
+
+\newglossaryentry{primary sales}{
+	name={primary sales},
+	description={initial sales of an artwork on the primary market},
+	sort={primarysales}
+}
+
+\newglossaryentry{secondary market}{
+	name={secondary market},
+	description={the market where an artwork is re-sold, from a collector to another collector, such that the seller sets the price and receives the majority of the proceeds of the sale, minus any artist royalties which are paid to the artist},
+	sort={secondarymarket}
+}
+
+\newglossaryentry{secondary sales}{
+	name={secondary sales},
+	description={re-sales of an artwork on the secondary market},
+	sort={secondarysales}
+}
+
+
+\newglossaryentry{web3}{
+	name={web3},
+	description={re-sales of an artwork on the secondary market},
+	sort={web3}
+}
+
+
+
+

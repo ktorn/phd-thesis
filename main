@@ -1,0 +1,114 @@
+\documentclass[12pt,a4paper]{report}
+%\usepackage[left=12mm, top=0.5in, bottom=12mm]{geometry}
+\usepackage{layout}
+\usepackage[style=altlist, acronym, symbols, nonumberlist]{glossaries-extra}
+\usepackage{imakeidx}
+\makeindex
+\usepackage{xpatch}
+\usepackage{hyperref}
+\usepackage{apacite}
+\usepackage{url}
+\usepackage{cleveref}
+
+\usepackage{graphicx}
+\usepackage{svg}
+\graphicspath{ {images/} }
+\svgpath{ {images/} }
+
+\usepackage{float}
+\usepackage{pgf-umlsd}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage{setspace}
+
+
+\def\code#1{\texttt{#1}}
+
+\usepackage{datetime}
+
+\newdateformat{monthyeardate}{%
+  \monthname[\THEMONTH], \THEYEAR}
+
+\makenoidxglossaries
+
+% Redefine the TOC page title
+\renewcommand{\contentsname}{Table of Contents}
+
+% Include the separate glossary and acronym entries file
+\input{glossary.tex}
+
+% Index acronyms and glossary terms
+\newcommand{\indexacronym}[1]{\gls{#1}\index{\glsentryshort{#1}}}
+\newcommand{\indexglossary}[1]{\gls{#1}\index{\glsentryname{#1}}}
+
+
+\begin{document}
+\title{SEDA \\ \large A study of conservation techniques for networked cryptoart}
+
+\author{Daniel Filipe Farinha}
+
+% temporarily changing page numbering style to avoid "destination with the same identifier" warning
+% caused by title page
+\pagenumbering{Alph}
+
+% Frontmatter
+\input{frontmatter/titlepage.tex}
+\input{frontmatter/endorsement.tex}
+
+% changing page numbering to roman for front matter
+\pagenumbering{roman}
+
+\input{frontmatter/abstract.tex}
+\input{frontmatter/acknowledgments.tex}
+
+
+% Add ToC entry for the Table of Contents itself
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Table of Contents}
+\tableofcontents
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+
+\cleardoublepage
+\printnoidxglossary[type=acronym, title={List of Acronyms}, toctitle={List of Acronyms}]
+\cleardoublepage
+
+% changing page numbering style back to arabic
+\pagenumbering{arabic}
+\doublespacing
+
+\include{chapters/chapter1-intro}
+\include{chapters/chapter2-relatedwork}
+\include{chapters/chapter3-method}
+\include{chapters/chapter4-dev}
+\include{chapters/chapter5-eval}
+\include{chapters/chapter6-results}
+\include{chapters/chapter7-discuss}
+\include{chapters/chapter8-conclusion}
+
+
+\cleardoublepage
+\label{sec:glossary}
+\printnoidxglossary[title={Glossary}]
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+
+
+\clearpage
+
+
+\bibliographystyle{apacite}
+\bibliography{references}
+%\bibliographystyle{plainurl}
+
+\layout
+
+\end{document}
