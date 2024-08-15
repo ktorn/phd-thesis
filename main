@@ -9,6 +9,7 @@
 \usepackage{apacite}
 \usepackage{url}
 \usepackage{cleveref}
+\usepackage{caption}
 
 \usepackage{graphicx}
 \usepackage{svg}
