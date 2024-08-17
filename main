@@ -5,6 +5,8 @@
 \usepackage{imakeidx}
 \makeindex
 \usepackage{xpatch}
+\usepackage{xcolor}
+\usepackage{soul}
 \usepackage{hyperref}
 \usepackage{apacite}
 \usepackage{url}
@@ -41,6 +43,10 @@
 % Index acronyms and glossary terms
 \newcommand{\indexacronym}[1]{\gls{#1}\index{\glsentryshort{#1}}}
 \newcommand{\indexglossary}[1]{\gls{#1}\index{\glsentryname{#1}}}
+
+% placeholder for citations
+\newcommand{\needcite}{\textcolor{red}{\hl{\textbf{[CITE]}}}}
+\newcommand{\todo}{\textcolor{red}{\hl{\textbf{[TODO]}}}}
 
 
 \begin{document}
