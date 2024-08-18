@@ -53,7 +53,19 @@ The following three years saw a modest amount of development around Tezos especi
 
 Hic et Nunc (\indexacronym{hen}) was an NFT marketplace created by Brazilian developer Rafael Silva and launched on the Tezos blockchain in March 2021, becoming the first to do so on that chain, and in the process beating rival marketplace Kalamint, who was still in closed beta.
 
-At a time when the NFT market was experiencing a boom cycle \needcite , many artists, especially those from the Global South, were priced out of the fast increasing gas prices on Ethereum, on account of the high demand for block space. At the same time environmentally conscious artists raised concerns about Ethereum's high carbon footprint, since at that time it still operated on a \gls{proofofwork} consensus algorithm \cite{lemercierProblemEthereumCryptoArt2021}. With Tezos offering very low transactions costs, and also being environmentally friendly due to its \gls{proofofstake} consensus algorithm, HEN's launch on Tezos provided a solution for these two groups of artists, and many others. With an iconic minimalistic and raw interface, the platform invoked an underground culture of experimental and avant-garde digital art. It also intentionally lacked any kind of artist signup process or similar kinds of gatekeeping. Anyone with as little as 0.5 XTZ (approximately \$2.5 USD at the time) in a Tezos wallet could mint an artwork on HEN. After only a few weeks, HEN rose in popularity and by May 2021 it even overtook OpenSea, the largest NFT marketplace in Ethereum, in number of active users \cite{nelsonWhereAreYour2022}. This sudden rise in usage can be clearly seen on the number of transactions and smart contract calls on the Tezos blockchain which started climbing just after March 2021, see \autoref{fig:tezos-tx-vol}. 
+At a time when the NFT market was experiencing a boom cycle \needcite , many artists, especially those from the Global South, were priced out of the fast increasing gas prices on Ethereum, on account of the high demand for block space. At the same time environmentally conscious artists raised concerns about Ethereum's high carbon footprint, since at that time it still operated on a \gls{proofofwork} consensus algorithm \cite{lemercierProblemEthereumCryptoArt2021}. With Tezos offering very low transactions costs, and also being environmentally friendly due to its \gls{proofofstake} consensus algorithm, HEN's launch on Tezos provided a solution for these two groups of artists. Prominent artists like Joanie Lemercier and Mario Klingemann quickly saw the potential of the platform and started promoting it amongst their peers. With an iconic minimalistic and raw interface, the platform invoked an underground culture of experimental and avant-garde digital art. It also intentionally lacked any kind of artist signup process or similar kinds of gatekeeping. Anyone with as little as 0.5 XTZ (approximately \$2.5 USD at the time) in a Tezos wallet could mint an artwork on HEN. After only a few weeks, HEN rose in popularity and became a boiling pot of creativity and experimentation.
+
+Pioneering museum strategist, and curator Diane Drubay, reflecting on the HEN experiment, stated:
+
+\begin{quotation}
+``In March 2021, if you were minting on hic et nunc, you had no choice but not to sleep anymore. It was hectic and so beautiful! The energy was thrilling and every day was a new adventure.'' \cite{drubayHowHicNunc2021}
+\end{quotation}
+
+
+
+By May 2021 HEN overtook OpenSea, the largest NFT marketplace in Ethereum, in number of active users \cite{nelsonWhereAreYour2022}. This sudden rise in usage can be clearly observed on the number of transactions and smart contract calls on the Tezos blockchain which started climbing just after March 2021, see \autoref{fig:tezos-tx-vol}.
+
+Each NFT platform on Tezos adopts a token name for its NFTs, and Rafael Lima named the HEN tokens: \gls{OBJKT}.
 
 
 \begin{figure}[h]
@@ -64,17 +76,22 @@ At a time when the NFT market was experiencing a boom cycle \needcite , many art
 \end{figure}
 
 
-
 \subsection{Networked OBJKTs and ``Self-Aware'' Artworks}
 
-HEN named its NFT tokens OBJKTs, so each NFT minted on the HEN smart contract is an \gls{OBJKT} with a unique serial number. The platform supported the minting of OBJKTs using a variety of file formats, and one of those format was SVG (mimetype \texttt{image/svg+xml}). Since the SVG file standard allows for the embedding of JavaScript code, which is executed when rendering the file on a web browser, artists were quick to use this and started minting dynamic code-based artworks, such as ``The Magician'' by Lionel Radisson \cite{makio135Magician2021}
+The platform supported the minting of OBJKTs using a variety of file formats, and one of those format was SVG (mimetype \texttt{image/svg+xml}). The SVG file standard allows for the embedding of JavaScript code, which is executed when rendering the file on a web browser.  On 14 Mar 2021 Lionel Radisson minted the first OBJKT with embedded JavaScript, ``The Magician''  \cite{makio135Magician2021}, and other artists quickly followed and started minting dynamic code-based artworks, such as Ricardo Cabello (a.k.a mrdoob)  with the interactive game ``Jumpy Dot'' \needcite which in the process became the first ever web-based interactive game minted as an NFT.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{jumpydot-play.png}
+    \caption[``Jumpy Dot'' by mrdoob]{``Jumpy Dot'' by mrdoob}
+    \label{fig:tezos-tx-vol}
+\end{figure}
 
 
+Soon afterwards, the first few OBJKTs that made network (\indexacronym{http}) requests appeared. The first ones only loaded external webpages, or even played with recursion by loading the HEN website itself, but then 
 
 
 \subsection{TODO}
-
-
 
 
 The research presented in this thesis sits at the intersection between information systems and art. Having started its lifecycle within the context of a PhD program in Information Systems under the umbrella of the Faculty of Arts and Humanities, an usual mix as far as this type of programme is concerned, this research project can best be categorised within the Digital Humanities. 

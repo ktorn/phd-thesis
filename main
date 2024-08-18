@@ -14,6 +14,7 @@
 \usepackage{caption}
 
 \usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage{svg}
 \graphicspath{ {images/} }
 \svgpath{ {images/} }
@@ -23,6 +24,7 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 \usepackage{setspace}
+\usepackage{listings}
 
 
 \def\code#1{\texttt{#1}}
@@ -47,6 +49,59 @@
 % placeholder for citations
 \newcommand{\needcite}{\textcolor{red}{\hl{\textbf{[CITE]}}}}
 \newcommand{\todo}{\textcolor{red}{\hl{\textbf{[TODO]}}}}
+
+
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+
+ \lstdefinestyle{htmlCode} {
+   language=html,
+   basicstyle=\linespread{1}\scriptsize\ttfamily,
+   numberstyle=\scriptsize,
+   keywordstyle=\bfseries\ttfamily,
+   commentstyle=\color{gray}\ttfamily,
+   escapechar=| % Escape to LaTeX between |...|
+}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={abstract, any, as, boolean, break, case, catch, class, console, 
+    const, continue, debugger, declare, default, delete, do, else, enum, export, 
+    extends, false, finally, for, from, function, get, if, implements, import, in, 
+    infer, instanceof, interface, keyof, let, module, namespace, never, new, null, 
+    number, object, package, private, protected, public, readonly, require, return, 
+    set, static, string, super, switch, symbol, this, throw, true, try, type, typeof, 
+    undefined, unique, unknown, var, void, while, with, yield},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\linespread{1}\scriptsize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\scriptsize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
 
 
 \begin{document}
@@ -81,6 +136,15 @@
 \cleardoublepage
 \addcontentsline{toc}{chapter}{\listtablename}
 \listoftables
+
+
+\renewcommand{\lstlistlistingname}{List of Code Listings}
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{List of Code Listings}
+\lstlistoflistings
+
+
 
 \cleardoublepage
 \printnoidxglossary[type=acronym, title={List of Acronyms}, toctitle={List of Acronyms}]
