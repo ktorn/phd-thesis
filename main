@@ -36,7 +36,7 @@
 
 \makenoidxglossaries
 
-% Redefine the TOC page title
+% Redefine the TOC page title 
 \renewcommand{\contentsname}{Table of Contents}
 
 % Include the separate glossary and acronym entries file
