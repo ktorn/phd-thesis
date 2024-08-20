@@ -43,6 +43,16 @@
 	sort={conceptualart}
 }
 
+\newacronym{cid}{CID}{content identifier}
+\newglossaryentry{contentidentifier}{
+    name={content identifier},
+    description={a hash of a file, or a chunk of a file, which uniquely identifies that file or chunk on the InterPlanetary File System network, and which can be used to retrieve it via content addressing},
+    sort={contentidentifier},
+    type={main},
+    first={\glsentrydesc{cid} (\glsentryshort{cid})},
+    see=[see also]{cid}
+}
+
 \newacronym{dapp}{dApp}{decentralised application}
 
 \newglossaryentry{decentralised application}{
@@ -63,12 +73,35 @@
 }
 
 
+\newacronym{dag}{DAG}{directed acyclic graph}
+\newglossaryentry{directed acyclic graph}{
+    name={directed acyclic graph},
+    description={a data structure where nodes connect by directed edges, and these edges do not form any closed loops},
+    sort={directedacyclicgraph},
+    type={main},
+    first={\glsentrydesc{dag} (\glsentryshort{dag})},
+    see=[see also]{dag}
+}
+
+
+\newacronym{dht}{DHT}{distributed hash table}
+\newglossaryentry{distributed hash table}{
+    name={distributed hash table},
+    description={a decentralised key-value store that runs on a p2p network},
+    sort={distributedhashtable},
+    type={main},
+    first={\glsentrydesc{dht} (\glsentryshort{dht})},
+    see=[see also]{dht}
+}
+
+
 
 \newglossaryentry{emulation}{
 	name={emulation},
 	description={the process of imitating the behavior of one system using another system},
 	sort={emulation}
 }
+
 
 \newglossaryentry{ghost-chain}{
 	name={ghost chain},
@@ -116,7 +149,6 @@
 }
 
 
-% define entry in 'acronym' glossary and link it to the full form:
 \newacronym{nft}{NFT}{non-fungible token}
 \newglossaryentry{nonfungibletoken}{
     name={non-fungible token},
@@ -125,6 +157,17 @@
     type={main},
     first={\glsentrydesc{nft} (\glsentryshort{nft})},
     see=[see also]{nft}
+}
+
+
+\newacronym{p2p}{p2p}{peer-to-peer}
+\newglossaryentry{peertopeer}{
+    name={peer-to-peer},
+    description={a distributed architecture for organising nodes in a network, where they connect and communicate in a mesh-like topology, without relying on central servers},
+    sort={NFT},
+    type={main},
+    first={\glsentrydesc{p2p} (\glsentryshort{p2p})},
+    see=[see also]{p2p}
 }
 
 

@@ -57,6 +57,7 @@
 \newcommand{\needcite}{\textcolor{red}{\hl{\textbf{[CITE]}}}}
 \newcommand{\todo}{\textcolor{red}{\hl{\textbf{[TODO]}}}}
 
+\newcommand{\citep}[2]{(#1, #2)}
 
 \definecolor{lightgray}{rgb}{.9,.9,.9}
 \definecolor{darkgray}{rgb}{.4,.4,.4}

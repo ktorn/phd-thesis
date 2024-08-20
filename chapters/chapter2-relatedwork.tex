@@ -6,8 +6,8 @@ This chapter reviews literature and existing work which is of relevance to this 
 \begin{enumerate}
     \item A brief introduction to blockchain, smart contracts and NFTs
     \item The anatomy of a HEN OBJKT
-    \item Conservation strategies for netart
-    \item Survey of relevant artworks
+    \item A review of Net Art conservation theory
+    \item A survey of relevant artworks
 \end{enumerate}
 
 \vspace{0.5cm}
@@ -140,62 +140,76 @@ As mentioned above, in order to avoid single-points of failure while storing NFT
 \subsubsection{InterPlanetary File System}
 \label{sec:ipfs}
 
+IPFS is a suite of protocols for organising and transferring data over a \gls{peertopeer} network, using content addressing rather than location addressing, such as domain names or IP addresses.
+Content addressing works by hashing the contents of the file, or smaller chunks when the file is big enough. This hash is known in IPFS as a \gls{contentidentifier}. IPFS then uses these CIDs to organise the assets in a Merkle \gls{directed acyclic graph} allowing for efficient storage and retrieval.
+CIDs are mapped onto the nodes (peerIDs) which host them, using a \gls{distributed hash table}. Through network gossiping the nodes can quickly find a peer which hosts a CID. Nodes also cache CIDs which are retrieved through them, temporarily increasing their availability on the network.
+However cached CIDs are eventually garbage collected. To ensure the long term availability of a file on the IPFS network, at least one node must \emph{pin} that content, which is to say, it prevents its own garbage collector from removing it, and advertises itself a host of that CID.
+Since a CID is a hash of the content it assures the immutability chain between the on-chain NFT record and its off-chain asset.
+For those who do not wish to run their own IPFS nodes in order to pin data, there are commercial services available which will do it for a fee, such as Pinata\footnotemark[1], and Infura\footnotemark[2]. There is also Filecoin\footnotemark[3], a blockchain project which offers a decentralised marketplace linking storage node providers with paying users.
 
+\footnotetext[1]{https://www.pinata.cloud/}
+\footnotetext[2]{https://www.infura.io/}
+\footnotetext[3]{https://filecoin.io/}
 
 \subsubsection{ArWeave}
 \label{sec:arweave}
 
+ArWeave is an alternative to IPFS. It relies on a blockchain architecture to provide permanent storage but, unlike traditional blockchains which suffer from scalability issues in terms of storage, ArWeave nodes shard the data amongst themselves, rather than keeping a full copy of the data in each node.
+It also uses a similar content addressing strategy to IPFS and, unlike IPFS, it only requires a one-off payment for perpetual data storage (where perpetual is defined as at least the next 200 years) \needcite
 
 \subsection{On-Chain Storage}
 
-
-mention fxhash articles (https://docs.fxhash.xyz/articles) and their tezos pointer scheme (https://github.com/fxhash/specifications/blob/main/general/tezos-storage-pointers.md) which may be useful for the idea of cross contract references, which is my plan for documentation (each person, one contract, cross-referecning OBJKTs)
-
-\subsection{Interplanetary File System (IPFS)}
-
-\subsection{Arweave}
+It should be noted that even thought the majority of NFTs follow an off-chain strategy for asset storage, some NFT projects seek to host all their assets directly inside one or more smart contracts, in what is called on-chain storage. The rationale is that on-chain storage is the safest type of storage, since both the NFT and its metadata and media are stored in the same medium. Even though this argument has some merit, it is not without controversy. As more data is added to a blockchain it increases the storage costs for nodes, which can compromise on the level of decentralisation of the network. For this reason many blockchains look for strategies to reduce the storage requirements, for example, by allowing classes of nodes to prune some parts of the data leaving only a much smaller subset of nodes as fully archival nodes. Since multipurpose blockchains are meant to cater to a wide variety of use cases, the argument against on-chain storage of NFT media is that it represents a tragedy of the commons problem \needcite .
 
 
+\section{The anatomy of a HEN OBJKT (TODO)}
+
+\todo change section title and complete this, with diagrams
 
 
+\section{Net Art Conservation Theory}
+
+Due to the lack of existing literature on the conservation of networked cryptoart, a reasonably good starting point is the study of net art.
+
+Net art is an art movement which started in the early 1990s and gained prominence in the middle of the decade, likely fuelled by the rise in popularity of the World Wide Web. It uses the Internet as a medium, and is usually highly interactive often invoking the participation of the viewer \cite{kholeifInternet_ArtBirthWeb2023}. Although there is no clear consensus on a definition of net art, especially with regards to an actual technical requirement for the artwork to be connected to the Internet, Rhizome on their Net Art Anthology define net art as: "art that acts on the network, or is acted on by it" \cite{WhatNetArt2017}.
+This emphasis on the interaction between the art and the network was famously capture by MTAA in 1997, see \autoref{fig:simplenetartdiag}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\linewidth]{netartdiagram.png}
+    \caption[Simple Net Art Diagram]{Simple Net Art Diagram. Source: MTAA \cite{NETARTANTHOLOGY2016a}}
+    \label{fig:simplenetartdiag}
+\end{figure}
+
+Net art shares many similarities with networked cryptoart. In fact, if we try to set them apart, the main difference between a net net artart artwork and a networked cryptoart artwork is that the later is registered on a blockchain, and as per our delimitation of scope, operates exclusively in the digital realm. Thus cryptoart can be said to lay at the intersection of net art and cryptoart. This allows us to draw the first part of our conceptual framework.
 
 
+\begin{figure}[h]
+    \centering
+    \includesvg[width=0.5\textwidth]{netart-cryptoart}
+    \caption[Networked cryptoart at the intersection of net art and cryptoart]{Networked cryptoart is at the intersection of net art and cryptoart}
+    \label{fig:netart-cryptoart}
+\end{figure}
 
+Net art belongs to a wider category of digital art, specifically born-digital art, which designates artworks created in a digital format from the outset, and which depends on the technology to operate \cite{innocentiKeepingBitsAlive2013}.
 
+\subsection{What is Conservation?}
 
-
-
-
-
-
-
-\section{Net Art Conservation}
-
-
-\todo define code-based art and netart
-
-Also, since there is a significant overlap on the preservation and restoration needs of all code-based art, whether it is networked or not, the review of artworks included these in the scope, with the aim of informing the design of a draft taxonomy.
-
-
-
-\section{Blockchain Basics}
-
-The concept of a blockchain was introduced in the form of published hashes of data in newspaper format  \cite{whitakerArtBlockchainPrimer2019}
-
-\subsection{Consensus Algorithms}
-
-Proof-of-Work
-
-Proof-of-Stake
-
-
-\subsection{Oracles}
+As defined in \autoref{sec:definitions} - \nameref{sec:definitions} , page \pageref{sec:definitions}, conservation consists of a number of activities taken toward the long-term preservation of cultural heritage. This section will examine these activities in more detail.
 
 
 
-\subsection{Non-Fungible Tokens}
+\subsection{Capturing Performance Art}
 
-Created by crypto-kitties in 2018, specifically for art, but protocol can be used for other applications.
+Net art is often considered a kind of performance art, not only from a participatory perspective, where the viewer is invited to interact and thus becomes part of the performance, but also as performance by the artwork itself, as its code base interacts with its wider environment, through the network. This is also noted by Innocenti with regards to digital art as whole \cite{innocentiKeepingBitsAlive2013}.
+
+Reflecting on this, one can argue that changing nature of the artwork, in all its multiple manifestations, is the artwork. A single snapshot in time in not able to capture the essence of the performance. From a conservation point of view this is a key aspect. The recording of the evolution of the artwork is therefore a must. This is something that 
+
+\subsection{Applying Theory to Networked Cryptoart}
+
+
+
+As Innocenti stated, "if conservation for digital art is a moving target, then our scientific methodology should be a moving gun" \citeyear[p.230]{innocentiKeepingBitsAlive2013}.
 
 
 
@@ -203,23 +217,6 @@ Created by crypto-kitties in 2018, specifically for art, but protocol can be use
 
 \subsection{Rhizome ArtBase}
 
-
-
-\section{Crypto-Art}
-
-
-Early bitcoin inscribed ASCII artworks.
-
-McCoy early work on Namecoin (2014)
-
-Early work by Rhea Myers, predates NFTs.
-
-Rhea Myers "Token Equals Text" (2019)
-
-
-Tezos as the art chain (mention participation in basel
-
-\section{Digital Art Preservation}
 
 \subsection{NDSA Levels of Digital Preservation}
 
@@ -240,6 +237,62 @@ webrecorder
 
 WARC
 
+
+
+
+
+\todo define code-based art and netart
+
+Also, since there is a significant overlap on the preservation and restoration needs of all code-based art, whether it is networked or not, the review of artworks included these in the scope, with the aim of informing the design of a draft taxonomy.
+
+
+
+
+
+
+
+
+
+
+\section{Conservation}
+
+Mention how the Internet Archive, in cooperation with the MAME project, which started as an emulator for old arcade games, has now branched to include other kinds of vintage hardware, like consoles and even scientific calculators. \cite{scottjasonCalculatedMoveCalculators2023}
+
+This is a quick mention of \gls{emulation} so that it appears on the glossary.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Non-Fungible Tokens}
+Created by crypto-kitties in 2018, specifically for art, but protocol can be used for other applications.
+
+
+
+
+
+
+\section{Crypto-Art}
+
+
+Early bitcoin inscribed ASCII artworks.
+
+McCoy early work on Namecoin (2014)
+
+Early work by Rhea Myers, predates NFTs.
+
+Rhea Myers "Token Equals Text" (2019)
+
+
+Tezos as the art chain (mention participation in basel
 
 
 
@@ -316,8 +369,6 @@ mention VDP, its role in wg3.2 (beneficiaries), and how the idea spread to other
 
 
 \section{Stuff copied from prev chapter}
-
-
 
 
 
@@ -399,12 +450,6 @@ Last but not least, it proposed a new paradigm for art creation based on xxx, an
 Digital assets like \gls{nonfungibletoken} are transforming the art world. An \indexacronym{nft} is a unique digital asset verified using blockchain technology.
 This document discusses various examples (EX) of digital assets and their conservation techniques. This is the nature of the \gls{nonfungibletoken}.
 
-
-\section{Conservation}
-
-Mention how the Internet Archive, in cooperation with the MAME project, which started as an emulator for old arcade games, has now branched to include other kinds of vintage hardware, like consoles and even scientific calculators. \cite{scottjasonCalculatedMoveCalculators2023}
-
-This is a quick mention of \gls{emulation} so that it appears on the glossary.
 
 
 \subsection{Historical Consensus - Conservation of Bugs}
