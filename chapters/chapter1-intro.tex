@@ -1,4 +1,5 @@
 \chapter{Introduction}
+\label{chap:introduction}
 
 Blockchains have enabled a new global market for digital art, allowing artists to publish and sell their work directly to collectors from all over the world, bypassing traditional gatekeepers such as art galleries, auction houses and art dealers. Through chains of cryptographic proofs and consensus protocols which enable public append-only ledgers, blockchains are able to maintain the full history of an artwork's market transactions, from its inception (or \gls{minting}), to its first sale on the \gls{primary market}, and onwards through subsequent transactions on the \gls{secondary market}, and thus natively solve, at least partially, the issue of art provenance, a long-standing problem in the traditional art world. In addition to that, with the use of smart contracts that automatically enforce artist royalties, artists can benefit from a life-long revenue stream, both from \gls{primary sales} and \gls{secondary sales} alike.
 
@@ -14,13 +15,9 @@ This thesis contains many terms which were born out of the crypto community and 
 
 \section{Motivation}
 
-This is not a typical thesis in Information Systems (IS).
+To better understand my motivation for this work, as well as contextualise some of the research and development decisions made during the study, it is helpful for the reader to review a brief timeline of my personal experience in the crypto space and how it led to this research topic. Due to its personal nature, I took the liberty of using a more informal tone in this section.
 
-The topic presented on this thesis is in fact not the same that I had planned to pursue at the start of the PhD programme.  In the beginning I proposed to build on my Master's degree work, and further develop Grokya, a project which aims to build a personal digital cortex, or an an external digital mind extension \needcite . Such a topic would be purely within the traditional scope of an IS thesis. However after spending half of my allotted research time on such endeavour, I had a change of heart. At that time, the PhD in IS at USJ existed under the umbrella of the Faculty of Arts and Humanities, which was undoubtedly an usual combination. Most IS programmes in other higher education institutions around the world fall under either a Business School, a Faculty of Informatics, or some other Engineering school. I took this unusual mix as an opportunity to pursue a different path for my research. In my personal time I was undergoing a truly transformative experience. As long term member of the cryptocurrency community, I was experiencing first-hand the cultural interchange that was happening between the world of crypto and the world of art. The year of 2021 saw large amounts of artists entering the crypto space as they looked to explore the exciting, and booming, area of cryptoart. At this time I was invited to write a paper for the International Journal of Creative Interfaces and Computer Graphics (IJCICG) and I saw it as perfect opportunity to change my PhD topic, and pursue a theme that truly brought together the world of IS and art. Also for this reason, I spent a good amount of time thinking deeply about what it meant to do research in this interdisciplinary field. I felt as if this thesis, due its unusual placement within the structure of the University, had to do a good job of bridging the Humanities and the Sciences. Ironically, due to a recent restructuring, the University has now moved the PhD in IS programme under the newly created Institute for Data Engineering and Science (IDEAS), which certainly is a more common placement for such a programme. However there was no turning back for me. The research work and the respective thesis presented here represents my attempt at bridging ``the two cultures'' of Science and the Humanities \cite{snowTwoCultures2012a}
-
-To better understand my motivation for this work, as well as contextualise some of the research and development decisions made during the study, it is helpful for the reader to review a brief timeline of my personal experience in the crypto space and how it led to this research topic.
-
-\subsection{Bitcoin}
+\subsection*{Bitcoin}
 
 I first came across Bitcoin in 2011, and experienced the basic use case of installing the Bitcoin-QT software on my laptop and receiving a small transaction (0.02 BTC) from a public faucet ran by early bitcoin developer Gavin Andersen \cite{lucasHowGavinAndresen2022}. As many people at that time, I failed to understand the significance of such a transaction. From a user experience perspective it was underwhelming.  The interface was rudimentary, and the transaction took a while to appear as confirmed. Paypal was miles ahead, or so I thought. This mis-judgement of the merits of the technology due to a very limited understanding, or even complete ignorance, of such a technology is unfortunately very common in the crytocurrency space.
 
@@ -28,7 +25,7 @@ It wasn't until 2013 that I looked into Bitcoin again. This time I read the Bitc
 
 As an anarchist sympathetic with the anti-capitalist movement, I brushed aside the fact that Bitcoin was firmly rooted in a capitalist culture, because it also represented a very tangible step away from a financial system which I saw as irreparably corrupt. I became an advocate, organising Bitcoin meetups in Macau \cite{BitcoinMacau2024}, delivering public courses \cite{mouraUSJHoldCourse2021}, appearing in interviews to the media \cite{tdmportuguesenewsprogramsReportagemJornalistaLina2015} \cite{reisBitcoinDuasFaces2017} and generally being very active in the Bitcoin community.
 
-\subsection{Ethereum}
+\subsection*{Ethereum}
 
 In January 2014, when Ethereum was announced as a concept by Buterin \citeyear{buterinEthereumNextGenerationCryptocurrency2014}, I was instantly impressed. Bitcoin always had basic scripting capabilities baked into its transaction processing logic \cite{ScriptBitcoinWiki2024}, but to take what was mostly a transactional ledger technology and enhance it with a Turing-complete runtime was going to open a world of possibilities. But perhaps even more importantly, Ethereum was also marketed as a decentralised platform where \emph{\gls{code is law}}, a concept which deeply resonated with me. The idea of encoding governance into public, immutable, and self-enforceable rules seemed like a silver-bullet against corruption.
 
@@ -37,7 +34,7 @@ In 2016, a bug was exploited in a smart contract of a DAO which held around 14\%
 I should note that more recently I changed my stance regarding \emph{code is law}, as will be explained later.
 
 
-\subsection{Tezos}
+\subsection*{Tezos}
 
 In the summer of 2017 I came across Tezos, a project still in its inception stage, but which was planning to build a self-amending blockchain with a well designed governance system built into protocol, giving its token holders voting power on updates to the protocol itself \cite{goodmanTezosSelfamendingCryptoledger2014a} . 
 
@@ -50,7 +47,7 @@ Ironically, after delays due to extensive \gls{off-chain} governance issues and 
 The following three years saw a modest amount of development around Tezos especially in the areas of \gls{decentralisedfinance} and gaming, however adoption of the chain remained relatively low, as measured by the low transaction volume recorded on-chain, allowing detractors to classify it as a \emph{\gls{ghost-chain}}. In March 2021 all that was about to change.
 
 
-\subsection{Hic Et Nunc (HEN)}
+\subsection*{Hic Et Nunc (HEN)}
 
 
 Hic et Nunc (\indexacronym{hen}) was an NFT marketplace created by Brazilian developer Rafael Silva and launched on the Tezos blockchain in March 2021, becoming the first to do so on that chain, and in the process beating rival marketplace Kalamint, who was still in closed beta.
@@ -78,7 +75,7 @@ Each NFT platform on Tezos adopts a token name for its NFTs, and Rafael Lima nam
 \end{figure}
 
 
-\subsection{Networked OBJKTs and ``Self-Aware'' Artworks}
+\subsection*{Networked OBJKTs and ``Self-Aware'' Artworks}
 
 The platform supported the minting of OBJKTs using a variety of file formats, and one of those format was SVG (mimetype \texttt{image/svg+xml}). The SVG file standard allows for the embedding of JavaScript code, which is executed when rendering the file on a web browser.  On 14 Mar 2021 Lionel Radisson minted the first OBJKT with embedded JavaScript, ``The Magician''  \cite{makio135Magician2021}, and other artists quickly followed and started minting dynamic code-based artworks, such as Ricardo Cabello (a.k.a mrdoob)  with the interactive game ``Jumpy Dot'' \needcite which in the process became the first ever web-based interactive game minted as an NFT.
 
@@ -161,11 +158,11 @@ The source code for \texttt{ARKIVO.ART} can be accessed from:
 
 \texttt{https://github.com/seda-studio/arkivo}
 
-\vspace{1cm}
+\vspace{0.5cm}
 
 A secondary technical contribution is a physical device, intended to be run from home, that contributes to the storing of the artwork digital assets. This component is key for the decentralisation, and long term economic sustainability of the project. 
 
-\vspace{1cm}
+\vspace{0.5cm}
 
 In addition to these artifacts, this work makes the following contributions to the body of knowledge:
 
@@ -190,15 +187,22 @@ This is an important distinction, because any web-based artifact will normally m
 
 \vspace{0.5cm}
 
-\textbf{cryptoart} - this refers to any artwork which is registered on a blockchain as an NFT. Although recently this term is gaining a negative connotation (the author was strongly advised against using it) due to its association with crypto's scams and market speculation, it is still benefits from being a single term, unique, and which is easy to search for when researching.
+\textbf{cryptoart} - this refers to any artwork which is registered on a blockchain as an NFT, and which exists purely in digital format, without any physical components. This last assumption is important, as the conservation of physical artifacts requires a very different approach to their digital counterparts.
 
+\vspace{0.5cm}
 
-\vspace{20cm}
+It should be noted that the term cryptoart has gained a negative reputation, due to its association with the controversial world of cryptocurrencies, with stems from their highly speculative nature and the public perception that crypto is mostly a vehicle for financial fraud. Although there is undoubtedly some truth to these claims, the potential of technology to support digital artists is undeniable, and thus I believe that the term \emph{cryptoart} is worth promoting in a positive light, differentiating it from the \emph{bad} side of crypto.
+
+\vspace{0.5cm}
 
 \textbf{conservation} - ``Conservation encompasses all those actions taken toward the long-term preservation of cultural heritage. Activities include examination, documentation, treatment, and preventive care, supported by research and education.''  \cite{WhatConservation}
 
 Regina Harsanyi, a preventive conservator of time-based media who works extensively with blockchain related artwork, during an interview for this study highlighted that the code of ethics followed by conservation professionals is also key to the definition of the term.
 
+
+\vspace{0.5cm}
+
+These terms will be further unpacked in \autoref{chap:related_work}.
 
 \section{Delimitation of Scope}
 

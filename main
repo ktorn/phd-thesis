@@ -25,6 +25,13 @@
 \usetikzlibrary{shapes,arrows}
 \usepackage{setspace}
 \usepackage{listings}
+\usepackage{enumitem}
+
+
+% Set global options for itemize (and optionally enumerate, description)
+\setlist[itemize]{nosep, partopsep=0pt, topsep=0pt, parsep=0pt, itemsep=0pt}
+\setlist[enumerate]{nosep, partopsep=0pt, topsep=0pt, parsep=0pt, itemsep=0pt}
+\setlist[description]{nosep, partopsep=0pt, topsep=0pt, parsep=0pt, itemsep=0pt}
 
 
 \def\code#1{\texttt{#1}}
