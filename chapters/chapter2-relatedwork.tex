@@ -1,13 +1,16 @@
 \chapter{Related Work}
 \label{chap:related_work}
 
-This chapter reviews literature and existing work which is of relevance to this study. It is structured in 3 main sections:
+This chapter reviews literature and existing work which is of relevance to this study. It is structured in 6 main sections:
 
 \begin{enumerate}
     \item A brief introduction to blockchain, smart contracts and NFTs
     \item The anatomy of a HEN OBJKT
     \item A review of Net Art conservation theory
-    \item A survey of relevant artworks
+    \item A review of the Open Archival Information System (OAIS)
+    \item A review of web archiving tools
+    \item A survey of representative artworks
+    \item A tentative taxonomy of cryptoart
 \end{enumerate}
 
 \vspace{0.5cm}
@@ -171,7 +174,7 @@ It should be noted that even thought the majority of NFTs follow an off-chain st
 
 Due to the lack of existing literature on the conservation of networked cryptoart, a reasonably good starting point is the study of net art.
 
-Net art is an art movement which started in the early 1990s and gained prominence in the middle of the decade, likely fuelled by the rise in popularity of the World Wide Web. It uses the Internet as a medium, and is usually highly interactive often invoking the participation of the viewer \cite{kholeifInternet_ArtBirthWeb2023}. Although there is no clear consensus on a definition of net art, especially with regards to an actual technical requirement for the artwork to be connected to the Internet, Rhizome on their Net Art Anthology define net art as: "art that acts on the network, or is acted on by it" \cite{WhatNetArt2017}.
+Net art is an art movement which started in the early 1990s and gained prominence in the middle of the decade, likely fuelled by the rise in popularity of the World Wide Web. It uses the Internet as a medium, and is usually highly interactive often invoking the participation of the viewer \cite{kholeifInternet_ArtBirthWeb2023}. Although there is no clear consensus on a definition of net art, this study will adopt the definition proposed by Rhizome on their Net Art Anthology: "art that acts on the network, or is acted on by it" \cite{WhatNetArt2017}.
 This emphasis on the interaction between the art and the network was famously capture by MTAA in 1997, see \autoref{fig:simplenetartdiag}.
 
 \begin{figure}[h]
@@ -195,15 +198,52 @@ Net art belongs to a wider category of digital art, specifically born-digital ar
 
 \subsection{What is Conservation?}
 
-As defined in \autoref{sec:definitions} - \nameref{sec:definitions} , page \pageref{sec:definitions}, conservation consists of a number of activities taken toward the long-term preservation of cultural heritage. This section will examine these activities in more detail.
+As defined in \autoref{sec:definitions} - \nameref{sec:definitions} , page \pageref{sec:definitions}, conservation consists of a number of activities taken toward achieving the long-term preservation of cultural heritage. This section will examine these activities in more detail.
+
+\subsection{Acquisition}
+
+Acquisition is the process that a cultural heritage institution takes to obtain an artifact for conservation. It is normally divided into 3 phases:
+
+\begin{enumerate}
+    \item \textbf{Pre-aquisition}: a pre-assessment of the artifact, to find its condition and whether it can be exhibited sustainably. This assessment includes an estimation of the overall costs, which include acquisition, exhibition, and continuing costs. If the assessment is positive, then the terms for the negotiation of the acquisition contract are drafted.
+    \item  \textbf{Acquisition}: the process of acquisition involves negotiation with the vendor or donor, verification that all agreed components were delivered, including preservation materials, and exchange contracts;
+    \item  \textbf{Post-acquisition}: 
+\end{enumerate}
+
+\cite{ahtilaAcquiringMediaArt1998}
+
+\subsection{Archival Storage}
+
+\subsection{Access}
+
+\subsection{Emulation}
+
+talk about Flash, games, webrecorder browser emulator, etc
+
+\subsection{Migration}
 
 
+\subsection{Reinterpretation}
 
-\subsection{Capturing Performance Art}
 
-Net art is often considered a kind of performance art, not only from a participatory perspective, where the viewer is invited to interact and thus becomes part of the performance, but also as performance by the artwork itself, as its code base interacts with its wider environment, through the network. This is also noted by Innocenti with regards to digital art as whole \cite{innocentiKeepingBitsAlive2013}.
+\subsection{Reconstruction}
 
-Reflecting on this, one can argue that changing nature of the artwork, in all its multiple manifestations, is the artwork. A single snapshot in time in not able to capture the essence of the performance. From a conservation point of view this is a key aspect. The recording of the evolution of the artwork is therefore a must. This is something that 
+
+\subsection{Fixity}
+
+
+\subsection{Copyright Implications}
+\label{subsec:chap2_copyright}
+
+There is a general consensus throughout cryptoart that the act of collecting an NFT does not grant the collector any copyrights over the NFT's original artwork, which remain with the artist. However the practice of NFT marketplaces engaging in cross-listings, which means displaying the artwork for sale on platforms other than the one where the artist minted the work originally, is widespread. It's a practice that is not only accepted, but arguably even appreciated by artists, who gain a wider platform for displaying, and potentially selling, their artworks. This is something that would not normally happen with a museum or other traditional institutions, who always have to go through a step of acquisition of the artwork, along with conservation specific contract signing, before displaying or applying conservation techniques to it.
+
+For the design of our artifact, this means that merely displaying an artwork on an art conservation platform, by itself, should not not constitute a problem. However if the platform engages in automatic classification and displays such metadata along with the artwork, it may raise issues, as the artist may not agree with a particular classification or intervention. This is an area which needs further attention in future work.
+
+\subsection{Net Art is Performance Art}
+
+Net art, as a subset of digital art, is widely considered a kind of performance art, not only from a participatory perspective, where the viewer is invited to interact and thus becomes part of the performance, but also as performance by the artwork itself, as its code base interacts with its wider environment, through the network, and through time.
+
+Reflecting on this, one can argue that the changing nature of the artwork, in all its multiple manifestations, is the artwork. A single snapshot in time in not able to capture the essence of that performance. From a conservation point of view this is a key aspect. The recording of the evolution of the artwork is therefore a must. This is something that will be a focus for this work when designing the artifact.
 
 \subsection{Applying Theory to Networked Cryptoart}
 
@@ -228,6 +268,26 @@ As Innocenti stated, "if conservation for digital art is a moving target, then o
 \caption[NDSA Levels of Digital Preservation Matrix V2.0]{NDSA Levels of Digital Preservation Matrix V2.0. Source: https://osf.io/qd54c}
 \label{tab:ndsa-levels-of-digital-preservation}
 \end{table}
+
+
+
+\section{Open Archival Information System (OAIS)}
+
+\todo
+
+The \gls{oais} , published in 2005, is the standard reference model for the long term archiving of digital data.
+
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=\textwidth]{OAIS-high-level-data-flow}
+    \caption[OAIS-high-level-data-flow]{OAIS-high-level-data-flow}
+    \label{fig:oais-high-level-data}
+\end{figure}
+
+
+
+
 
 
 \section{Web Archiving: State of the Art}
@@ -337,11 +397,37 @@ This section deals with whether artworks are deterministic in the way they are r
 
 \section{Code Security}
 
+One aspect that current digital and net art conservation theory does not cover, but which is a major concern for code-based cryptoart is that of security.
+
+NFT marketplaces have a global reach. Anyone can publish a code-based artwork, which is essentially a web application, and have it accessed by hundreds or even thousands of users. To make matters worse, the majority of these NFT marketplace users are likely running crypto wallets on their devices which could be holding significant sums of cryptocurrency and NFTs. This makes NFT marketplaces a potential honey pot for malicious actors who will looking for the opportunity to drain the assets from users wallet. Attacks can either be direct by minting a malicious NFT, or indirect by infecting an open source library which may be used as a dependency by honest NFT artists. This kind of backdoor attack has already happened in the crypto industry when a malicious actor took over the maintenance of a popular javascript NPM module which was used as a dependency in the crypto wallet CoPay \cite{haworthPopularJavaScriptDependency2018}.
+
+Even though addressing the security aspect of cryptoart may seem to fall outside the scope of conservation efforts, the fact is that if a conservation tool is already automatically downloading and running artworks in a sandbox in order to snapshot them and preserve their evolution, then it is logical that it should also serve a useful function in this regard.
+
 In this section I review methods of detecting potential malicious code
+
+\subsection{Malware Scanning}
+
+The area of malware scanning is well established, and it normally involves comparing the target software agains signatures of well known malware.
+
 
 Strategies can involve code similarity checks \cite{ragkhitwetsagulComparisonCodeSimilarity2018} and particularly in JavaScript \cite{alfagehCloneDetectionTechniques2020} where an artwork's code can be compared against well known wallet code.
 
+
+Early detection systems based on machine learning \cite{schuttEarlyDetectionMalicious2012}, detection of malicious obfuscated JavaScript code \cite{likarishObfuscatedMaliciousJavascript2009} \cite{fassJaStFullySyntactic2018}, malicious code detection based on semantic analysis \cite{fangDetectingMaliciousJavaScript2020}.
+
+
+\todo ESLint
+
+
+However, research into techniques of camouflaging malicious code in a benign \gls{abstractsyntaxtree}
+\cite{fassHideNoSeekCamouflagingMalicious2019} serves as a timely reminder that this security minded endeavour may always become a cat and mouse game.
+
+
 This can also aid in identifying potential outdated libraries which could contain vulnerabilities or even current libraries which were attacked by hackers, looking to add backdoors or other crypto exploiting code.
+
+
+
+
 
 
 
