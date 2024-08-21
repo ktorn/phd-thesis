@@ -102,11 +102,37 @@ It was at this stage that Mario Klingemann (a.k.a. quasimondo) minted a conceptu
 
 This kickstarted a wave of self-referential, some would even call it ``self-aware'' artworks, which also have the property of evolving over time. Many of which will be reviewed later in this manuscript.
 
-This concept of ``self-awareness'' of an artwork struck a chord in me, and I decided to study it in detail. It soon became clear that this kind of artwork faces a number of challenges. 
+This concept of ``self-awareness'' of an artwork struck a chord in me, and I decided to study it in detail. It soon became clear that this kind of artwork faces a number of challenges, which are discussed in \autoref{sec:challenges}.
+
+
+\subsection*{HEN Discontinuation and the Birth of Teia}
+\label{sub:teia}
+
+For reasons which are outside of the scope of this thesis, but which are reported at length in online articles \cite{straeubigHENTimelineHentimeline2024} \cite{siqueiraHicNuncStory2021a} \cite{tezosHistoryTeiaArt2022} \cite{smithHicNuncPart2022}, on November 11 2021, only 9 months since its launch, Rafael Lima decided to discontinue HEN. Without warning, the webserver which served the website's \indexacronym{ui} was taken down (\texttt{hicetnunc.xyz}), and the official twitter account was changed to show the message "discontinued".
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{discontinued.png}
+    \caption[``discontinued'' by Rafael Lima]{`discontinued'' by Rafael Lima. Source: https://t.ly/PtiOd}
+    \label{fig:discontinued}
+\end{figure}
+
+Fortunately, Lima had followed the web3 ideals of decentralisation and trustlessness when he designed and built HEN. The source code of the website's UI was open source and hosted on GitHub, and the smart contracts that the platform relied on were still operational on the Tezos blockchain, and did not contain any \emph{kill switch}, therefore they formed a sort of public utility infrastructure beyond the reach of their own creator. The artwork media assets were available on a public storage network (IPFS) and therefore were publicly accessible as well.
+
+The community that had formed around HEN quickly entered into action and in only a few hours several clones of the UI were setup online, in what the community calls ``mirrors'', allowing users to continue minting, and collecting OBJKTs just as they did before. Efforts were made to ensure the continuity of the media assets on IPFS, and this was also achieved successfully.
+
+After some time, the community converged on a particular HEN mirror, and after requests from Lima to not use the name HEN, the community renamed it Teia ("web" in Portuguese, in a gesture of respect to the Brazilian roots of the original project). And thus the Teia community was formed and the new website domain adopted: \texttt{teia.art}.
+
+Today, Teia operates as a Decentralised Autonomous Organisation \gls{dao}, is legally established as non-profit organisation, and continues to operate thanks to a team of volunteers.
+
+For disclosure, I am a member of the Teia core team, which consists of 19 community members who currently operate the platform and oversee the treasury my means of voting on a multisig smart contract on Tezos. The roadmap is to migrate the governance to a much larger DAO structure, where thousands of users who currently hold TEIA governance tokes, which were distributed based on their usage of the platform and contributions to project, can vote on proposals related to the project.
+
+As a Teia team member, my focus is the preservation of code-base OBJKTs, which are called Interactive OBJKTs in the platform's terminology.
 
 \section{Challenges}
+\label{sec:challenges}
 
-The biggest challenge facing this kind of artwork is a mismatch between the immutability of the NFT and the fast changing nature of the environment in which it operates. This is not a problem for the vast majority of artworks, because they represent static assets, such as image, video, or sound files. As long as their file formats are supported by modern web browsers then they should continue to work for a reasonable amount of time.
+The biggest challenge facing a networked artwork is a mismatch between the immutability of the NFT and the fast changing nature of the environment in which it operates. This is not a problem for the vast majority of artworks, because they represent static assets, such as image, video, or sound files. As long as their file formats are supported by modern web browsers then they should continue to work for a reasonable amount of time.
 
 Code-based artworks, if they contain all the required software dependencies and assets , such that you can successfully render them on an off-line device, should in theory also last a reasonable amount of time, notwithstanding the need for emulation at a later stage.
 
@@ -130,15 +156,14 @@ Finally, although not directly related to conservation, any code-base artwork ca
 
 \section{Goals}
 
-In order to address the challenges outlined above, and from an IS perspective, two main goals arise:
+In order to address the challenges outlined above, and from an IS perspective, two main goals arise for this work:
 
 \begin{itemize}
-	\item To design and implement software systems that can support the conservation of networked cryptoart
+	\item To design and implement sustainable information systems that can support the long-term preservation of networked cryptoart
 	\item To contribute to the body of knowledge in the area of networked cryptoart conservation
 \end{itemize}
 
-Conservation, among many things, entails the long-term preservation of artworks. For this preservation to be feasible, it must be sustainable in the long term.
-For this reason, although not explicitly stated in the goals, sustainability is key concern and guiding principle behind this work.
+The reason why sustainability is explicitly included as an objective is because it is a requirement to support \emph{long-term} preservation, and even though there are many types of sustainability which should be considered, in this context the key factor is economic sustainability.
 
 \section{Contributions}
 
@@ -221,7 +246,11 @@ As mentioned above, this artifact will also only focus on digital-only OBJKTs. A
 
 Having said that, the Related Work section will provide a broader view and review artworks that may fall outside this scope, in order to provide additional context to the area of cryptoart.
 
+\section{Relevance of Research}
 
+Although the scope of the research may seem narrow, the focus of the research is of significant relevance to cultural heritage of cryptoart.
+HEN, even if short-lived, is widely acknowledged to represent one of the most important cultural events and social experiments that happened in the world of cryptoart, not only because of the art, but also for demonstrating the importance of web3 decentralisation \cite{rcsEarlyDaysHic2023} \cite{baileyHicNuncBrings2021} \cite{drubayHowHicNunc2021}.
+In addition, the type of art which is the focus of this study, networked art, is one that HEN pioneered in this field and hence of the utmost importance to be preserved.
 
 \section{Structure of the Thesis}
 

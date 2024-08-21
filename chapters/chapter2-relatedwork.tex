@@ -5,7 +5,7 @@ This chapter reviews literature and existing work which is of relevance to this 
 
 \begin{enumerate}
     \item A brief introduction to blockchain, smart contracts and NFTs
-    \item The anatomy of a HEN OBJKT
+    \item An overall view of the architecture of Teia and HEN OBJKTs
     \item A review of Net Art conservation theory
     \item A review of the Open Archival Information System (OAIS)
     \item A review of web archiving tools
@@ -26,7 +26,7 @@ This forms the theoretical framework on which this work builds upon.
 
 
 \subsection{Blockchain}
-
+\label{sub:blockchain}
 
 The concept behind a blockchain is not new. It was first introduced by Stuart Haber and Scott Stornetta in 1991 in the Journal of Cryptology \cite{haberHowTimeStampDigital1991}. The problem they were trying to solve was: how can we trust historical records when digital media is so easy to manipulate, and how can we do so without having to trust a central authority? Their solution relied on one-way hashing functions.
 
@@ -101,7 +101,11 @@ Ethereum standards, like ERC-20, allow the creation of fungible tokens which can
 The ERC-721 standard is used for the creation of unique and non-divisible NFTs, each with a unique identifier, such that they are not fungible as their ERC-20 counterparts.
 Due to the limited storage available on the blockchain, the ERC-721 standard defined as part of its \texttt{ERC721Metadata} a \texttt{tokenURI} field which should point to an external location where the actual NFT metadata should be stored. In turn, this metadata should follow the ERC721 Metadata JSON Schema, and includes the name and description of the NFT, and another URI, this time to the actual NFT media asset \cite{ERC721NonFungibleToken}.
 
-\begin{lstlisting}[style=htmlCode,caption={ERC721 Metadata JSON Schema}] 
+%\begin{lstlisting}[style=jsonCode,caption={ERC721 Metadata JSON Schema}] 
+
+
+
+\begin{lstlisting}[language=json,firstnumber=1,caption={ERC721 Metadata JSON Schema}]
 {
     "title": "Asset Metadata",
     "type": "object",
@@ -165,7 +169,17 @@ It also uses a similar content addressing strategy to IPFS and, unlike IPFS, it 
 It should be noted that even thought the majority of NFTs follow an off-chain strategy for asset storage, some NFT projects seek to host all their assets directly inside one or more smart contracts, in what is called on-chain storage. The rationale is that on-chain storage is the safest type of storage, since both the NFT and its metadata and media are stored in the same medium. Even though this argument has some merit, it is not without controversy. As more data is added to a blockchain it increases the storage costs for nodes, which can compromise on the level of decentralisation of the network. For this reason many blockchains look for strategies to reduce the storage requirements, for example, by allowing classes of nodes to prune some parts of the data leaving only a much smaller subset of nodes as fully archival nodes. Since multipurpose blockchains are meant to cater to a wide variety of use cases, the argument against on-chain storage of NFT media is that it represents a tragedy of the commons problem \needcite .
 
 
-\section{The anatomy of a HEN OBJKT (TODO)}
+\section{Teia and HEN OBJKT architecture}
+
+In order to understand the overall structure in which OBJKTs exist, we will examine the architecture of the Teia platform.
+
+\begin{figure}[H]
+    \centering
+    \includesvg[width=\textwidth]{hen-teia-components}
+    \caption[Teia and HEN OBJKT architecture]{Teia and HEN OBJKT architecture}
+    \label{fig:teia-arch}
+\end{figure}
+
 
 \todo change section title and complete this, with diagrams
 
@@ -202,64 +216,25 @@ As defined in \autoref{sec:definitions} - \nameref{sec:definitions} , page \page
 
 \subsection{Acquisition}
 
-Acquisition is the process that a cultural heritage institution takes to obtain an artifact for conservation. It is normally divided into 3 phases:
+Acquisition is the process that a cultural heritage institution takes to obtain an artifact for conservation. It is normally divided into 3 phases \cite{ahtilaAcquiringMediaArt1998}:
 
 \begin{enumerate}
     \item \textbf{Pre-aquisition}: a pre-assessment of the artifact, to find its condition and whether it can be exhibited sustainably. This assessment includes an estimation of the overall costs, which include acquisition, exhibition, and continuing costs. If the assessment is positive, then the terms for the negotiation of the acquisition contract are drafted.
     \item  \textbf{Acquisition}: the process of acquisition involves negotiation with the vendor or donor, verification that all agreed components were delivered, including preservation materials, and exchange contracts;
-    \item  \textbf{Post-acquisition}: 
+    \item  \textbf{Post-acquisition}: work is catalogued and documented, and a long term conservation plan is made, potentially informed by follow-up interviews with the artist.
 \end{enumerate}
 
-\cite{ahtilaAcquiringMediaArt1998}
+In a digital context, acquisition is also commonly called \emph{injest}, see \autoref{sub:oais}.
 
 \subsection{Archival Storage}
 
-\subsection{Access}
+Cultural heritage institutions involved in conservation of digital art need to develop a robust archival storage strategy. Depending on the size of the institution they may choose to invest in on-site storage, normally in server rooms designed for that purpose, or outsource it to specialised storage or cloud vendors, and in many cases for the purposes of redundancy, both.
 
-\subsection{Emulation}
+In this area the National Digital Stewardship Alliance (NDSA) published authoritative guidelines for industry best practices, see \autoref{tab:ndsa-levels-of-digital-preservation}
 
-talk about Flash, games, webrecorder browser emulator, etc
+These guidelines include the practice of \emph{file fixity}, which consists of the use of checksums or file hashing, as discussed in \autoref{sub:blockchain}, to ensure a file is ``fixed'' or unchanged.
 
-\subsection{Migration}
-
-
-\subsection{Reinterpretation}
-
-
-\subsection{Reconstruction}
-
-
-\subsection{Fixity}
-
-
-\subsection{Copyright Implications}
-\label{subsec:chap2_copyright}
-
-There is a general consensus throughout cryptoart that the act of collecting an NFT does not grant the collector any copyrights over the NFT's original artwork, which remain with the artist. However the practice of NFT marketplaces engaging in cross-listings, which means displaying the artwork for sale on platforms other than the one where the artist minted the work originally, is widespread. It's a practice that is not only accepted, but arguably even appreciated by artists, who gain a wider platform for displaying, and potentially selling, their artworks. This is something that would not normally happen with a museum or other traditional institutions, who always have to go through a step of acquisition of the artwork, along with conservation specific contract signing, before displaying or applying conservation techniques to it.
-
-For the design of our artifact, this means that merely displaying an artwork on an art conservation platform, by itself, should not not constitute a problem. However if the platform engages in automatic classification and displays such metadata along with the artwork, it may raise issues, as the artist may not agree with a particular classification or intervention. This is an area which needs further attention in future work.
-
-\subsection{Net Art is Performance Art}
-
-Net art, as a subset of digital art, is widely considered a kind of performance art, not only from a participatory perspective, where the viewer is invited to interact and thus becomes part of the performance, but also as performance by the artwork itself, as its code base interacts with its wider environment, through the network, and through time.
-
-Reflecting on this, one can argue that the changing nature of the artwork, in all its multiple manifestations, is the artwork. A single snapshot in time in not able to capture the essence of that performance. From a conservation point of view this is a key aspect. The recording of the evolution of the artwork is therefore a must. This is something that will be a focus for this work when designing the artifact.
-
-\subsection{Applying Theory to Networked Cryptoart}
-
-
-
-As Innocenti stated, "if conservation for digital art is a moving target, then our scientific methodology should be a moving gun" \citeyear[p.230]{innocentiKeepingBitsAlive2013}.
-
-
-
-\section{Existing Repositories}
-
-\subsection{Rhizome ArtBase}
-
-
-\subsection{NDSA Levels of Digital Preservation}
-
+Institutions are also adopting storage information systems which comply with the \gls{oais} standard. This standard is of special interest to this work, so it will be examined in more detail in \autoref{sub:oais}.
 
 \begin{table}[h!]
 \centering
@@ -270,8 +245,104 @@ As Innocenti stated, "if conservation for digital art is a moving target, then o
 \end{table}
 
 
+\subsection{Access}
+
+The archive should provide a user interface, allowing users to browse and search its contents, and in applicable to request copies of materials. In some cases some degree of access control may need to be put in place, in which case the system should provide such a feature. \cite{nationallibraryofaustraliaGuidelinesPreservationDigital2003}
+
+\subsection{Emulation}
+
+Emulation is the recreation of a particular system, either hardware or software, as software which runs in a virtualised environment within another system \cite{rothenbergUsingEmulationPreserve2000}. It is one of the most common methods of preserving digital systems which became obsolete over time.
+
+It is widely used in a variety of contexts, from reviving old video games, such as arcade\footnotemark[1], ZX Spectrum\footnotemark[2], and many other obsolete systems\footnotemark[3], as well as more recent web publishing proprietary systems like Adobe Flash\footnotemark[4] and even obsolete calculators \cite{scottjasonCalculatedMoveCalculators2023}.
+
+\footnotetext[1]{\url{https://www.mamedev.org/}}
+\footnotetext[2]{\url{https://archive.org/details/softwarelibrary_zx_spectrum}}
+\footnotetext[3]{\url{https://archive.org/details/software}}
+\footnotetext[4]{\url{https://ruffle.rs/}}
+
+OldWeb.Today, which combines \gls{emulation} of obsolete browsers, like NCSA Mosaic and Netscape Navigator, with Archive.org's WayBackMachine web snapshots, enables users to experience navigating the web as it was all the way back into the 1990s, see \autoref{fig:oldweb}.
+
+One challenge of emulators is that, as any other software system, they may have to be readapted to run on more modern hardware. This means that the work of creating and updating emulator software is likely to be an ongoing effort for the foreseeable future.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{oldweb.png}
+    \caption[OldWeb.Today Browser Emulator]{OldWeb.Today Browser Emulator. Source: https://oldweb.today/ }
+    \label{fig:oldweb}
+\end{figure}
+
+
+\subsection{Migration}
+
+Migration of a digital artwork involves moving it from its original technological environment, to a more modern one. However it is often the case that this will result in some degradation of the artwork, due to incompatibilities between the two environments. \cite{huberNewMediaOld2013}
+
+As an empirical example of this, we can use the ACID test v2, which was test web page setup in 2005 by the Web Standards Project to test web browser compatibility with the standards for displaying HTML markup, PNG images, CSS 2.1styling, and data URIs \cite{Acid22024}.
+
+If we access the test page\footnotemark[1] with a modern browser, such as Google Chrome Version 127 on a Mac OS 13.6 operating system, and compare it with the reference image\footnotemark[2], we can see clearly that backwards compatibility with web standards that were in place less than 20 years ago is already decaying.
+
+\footnotetext[1]{\url{http://acid2.acidtests.org/\#top}}
+\footnotetext[2]{\url{http://acid2.acidtests.org/reference.html}}
+
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.75\textwidth]{acid2-test.png}
+    \caption{ACID test v2 in 2024}
+    \label{fig:image1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.75\textwidth]{acid2-reference.png}
+    \caption{ACID test v2 reference image}
+    \label{fig:image2}
+  \end{subfigure}
+  \caption{ACID v2 test with modern browser}
+  \label{fig:acid2-test}
+\end{figure}
+
+
+\subsection{Restauration}
+
+Restauration is a process which aims to return an artifact to a known or assumed state, normally by adding non-original material or modifying existing material. In the context of code-based artworks this would be equivalent to code refactoring.
+
+\subsection{Reconstruction/Reinterpretation}
+
+Reconstruction is by far the most extreme methods of conservation, as it involves rebuilding an artwork, usually based on extensive documentation provided by the artist, so as to maintain their original intent, although it can be argued that any reconstruction is always susceptible to some degree or reinterpretation\cite{huberNewMediaOld2013}.
+
+\subsection{Documentation}
+
+\todo https://www.culturalheritage.org/about-conservation/code-of-ethics
+
+\subsection{Net Art is Performance Art}
+
+Net art, as a subset of digital art, is widely considered a kind of performance art, not only from a participatory perspective, where the viewer is invited to interact and thus becomes part of the performance, but also as performance by the artwork itself, as its code base interacts with its wider environment, through the network, and through time.
+
+Reflecting on this, one can argue that the changing nature of the artwork, in all its multiple manifestations, is the artwork. A single snapshot in time in not able to capture the essence of that performance. From a conservation point of view this is a key aspect. The recording of the evolution of the artwork is therefore a must. This is something that will be a focus for this work when designing the artifact.
+
+\subsection{Applying Theory to Networked Cryptoart}
+
+
+\todo
+
+
+\subsection{Copyright Implications}
+\label{subsec:chap2_copyright}
+
+There is a general consensus throughout cryptoart that the act of collecting an NFT does not grant the collector any copyrights over the NFT's original artwork, which remain with the artist. However the practice of NFT marketplaces engaging in cross-listings, which means displaying the artwork for sale on platforms other than the one where the artist minted the work originally, is widespread. It's a practice that is not only accepted, but arguably even appreciated by artists, who gain a wider platform for displaying, and potentially selling, their artworks. This is something that would not normally happen with a museum or other traditional institutions, who always have to go through a step of acquisition of the artwork, along with conservation specific contract signing, before displaying or applying conservation techniques to it.
+
+For the design of our artifact, this means that merely displaying an artwork on an art conservation platform, by itself, should not not constitute a problem. However if the platform engages in automatic classification and displays such metadata along with the artwork, it may raise issues, as the artist may not agree with a particular classification or intervention. This is an area which needs further attention in future work.
+
+
+As Innocenti stated, "if conservation for digital art is a moving target, then our scientific methodology should be a moving gun" \citeyear[p.230]{innocentiKeepingBitsAlive2013}.
+
+
+
 
 \section{Open Archival Information System (OAIS)}
+\label{sub:oais}
 
 \todo
 
@@ -288,14 +359,14 @@ The \gls{oais} , published in 2005, is the standard reference model for the long
 
 
 
+\section{Archive platforms}
+
+\subsection{Rhizome ArtBase}
 
 
-\section{Web Archiving: State of the Art}
+\subsection{WayBackMachine}
 
-webrecorder
-\subsection{Web Archiving Standards}
-
-WARC
+webrecorder and WARC
 
 
 
@@ -304,38 +375,6 @@ WARC
 \todo define code-based art and netart
 
 Also, since there is a significant overlap on the preservation and restoration needs of all code-based art, whether it is networked or not, the review of artworks included these in the scope, with the aim of informing the design of a draft taxonomy.
-
-
-
-
-
-
-
-
-
-
-\section{Conservation}
-
-Mention how the Internet Archive, in cooperation with the MAME project, which started as an emulator for old arcade games, has now branched to include other kinds of vintage hardware, like consoles and even scientific calculators. \cite{scottjasonCalculatedMoveCalculators2023}
-
-This is a quick mention of \gls{emulation} so that it appears on the glossary.
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Non-Fungible Tokens}
-Created by crypto-kitties in 2018, specifically for art, but protocol can be used for other applications.
-
-
 
 
 
@@ -353,6 +392,26 @@ Rhea Myers "Token Equals Text" (2019)
 
 
 Tezos as the art chain (mention participation in basel
+
+
+\todo
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\linewidth]{chainleft-taxonomy.png}
+    \caption[Onchain Runtime Art]{Onchain Runtime Art by @chainleft. Source: https://x.com/ChainLeftist/status/1757802497626767455}
+    \label{fig:onchainruntimeart}
+\end{figure}
+
+
+Chainleft kindly shared a more detailed description of each category by private message, which can be found in \nameref{appx:chainleft-taxonomy}, page \pageref{appx:chainleft-taxonomy}.
+
+
+\subsection{NFT Marketplace Restrictions}
+
+It should be noted that some NFT marketplaces apply restrictions to networked artworks. This can be for a number of reasons.
+For example, OBJKT.com applies a security warning by default, with an option to disable it.
+
 
 
 
@@ -393,6 +452,16 @@ Entanglement by Bjork (have permission for screenshots)
 \section{Determinism}
 
 This section deals with whether artworks are deterministic in the way they are rendered or whether there is an element of randomness that even given all the same starting conditions, the artwork will look very different each time. This categorisation is important for conservation because a nondeterministic artwork will be dificult to monitor from a browser obsolescence point of view, especially when using image difference between consecutive snapshots of the artwork. In the case of a non-deterministic artwork, the snapshots will be so different that they become ineffective in detecting changes due to browser version upgrades or other changes in web specifications overtime. In this context, the challenge is to differentiate between a deterministic animated artwork, and a nondeterministic artwork. This challenge exists, because even if an artwork is deterministic, unless there is a way to snapshot the exact same frame across all the snapshots then any image difference comparisons will result in exaggerated differences. In this case we may need to employ more advanced animation frame comparison algorithms, such that the sequence of the animation can be compared across snapshots, and these may involve the recording of the animation, rather than just taking a single snapshot in time. Of course, such a strategy has trade-offs, and in this particular case the trade-off would be a much larger snapshot file size, which will then impact on the overall economic sustainability of the archive.
+
+It should be noted that, determinism is also a reason why fxhash moderates any networked NFT minted on their platform. See \autoref{fig:aliak-data-as-landscape} for an example.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{aliak-data-as-landscape.png}
+    \caption[Data as Landscape by AliaK]{Data as Landscape by AliaK, 2022. Source: https://www.fxhash.xyz/generative/13124}
+    \label{fig:aliak-data-as-landscape}
+\end{figure}
+
 
 
 \section{Code Security}
