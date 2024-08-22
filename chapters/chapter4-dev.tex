@@ -1,10 +1,130 @@
-\chapter{Prototype Development}
+\chapter{Artifact Development}
+
+This chapter describes the development of the artifact, \texttt{ARKIVO.ART}, following the RQDD method introduced in the previous chapter.
+
+\section{Plan Breakdown}
+
+To answer a research question, one starts to plan what is required to answer the question, and then works backwards in incremental stages to where we are currently, leaving milestones (Miles) along the way, starting at 1 and going upwards as we get away from the goal. The analogy is that of a road, with each side-road marker showing how many miles we are away from a city, as we drive away from it.
+
+We will start by trying to answer RQ1:
+
+\vspace{0.5cm}
+
+RQ1 - Can we determine which code-based HEN OBJKTs are networked?
+
+\vspace{0.5cm}
+
+We know that we can do this manually, by opening the OBJKT on a web browser and inspecting the network tab under the Developer Tools, to determine if there is any network activity to a domain or URL path that is outside of the OBJKT's IPFS URL. As an example we will use the artwork ``Adam'' by Raphaël de Courville\footnotemark[1], which we know to be a networked OBJKT.
+As seen in \autoref{fig:devtools-net}, there is indeed a request to an external endpoint: \texttt{https\://api.hicdex.com/v1/graphql} initated by \texttt{sketch.js}, which is the p5js sketch that renders this artwork. The remaining 3 network requests are for local assets within the directory of the OBJKT, and hence not considered 'networking' as per our initial definition.
+
+\footnotetext[1]{https://cache.teia.rocks/ipfs/QmbNtTu7k2E2UDYDQTyiVzV8rVbCU44hc9js1erKzeSogY/?\\creator=tz1hfuVWgcJ89ZE75ut9Qroi3y7GFJL5Lf2K\&viewer=\&objkt=230177}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{dev-tools-net.png}
+    \caption[Developer Tools - Network Inspection]{Developer Tools - Network Inspection}
+    \label{fig:devtools-net}
+\end{figure}
+
+Now that we established that we can identify a networked OBJKT manually, the next step is to do it programatically.
+
+At this stage we can start to plan our Miles. The numbers will go up the further we get away from our goal.
+
+Analysing the network traffic and determining if an OBJKT is networked is Mile 1.
 
 
-boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text.
+For capturing the network traffic programatically we can use one of several headless browser automation solutions, which are normally used for automated website testing and web-scraping, like Playwright\footnotemark[2], Selenium\footnotemark[3], or Puppeteer\footnotemark[4]. For this work Playwright was selected. This is Mile 2.
 
 
-\section {Prototype Requirements}
+\footnotetext[2]{https://playwright.dev/}
+\footnotetext[3]{https://www.selenium.dev/}
+\footnotetext[4]{https://pptr.dev/}
+
+Although our Playwright instance could access the OBJKT asset directly from the Teia IPFS node, there are several reasons why it's not desirable to do so:
+
+\begin{enumerate}
+	\item introduces potential network latency which could affect the snapshot process adversely
+	\item increases the bandwidth usage between teia and arkivo
+	\item arkivo is supposed to archive these artworks anyway, including full copies of the assets
+\end{enumerate}
+
+For this reason the next step is to run our own IPFS node, so that we can fetch the OBJKTs locally, and pin them, which ensured it cannot be garbage collected by the node. This is Mile 3.
+
+But this raises another question, which artworks to fetch? We need a way to discover and index all the OBJKTs that we are interested in investigating. This is Mile 4.
+
+To discover the OBJKTs we can resort to existing indexers of the Tezos blockchain. There are 2 main options:
+
+\begin{enumerate}
+	\item TzKT API\footnotemark[5] - a generic indexer for the whole Tezos blockchain
+	\item TezTok API\footnotemark[6] - an indexer specialised in Tezos NFTs
+\end{enumerate}
+
+\footnotetext[5]{https://tzkt.io/api}
+\footnotetext[6]{https://www.teztok.com}
+
+The TzKT API being generic, operates at a very low level, with endpoints that are closely related to the blockchain data, without abstraction layers.
+TezTok, on the other hand, specialises in NFTs so it creates an abstraction layer that is easier to work with, since it is NFTs we are interested in discovering. For this reason TezTok was chosen.
+
+Finally, we can move to the last stage, determining what search criteria to use when querying Teztok. This is Mile 5.
+
+Here is a summary of the five Miles. We will write them in the reverse order, as now we are going back towards our goal.
+
+\vspace{0.5cm}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|p{10cm}|}
+\hline
+\textbf{Mile \#} & \textbf{Description} \\ \hline
+Mile 5 & Determine search criteria to use in Mile 4 \\ \hline
+Mile 4 & Query TezTok to identify which artworks to fetch (discovery) \\ \hline
+Mile 3 & Fetch and pin all OBJKTs of potential interest \\ \hline
+Mile 2 & Run OBJKT in Playwright sandbox and capture traffic \\ \hline
+Mile 1 & Analyse traffic and determine if the OBKJT is networked \\ \hline
+\end{tabular}
+\caption{The 5 Miles of Development for RQ1}
+\end{table}
+
+With these in place we draft an iteration plan. This can always be changed later but will give a rough idea of how many iterations are required.
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|p{5cm}|}
+\hline
+\makecell{\textbf{Iteration \#}} & \makecell{\textbf{Miles to Goal}} \\ \hline
+Iteration 1 & \makecell{Mile 5\\ Mile 4 } \\ \hline
+Iteration 2 & \makecell{Mile 3}  \\ \hline
+Iteration 3 & \makecell{Mile 2\\ Mile 1 } \\ \hline
+\end{tabular}
+\caption{Iteration Plan for RQ1}
+\end{table}
+
+
+\section {Iteration 1}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Risk Analysis}
 
@@ -15,6 +135,10 @@ TODO:
 * Libraries/Dependencies
 * Networked Dependencies (type, blockchain indexer vs other APIs, public endpoints or private)
 * Open source or not (obfuscated code, code running on private infra)
+
+
+
+
 
 
 

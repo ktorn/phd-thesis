@@ -26,6 +26,7 @@
 \usepackage{setspace}
 \usepackage{listings}
 \usepackage{enumitem}
+\usepackage{makecell}
 
 
 % Set global options for itemize (and optionally enumerate, description)
