@@ -27,6 +27,7 @@
 \usepackage{listings}
 \usepackage{enumitem}
 \usepackage{makecell}
+\usepackage{multirow}
 
 
 % Set global options for itemize (and optionally enumerate, description)
@@ -59,6 +60,7 @@
 \newcommand{\todo}{\textcolor{red}{\hl{\textbf{[TODO]}}}}
 
 \newcommand{\citep}[2]{(#1, #2)}
+
 
 \definecolor{lightgray}{rgb}{.9,.9,.9}
 \definecolor{darkgray}{rgb}{.4,.4,.4}
@@ -205,11 +207,8 @@
 \include{chapters/chapter2-relatedwork}
 \include{chapters/chapter3-method}
 \include{chapters/chapter4-dev}
-\include{chapters/chapter5-eval}
-\include{chapters/chapter6-results}
-\include{chapters/chapter7-discuss}
-\include{chapters/chapter8-conclusion}
-
+\include{chapters/chapter5-data-discuss}
+\include{chapters/chapter6-conclusion}
 
 \cleardoublepage
 \label{sec:glossary}

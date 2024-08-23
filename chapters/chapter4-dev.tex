@@ -71,11 +71,12 @@ Here is a summary of the five Miles. We will write them in the reverse order, as
 
 \vspace{0.5cm}
 
-\begin{table}[h!]
+\begin{table}[h]
+\footnotesize
 \centering
 \begin{tabular}{|c|p{10cm}|}
 \hline
-\textbf{Mile \#} & \textbf{Description} \\ \hline
+\textbf{Mile} & \textbf{Description} \\ \hline
 Mile 5 & Determine search criteria to use in Mile 4 \\ \hline
 Mile 4 & Query TezTok to identify which artworks to fetch (discovery) \\ \hline
 Mile 3 & Fetch and pin all OBJKTs of potential interest \\ \hline
@@ -88,23 +89,264 @@ Mile 1 & Analyse traffic and determine if the OBKJT is networked \\ \hline
 With these in place we draft an iteration plan. This can always be changed later but will give a rough idea of how many iterations are required.
 
 
-\begin{table}[h!]
+\begin{table}[h]
+\footnotesize
 \centering
-\begin{tabular}{|c|p{5cm}|}
+\begin{tabular}{|l|c|l|}
 \hline
-\makecell{\textbf{Iteration \#}} & \makecell{\textbf{Miles to Goal}} \\ \hline
-Iteration 1 & \makecell{Mile 5\\ Mile 4 } \\ \hline
-Iteration 2 & \makecell{Mile 3}  \\ \hline
-Iteration 3 & \makecell{Mile 2\\ Mile 1 } \\ \hline
+\textbf{Iteration}        & \multicolumn{1}{l|}{\textbf{Mile}} & \textbf{Description}                                         \\ \hline
+\multirow{2}{*}{Iteration 1} & Mile 5                              & Determine search criteria to use in Mile 4                   \\ \cline{2-3} 
+                             & Mile 4                              & Query TezTok to identify which artworks to fetch (discovery) \\ \hline
+Iteration 2                  & Mile 3                              & Fetch and pin all OBJKTs of potential interest               \\ \hline
+\multirow{2}{*}{Iteration 3} & Mile 2                              & Run OBJKT in Playwright sandbox and capture traffic          \\ \cline{2-3} 
+                             & Mile 1                              & Analyse traffic and determine if the OBKJT is networked      \\ \hline
 \end{tabular}
 \caption{Iteration Plan for RQ1}
 \end{table}
 
 
+
 \section {Iteration 1}
 
 
+\begin{table}[h]
+\footnotesize
+\centering
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Iteration}        & \multicolumn{1}{l|}{\textbf{Mile}} & \textbf{Description}                                         \\ \hline
+\multirow{2}{*}{Iteration 1} & Mile 5                              & Determine search criteria to use in Mile 4                   \\ \cline{2-3} 
+                             & Mile 4                              & Query TezTok to identify which artworks to fetch (discovery) \\ \hline
+\end{tabular}
+\caption{Iteration 1 Miles}
+\end{table}
 
+
+\subsection {Mile 5}
+
+Mile 5 is really just an exploratory phase, which does not require any development. It involves accessing Teztok's GraphQL playground\footnotemark[7], exploring the schema available, and crafting a query that returns a list of OBJKTs of interest.
+
+\footnotetext[7]{https://graphiql.teztok.com/}
+
+We want all OBJKTs of mime-type \texttt{application/x-directory} and \\ \texttt{image/svg+xml} from the HEN OBJKT smart contract \\\texttt{KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton} and we select all the metadata fields that are interesting to us, including \texttt{artifact\_uri} which is the CID of the OBJKT media asset in the IPFS network.
+
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=HTML, caption={GraphQL query to retrieve OBJKTs of interest}] 
+query artifact_metadata {
+  tokens(where: {_or: [{mime_type: {_eq: "application/x-directory"}},
+    									 {mime_type: {_eq: "image/svg+xml"}}],
+    						 fa2_address: {_eq: "KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton"}},
+    						 order_by: {minted_at: asc}, offset: 0, limit: 10) {
+    token_id
+    name
+    artifact_uri
+    metadata_uri
+    thumbnail_uri
+    mime_type
+    description
+    tags {
+      tag
+    }
+    artist_address
+    fa2_address
+    platform
+    minted_at
+    editions
+  }
+}
+\end{lstlisting}
+
+
+Following is a sample of a record returned by this query:
+
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=HTML, caption={Sample OBJKT Record }] 
+
+"tokens": [
+      {
+        "token_id": "229",
+        "name": "The Bird",
+        "artifact_uri": "ipfs://QmUHJdbFukpVBSqVnQ7V1C9JEFR5XC2pFZW17LUEpAtQnd",
+        "metadata_uri": "ipfs://QmbaWzPvtJJXJT8bqxUrFUQkraV3uHV4rzrXFLBcJ18kH1",
+        "thumbnail_uri": "ipfs://QmNrhZHUaEqxhyLfqoq1mtHSipkWHeT31LNHb1QEbDHgnc",
+        "mime_type": "image/svg+xml",
+        "description": "The Bird. SVG. 2021. @djangobits",
+        "tags": [],
+        "artist_address": "tz1YRG68NdqtAcsFEwTUw6FsSsiBb5kagEDo",
+        "fa2_address": "KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton",
+        "platform": "HEN",
+        "minted_at": "2021-03-02T06:16:35+00:00",
+        "editions": 1
+      },
+   [snip]
+\end{lstlisting}
+
+
+
+
+\subsection {Mile 4}
+
+Mile 4 is the beginning of development, and because it's the first we need to a barebones application. For this project the AdonisJS web framework was selected as the stack for the application, because it provides a full-stack MVC Framework, supports TypeScript, and follows a convention over configuration environment which helps speed up development.
+
+In this Mile we need to:
+
+\begin{enumerate}
+	\item Query TezTok and receive the list of OBJKTs. Because the listing is very large, we need to paginate the results with the use of the \texttt{limit} and \texttt{offset} parameters in the query
+	\item Store each OBJKT metadata in a local Postgres database, which will serve as the main database of our application.
+\end{enumerate}
+
+
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=0.75\textwidth]{mile4-arch}
+    \caption[Mile 4 Architecture]{Mile 4 Architecture}
+    \label{fig:mile4-arch}
+\end{figure}
+
+
+This concludes iteration 1. At this stage our database contains the metadata of 21,390 OBJKTs.
+
+
+\section {Iteration 2}
+
+
+\begin{table}[h]
+\footnotesize
+\centering
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Iteration}        & \multicolumn{1}{l|}{\textbf{Mile}} & \textbf{Description}                                         \\ \hline
+Iteration 2                  & Mile 3                              & Fetch and pin all OBJKTs of potential interest               \\ \hline
+\end{tabular}
+\caption{Iteration 2 Mile}
+\end{table}
+
+
+\subsection {Mile 3}
+
+In this Mile we will start pinning the OBJKTs assets in a local IPFS node. This is a significant milestone because from this moment onwards, the system is already delivering a useful service to the ecosystem. By pinning content and participating in the IPFS p2p network we are helping other nodes access the content.
+
+Tasks for Mile 3:
+\begin{enumerate}
+	\item Setup an IPFS node (Kubo)\footnotemark[8] to fetch and pin the OBJKTs
+	\item For each OBJKT metadata, we instruct the IPFS node to pin the CIDs of that OBJKT. This operation will also automatically fetch the assets to the IPFS node. These operations take a significant amount of time, so we need to queue the operations in a Redis database, which is consumed by a worker that actually communicates with the IPFS node.
+\end{enumerate}
+
+\footnotetext[8]{https://github.com/ipfs/kubo}
+
+
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=0.75\textwidth]{mile3-arch}
+    \caption[Mile 3 Architecture]{Mile 3 Architecture}
+    \label{fig:mile3-arch}
+\end{figure}
+
+
+After all OBJKTs are fetched and pinned, the IPFS node is using 79.3GB of disk size.
+
+
+And just like that, Iteration 2 answered RQ3:
+
+\vspace{0.5cm}
+RQ3 - What are the disk space requirements for storing all code-based HEN OBJKTs’ media assets?
+\vspace{0.5cm}
+
+\section {Iteration 3}
+
+
+\begin{table}[h]
+\footnotesize
+\centering
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Iteration}        & \multicolumn{1}{l|}{\textbf{Mile}} & \textbf{Description}                                         \\ \hline
+\multirow{2}{*}{Iteration 3} & Mile 2                              & Run OBJKT in Playwright sandbox and capture traffic          \\ \cline{2-3} 
+                             & Mile 1                              & Analyse traffic and determine if the OBKJT is networked      \\ \hline
+\end{tabular}
+\caption{Iteration 3 Miles}
+\end{table}
+
+
+
+\subsection {Mile 2}
+
+In this Mile we will use PlayWright to open each OBJKT and record any network calls initiated by the OBJKT. This is done in \texttt{SnapshotArtifactService}
+
+Tasks for Mile 2:
+\begin{enumerate}
+	\item Run each OBJKT in a Playwright sandbox and capture traffic, including URLs and any payloads
+\end{enumerate}
+
+
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=0.9\textwidth]{mile2-arch}
+    \caption[Mile 3 Architecture]{Mile 2 Architecture}
+    \label{fig:mile2-arch}
+\end{figure}
+
+
+Snapshots take a significant amount of time, because each snapshot must wait for a few seconds in case an OBJKT makes late network calls. For this reason \texttt{ProcessArtifact} had to be run on two different node processes, each one consuming from a separate Redis queue: \texttt{ipfs} and \texttt{snapshots}.
+
+A significant issue was found at this Mile: the PlayWright library does not release resources when a browser instance is closed, which causes a memory leak after only a short amount of time doing continuous snapshots. This is a known issue, and unlikely to be fixed soon. For this reason, the \texttt{ProcessArtifact} process in charge of snapshots must force exit itself after only 5 snapshots, and do this while wrapped in a shell-script which automatically restarts it each time. This way all resources are freed, every 5 snapshots.
+
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=bash, caption={runSnapshotWorker.sh}] 
+#!/bin/bash
+
+# Infinite loop to restart the command whenever it exits
+while true; do
+  # Execute the Node.js command
+  node ace queue:listen --queue=snapshot
+
+  # Wait for a second before restarting to avoid spamming in case of immediate failure
+  sleep 1
+done
+\end{lstlisting}
+
+
+\subsection {Mile 1}
+
+At this stage we code the logic that checks whether an OBJKT makes external network requests, and when it does, record that in a \texttt{is\_networked} database field.
+
+Tasks for Mile 1:
+\begin{enumerate}
+	\item Analyse traffic and determine if the OBKJT is networked
+\end{enumerate}
+
+
+After completing this process, we can query the database to find how many OBJKTS are networked. We do want to exclude those which have been burned, or destroyed by their creators, which are normally failed or test mints.
+
+\begin{center}
+\begin{lstlisting}[language=SQL, caption={SQL query - number of networked OBJKTs}]
+SELECT COUNT(id)
+FROM artifacts
+WHERE is_networked = true
+AND is_burned = false;
+\end{lstlisting}
+\end{center}
+
+As of this writing, there a total of \texttt{1083} networked OBJKTs on the HEN smart contract and each one is properly labelled in our database. RQ1 has been answered.
+
+
+\section {Iteration 4}
+
+
+We will now turn our attention to RQ2:
+
+\vspace{0.5cm}
+RQ2 - Can we capture and document networked HEN OBJKTs artistic performance?
+\vspace{0.5cm}
 
 
 
@@ -159,7 +401,7 @@ The \texttt{ArtifactController} now prepares a special data structure, \texttt{c
 After experimenting with different metadata standards \cite{DevExposing_metadataZotero}\cite{zahidOpenGraphMeta2023} , a solution was found using a mixture of standards, where Zotero can pull most of the relevant fields related to an artifact, as shown in \autoref{fig:zotero-metadata-comparison}
 
 
-\begin{lstlisting}[style=htmlCode,caption={Artifact page metadata}] 
+\begin{lstlisting}[language=HTML, caption={Artifact page metadata}] 
 <title>{{ citationMetadata.title}} - arkivo.art</title>
 <meta property="og:title" content="{{ citationMetadata.title }}">
 <meta property="og:type" content="website">
@@ -260,3 +502,40 @@ The choice of license for this project was ... due to...
 \section{Security: Detecting and Dealing with Malicious Code}
 
 In this section I will talk about the security aspects of code-base artworks.
+
+
+
+
+
+
+
+
+
+\section{Prototype Evaluation}
+
+
+boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text.
+
+\subsection{System Performance}
+
+boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text.
+
+\subsection{End-user study}
+
+
+The 'Networked Only' checkbox caused some confusion, as one user assumed it was a filter which should instantly be reflected on the results as one checks or unchecks it. Although not originally intended as an auto-updating filter (actual filters were not implemented) the behaviour of the checkbox was altered, by adding an \texttt{onchange} event which submits the form every time it is checked or unchecked. This results in an experience that is more aligned with the user's expectations, and is a reasonable compromise until a proper filtering system is put in place.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
