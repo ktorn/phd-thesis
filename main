@@ -1,4 +1,5 @@
-\documentclass[12pt,a4paper]{report}
+\documentclass[12pt,a4paper,twoside]{book}
+\usepackage[left=1in, right=1in, top=1in, bottom=1in, bindingoffset=0.5in]{geometry}
 %\usepackage[left=12mm, top=0.5in, bottom=12mm]{geometry}
 \usepackage{layout}
 \usepackage[style=altlist, acronym, symbols, nonumberlist]{glossaries-extra}
@@ -28,6 +29,36 @@
 \usepackage{enumitem}
 \usepackage{makecell}
 \usepackage{multirow}
+
+
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{%
+  \fancyhf{} % clear all header and footer fields
+  \fancyfoot[C]{\thepage} % page number in the center of the footer
+  \renewcommand{\headrulewidth}{0pt} % no line in header area
+  \renewcommand{\footrulewidth}{0pt} % no line in footer area
+}
+
+
+\fancypagestyle{frontmatterstyle}{
+  \fancyhf{} % clear all header and footer fields
+  \fancyfoot[C]{\thepage} % page number in the center of the footer
+  \renewcommand{\headrulewidth}{0pt} % no line in header area
+  \renewcommand{\footrulewidth}{0pt} % no line in footer area
+}
+
+
+\hypersetup{
+    breaklinks=true,   % allows links to break at the end of lines
+}
+
+\urlstyle{same}  % keeps the same font for URLs as the surrounding text
+
+\Urlmuskip=0mu plus 1mu % prevent bibliography cropping
+
+\setlength{\emergencystretch}{3em} % increases the allowed stretchability for line breaking
+
+\PassOptionsToPackage{hyphens}{url} % allows breaking of long URLs at hyphens
 
 
 % Set global options for itemize (and optionally enumerate, description)
@@ -149,8 +180,21 @@
 }
 
 
+% Redefine cleardoublepage to suppress page numbers on the cleared pages
+\let\originalcleardoublepage\cleardoublepage
+\renewcommand{\cleardoublepage}{
+  \clearpage
+  \thispagestyle{empty}
+  \originalcleardoublepage
+}
+
 
 \begin{document}
+
+\frontmatter
+
+\pagestyle{frontmatterstyle}
+
 \title{SEDA \\ \large A study of conservation techniques for networked cryptoart}
 
 \author{Daniel Filipe Farinha}
@@ -161,15 +205,20 @@
 
 % Frontmatter
 \input{frontmatter/titlepage.tex}
+\cleardoublepage
 \input{frontmatter/endorsement.tex}
+\cleardoublepage
 \input{frontmatter/dedication.tex}
+\cleardoublepage
 
 % changing page numbering to roman for front matter
 \pagenumbering{roman}
 
 \doublespacing
 \input{frontmatter/abstract.tex}
+\cleardoublepage
 \input{frontmatter/acknowledgments.tex}
+\cleardoublepage
 \singlespacing
 
 
@@ -199,9 +248,36 @@
 \printnoidxglossary[type=acronym, title={List of Acronyms}, toctitle={List of Acronyms}]
 \cleardoublepage
 
-% changing page numbering style back to arabic
+
+% Restore original cleardoublepage command
+\let\cleardoublepage\originalcleardoublepage
+
+\mainmatter
+\cleardoublepage % Start double-sided layout on the next odd-numbered page
 \pagenumbering{arabic}
-\doublespacing
+
+
+% Configure fancyhdr for the main chapters with headers and footers
+\fancypagestyle{mainchapterstyle}{
+  \fancyhf{} % clear all header and footer fields
+  \fancyhead[LE]{\leftmark} % Chapter title on even pages (Left side on Even pages)
+  \fancyhead[RO]{\rightmark} % Section title on odd pages (Right side on Odd pages)
+  \fancyfoot[C]{\thepage} % page number in the center of the footer
+  \renewcommand{\headrulewidth}{0.4pt} % line in header area
+  \renewcommand{\footrulewidth}{0pt} % no line in footer area
+}
+
+% Page style with only page numbers in the footer
+\fancypagestyle{plainpagestyle}{
+  \fancyhf{} % clear all header and footer fields
+  \fancyfoot[C]{\thepage} % page number in the center of the footer
+  \renewcommand{\headrulewidth}{0pt} % no line in header area
+  \renewcommand{\footrulewidth}{0pt} % no line in footer area
+}
+
+% Apply the page style to the main chapters
+\pagestyle{mainchapterstyle}
+
 
 \include{chapters/chapter1-intro}
 \include{chapters/chapter2-relatedwork}
@@ -214,15 +290,23 @@
 \label{sec:glossary}
 \printnoidxglossary[title={Glossary}]
 
-%\cleardoublepage
-%\addcontentsline{toc}{chapter}{Index}
-%\printindex
 
-\clearpage
+% Reset chapter/section marks after the glossary
+\cleardoublepage
+\markboth{}{} % Clear the header
+\pagestyle{mainchapterstyle} % Reapply the main chapter style
+
+\cleardoublepage
+
+%\clearpage
 
 \bibliographystyle{apacite}
 \bibliography{references}
 %\bibliographystyle{plainurl}
+
+% Apply plain page style after references
+\cleardoublepage
+\pagestyle{plainpagestyle}
 
 \include{backmatter/appendix-pub}
 \include{backmatter/appendix-chainleft}

@@ -179,9 +179,6 @@ The overall performance in terms of latency is good, although there is room for 
 
 
 
-
-
-
 \section{Data Analysis}
 
 boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text.
@@ -190,15 +187,6 @@ boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerpl
 
 
 The 'Networked Only' checkbox caused some confusion, as one user assumed it was a filter which should instantly be reflected on the results as one checks or unchecks it. Although not originally intended as an auto-updating filter (actual filters were not implemented) the behaviour of the checkbox was altered, by adding an \texttt{onchange} event which submits the form every time it is checked or unchecked. This results in an experience that is more aligned with the user's expectations, and is a reasonable compromise until a proper filtering system is put in place.
-
-
-
-
-
-
-
-
-
 
 
 
@@ -270,3 +258,12 @@ For this reason, the IOC model gains an even greater importance for the longevit
 \subsection{Beyond the Canvas}
 
 All of the artworks which this project currently aims to cater for in terms of conservation have one thing in common: their visual rendering is restricted to the boundaries of an HTML element on a web page, the canvas. Even those which intentionally choose to spread their visual expression past the boundaries of a single canvas element, are still constrained by the larger HTML DOM object or web page in which they, as web-based artworks, essentially exist. This is not unique to digital art. The great majority of paintings displayed in traditional museums are also constrained by their physical framed canvasses. Sculptures and other art installations are exceptions to this rule. However networked art reaches out into the world, and it would seem appropriate to explore a rendering medium that represents that breaking away from the canvas.
+
+
+\subsection{Identifying IPFS Pinning Abuse}
+
+Since most IPFS pinning services are paid for, there is a potential for abuse of free pinning services like Teia, and now Arkivo, by mining directory-x OBJKTs just as a way to store data on IPFS for free. The OBJKT might even render a piece of original art, but just as a facade for a much larger data payload. This would add to an archive's storage costs without contributing back in terms of donation, hurting its sustainability.
+
+
+On the other hand, if the art has value, 
+
