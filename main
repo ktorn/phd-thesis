@@ -220,13 +220,13 @@
 
 \clearpage
 
-
 \bibliographystyle{apacite}
 \bibliography{references}
 %\bibliographystyle{plainurl}
 
-\include{backmatter/appendix-01}
-\include{backmatter/appendix-02}
+\include{backmatter/appendix-pub}
+\include{backmatter/appendix-chainleft}
+\include{backmatter/appendix-chatgpt}
 
 \layout
 

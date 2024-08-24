@@ -4,7 +4,22 @@ This chapter describes the development of the artifact, \texttt{ARKIVO.ART}, fol
 
 \section{Plan Breakdown}
 
-To answer a research question, one starts to plan what is required to answer the question, and then works backwards in incremental stages to where we are currently, leaving milestones (Miles) along the way, starting at 1 and going upwards as we get away from the goal. The analogy is that of a road, with each side-road marker showing how many miles we are away from a city, as we drive away from it.
+To answer a research question, one starts to plan what is required to answer the question, and then works backwards in incremental stages to where we are currently, leaving milestones (Miles) along the way, starting at 1 and going upwards as we get away from the goal. The analogy is that of a road, with side-road markers, each showing how many miles away we are from our destination.
+
+The decision of how to group the Miles into Iterations really depends on the complexity of each Mile, and their relationships and dependencies.
+
+Finally, all Mile and Iteration labels should be prefixed with the RQ number that they correspond to, for example: RQ1.Mile 5, RQ1.Iteration 1. This ensures unique identifiers across a project. However due to space limitations in this document, only Iterations will show the prefix.
+
+\autoref{fig:dev-plan} illustrates a model of this reverse-plan forward-execution method.
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=\textwidth]{dev-plan}
+    \caption[Mile and Iteration Planning Process]{Mile and Iteration Planning Process}
+    \label{fig:dev-plan}
+\end{figure}
+
+\section{Plan for RQ1}
 
 We will start by trying to answer RQ1:
 
@@ -95,10 +110,10 @@ With these in place we draft an iteration plan. This can always be changed later
 \begin{tabular}{|l|c|l|}
 \hline
 \textbf{Iteration}        & \multicolumn{1}{l|}{\textbf{Mile}} & \textbf{Description}                                         \\ \hline
-\multirow{2}{*}{Iteration 1} & Mile 5                              & Determine search criteria to use in Mile 4                   \\ \cline{2-3} 
+\multirow{2}{*}{Iteration RQ1.1} & Mile 5                              & Determine search criteria to use in Mile 4                   \\ \cline{2-3} 
                              & Mile 4                              & Query TezTok to identify which artworks to fetch (discovery) \\ \hline
-Iteration 2                  & Mile 3                              & Fetch and pin all OBJKTs of potential interest               \\ \hline
-\multirow{2}{*}{Iteration 3} & Mile 2                              & Run OBJKT in Playwright sandbox and capture traffic          \\ \cline{2-3} 
+Iteration RQ1.2                  & Mile 3                              & Fetch and pin all OBJKTs of potential interest               \\ \hline
+\multirow{2}{*}{Iteration RQ1.3} & Mile 2                              & Run OBJKT in Playwright sandbox and capture traffic          \\ \cline{2-3} 
                              & Mile 1                              & Analyse traffic and determine if the OBKJT is networked      \\ \hline
 \end{tabular}
 \caption{Iteration Plan for RQ1}
@@ -106,19 +121,19 @@ Iteration 2                  & Mile 3                              & Fetch and p
 
 
 
-\section {Iteration 1}
+\section {Iteration RQ1.1}
 
 
-\begin{table}[h]
+\begin{table}[H]
 \footnotesize
 \centering
 \begin{tabular}{|l|c|l|}
 \hline
 \textbf{Iteration}        & \multicolumn{1}{l|}{\textbf{Mile}} & \textbf{Description}                                         \\ \hline
-\multirow{2}{*}{Iteration 1} & Mile 5                              & Determine search criteria to use in Mile 4                   \\ \cline{2-3} 
+\multirow{2}{*}{Iteration RQ1.1} & Mile 5                              & Determine search criteria to use in Mile 4                   \\ \cline{2-3} 
                              & Mile 4                              & Query TezTok to identify which artworks to fetch (discovery) \\ \hline
 \end{tabular}
-\caption{Iteration 1 Miles}
+\caption{Iteration RQ1.1 Miles}
 \end{table}
 
 
@@ -190,7 +205,7 @@ Following is a sample of a record returned by this query:
 
 \subsection {Mile 4}
 
-Mile 4 is the beginning of development, and because it's the first we need to a barebones application. For this project the AdonisJS web framework was selected as the stack for the application, because it provides a full-stack MVC Framework, supports TypeScript, and follows a convention over configuration environment which helps speed up development.
+Mile 4 is the beginning of development, and because it's the first we need to a barebones application. For this project the AdonisJS web framework was selected as the stack for the application, because it provides a full-stack MVC Framework, supports TypeScript, and follows a convention over configuration environment which helps speed up development. It also provides a very convenient way to create \indexacronym{cli} commands that we can use to control aspects of our application, such as starting batch jobs, or triggering specific actions.
 
 In this Mile we need to:
 
@@ -209,11 +224,11 @@ In this Mile we need to:
 \end{figure}
 
 
-This concludes iteration 1. At this stage our database contains the metadata of 21,390 OBJKTs.
+This concludes iteration RQ1.1. At this stage our database contains the metadata of 21,390 OBJKTs.
 
 
-\section {Iteration 2}
-
+\section {Iteration RQ1.2}
+\label{sec:rq1.2}
 
 \begin{table}[h]
 \footnotesize
@@ -221,9 +236,9 @@ This concludes iteration 1. At this stage our database contains the metadata of 
 \begin{tabular}{|l|c|l|}
 \hline
 \textbf{Iteration}        & \multicolumn{1}{l|}{\textbf{Mile}} & \textbf{Description}                                         \\ \hline
-Iteration 2                  & Mile 3                              & Fetch and pin all OBJKTs of potential interest               \\ \hline
+Iteration RQ1.2                  & Mile 3                              & Fetch and pin all OBJKTs of potential interest               \\ \hline
 \end{tabular}
-\caption{Iteration 2 Mile}
+\caption{Iteration RQ1.2 Mile}
 \end{table}
 
 
@@ -251,14 +266,14 @@ Tasks for Mile 3:
 
 After all OBJKTs are fetched and pinned, the IPFS node is using 79.3GB of disk size.
 
-
-And just like that, Iteration 2 answered RQ3:
+\label{txt:rq3-answered}
+And just like that, Iteration RQ1.2 answered RQ3:
 
 \vspace{0.5cm}
 RQ3 - What are the disk space requirements for storing all code-based HEN OBJKTs’ media assets?
 \vspace{0.5cm}
 
-\section {Iteration 3}
+\section {Iteration RQ1.3}
 
 
 \begin{table}[h]
@@ -267,10 +282,10 @@ RQ3 - What are the disk space requirements for storing all code-based HEN OBJKTs
 \begin{tabular}{|l|c|l|}
 \hline
 \textbf{Iteration}        & \multicolumn{1}{l|}{\textbf{Mile}} & \textbf{Description}                                         \\ \hline
-\multirow{2}{*}{Iteration 3} & Mile 2                              & Run OBJKT in Playwright sandbox and capture traffic          \\ \cline{2-3} 
+\multirow{2}{*}{Iteration RQ1.3} & Mile 2                              & Run OBJKT in Playwright sandbox and capture traffic          \\ \cline{2-3} 
                              & Mile 1                              & Analyse traffic and determine if the OBKJT is networked      \\ \hline
 \end{tabular}
-\caption{Iteration 3 Miles}
+\caption{Iteration RQ1.3 Miles}
 \end{table}
 
 
@@ -289,7 +304,7 @@ Tasks for Mile 2:
 \begin{figure}[h]
     \centering
     \includesvg[width=0.9\textwidth]{mile2-arch}
-    \caption[Mile 3 Architecture]{Mile 2 Architecture}
+    \caption[Mile 2 Architecture]{Mile 2 Architecture}
     \label{fig:mile2-arch}
 \end{figure}
 
@@ -339,58 +354,287 @@ AND is_burned = false;
 As of this writing, there a total of \texttt{1083} networked OBJKTs on the HEN smart contract and each one is properly labelled in our database. RQ1 has been answered.
 
 
-\section {Iteration 4}
-
+\section{Plan for RQ2}
 
 We will now turn our attention to RQ2:
 
 \vspace{0.5cm}
-RQ2 - Can we capture and document networked HEN OBJKTs artistic performance?
+RQ2 - Can we capture and document networked HEN OBJKTs aesthetic evolution?
 \vspace{0.5cm}
 
 
+This question is more difficult to answer because we need to define what we mean by ``aesthetic evolution''. At its most simplistic level, the regular capturing of screenshots of the artwork might suffice in many instances. But artworks which are animated require a different approach, like a video recording. Others might be user interactive, and require yet a different strategy, see \autoref{subsec:capture-interactive}. External elements, like artist, curator, and conservator documentation, audience reactions, and many others, could also be considered a part of an artwork's aesthetic evolution. All these would require in-depth classification and analysis of the artwork, which is not feasible within the timeframe of this project. Therefore the scope will be reduced to the content delivered within the OBJKT's canvas. Also, having in mind the economic sustainability of the project, the decision was made to only take a static screenshot of the artwork during a snapshot to keep the storage space requirements to a minimum.
+
+
+\begin{table}[h]
+\footnotesize
+\centering
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Iteration}        & \multicolumn{1}{l|}{\textbf{Mile}} & \textbf{Description}                                         \\ \hline
+Iteration RQ2.1                  & Mile 1                              & Take screenshot of OBJKT during snapshot               \\ \hline
+\end{tabular}
+\caption{Iteration Plan for RQ2}
+\end{table}
+
+\section {Iteration RQ2.1}
+
+
+\subsection {Mile 1}
+
+Since we already have our snapshotting infrastructure in place, all we need is to take a screenshot at the end of the snapshotting process and store it. For now we will store the screenshots as base64-encoded PNGs in our snapshot record. This is not ideal in the long term, as the database will grow quite rapidly, but it works for the purposes of our research question, and that is all that is required when following the RQDD method.
+
+\autoref{lst:screenshotcode} shows an abbreviated version of the code which takes the screenshot, using the PlayWright library.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=JavaScript, caption={OBKJT screenshot code}, label={lst:screenshotcode}] 
+
+async snapshot(artifact: Artifact, dryRun: boolean): Promise<void> {
+
+  const START_TIME = Date.now();
+
+  // strip ipfs prefix from url
+  let url = artifact.artifactUri;
+  const pageUrl = this.formatPlatformUrl(artifact, url);
+
+  // prepare browser instance
+  const browser = await chromium.launch();
+  const context = await browser.newContext({
+      viewport: { width: DEFAULT_VIEWPORT_WIDTH,
+                  height: DEFAULT_VIEWPORT_HEIGHT
+                }
+  });
+
+  // open artifact URL
+  const page = await context.newPage();
+  await page.goto(pageUrl);
+
+  // wait for the remaining time
+  const TIME_LEFT = SNAPSHOT_DURATION - (Date.now() - START_TIME);
+  await page.waitForTimeout(TIME_LEFT);
+
+  // capture screenshot
+  console.log(`Taking screenshot...`);
+  const buffer = await page.screenshot({ timeout: 60000 });
+  this.snapshotData.snapshot.screenshot = buffer.toString('base64');
+\end{lstlisting}
+
+After a round of snapshots with screenshots across all the OBJKTs indexed in our database, the \texttt{snapshots} table grew significantly in size, as expected: 26GB. The total database size, including the OBJKTs metadata, is 29.4GB.
+
+A sample of screenshots was manually inspected, and all worked as expected. Later we will develop a web UI where the screenshots can be easily inspected.
+
+This first snapshot is important, as it is used for the initial classification of the OBJKT (networked or not), as well as to establish a baseline record, against which future snapshots can be compared. Therefore it should be taken immediately after discovery/ingestion of new OBJKTs.
+
+This feature allows us to capture screenshots of each OBJKT across time, which answers RQ2, even if in the limited scope that we discussed above.
+
+\section{Plan for RQ3}
+
+RQ3 was answered by Iteration RQ1.2, see \autoref{sec:rq1.2}, page \pageref{txt:rq3-answered}.
+
+\section{Plan for RQ4}
+
+RQ4 is the most challenging of all our research questions:
+
+\vspace{0.5cm}
+RQ4 - Can an online archive for HEN OBJKTs be economically self-sustainable?
+\vspace{0.5cm}
+
+To answer this question we need to understand what are the recurring costs of running such an archive, so that we can calculate the amount of income required to break-even, and then determine if such a source of income can be sustained and how.
+
+Even though this requires mostly a financial analysis, there is a component of development that is required: to create and host an actual online archive.
+The application developed for the previous RQs already suffices as a backend for such an archive, so all we need is to develop a web-interface that allows for the browsing and searching of the artworks.
+
+Once deployed in production we will determine the recurring cost of hosting the system which will allow us to proceed with the break-even analysis.
+
+This RQ only requires one iteration.
+
+\section {Iteration RQ4.1}
+
+\begin{table}[H]
+\footnotesize
+\centering
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Iteration}        & \multicolumn{1}{l|}{\textbf{Mile}} & \textbf{Description}                                         \\ \hline
+\multirow{2}{*}{Iteration RQ4.1} & Mile 2                              & Develop web UI                   \\ \cline{2-3} 
+                             & Mile 1                              & Deploy system in production \\ \hline
+\end{tabular}
+\caption{Iteration RQ4.1 Miles}
+\end{table}
+
+\subsection {Mile 2}
+
+To develop the web UI we start by sketching a basic wireframe to plan the layout of the pages. We only need 2 page templates, one for browsing the OBJKTs and another to display a particular OBJKT, see \autoref{fig:web-wireframe}.
+The browsing page will display 9 artworks at once, with a page navigation control at the bottom.
+The detail page is somewhat inspired in the Rhizome ArtBase website, with the inclusion of the accordion menus, to show and collapse the details about the artwork.
+
+\begin{figure}[H]
+  \centering
+  \begingroup
+  \setlength{\fboxsep}{0pt} % No padding between box and content
+  \setlength{\fboxrule}{1pt} % Thickness of the border
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \fcolorbox{gray}{white}{\includesvg[width=\textwidth]{wireframe-browse.svg}}
+    \caption{Artifact Browsing Page}
+    \label{fig:wireframe1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \fcolorbox{gray}{white}{\includesvg[width=\textwidth]{wireframe-objkt.svg}}
+    \caption{Artifact Detail Page}
+    \label{fig:wireframe2}
+  \end{subfigure}
+  \endgroup
+  \caption{Artifact Web UI Wireframe}
+  \label{fig:web-wireframe}
+\end{figure}
+
+With the overall UI mapped out, it was just a matter of coding it, using AdonisJS Edge templating engine. In the Artifact Detail Page, we can see one of the snapshots for the artwork, including the screenshot of the artwork.
+
+For the search facility, a checkbox was added to optionally restrict the search to networked OBJKTs only. This makes use of the automatic classification of networked OBJKTs developed in Iteration RQ1.3 Mile 1.
+
+\begin{figure}[H]
+  \centering
+  \begingroup
+  \setlength{\fboxsep}{0pt} % No padding between box and content
+  \setlength{\fboxrule}{1pt} % Thickness of the border
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \fcolorbox{gray}{white}{\includegraphics[width=\textwidth]{arkivo-ui-browse.png}}
+    \caption{Artifact Browsing Page}
+    \label{fig:wireframe1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \fcolorbox{gray}{white}{\includegraphics[width=\textwidth]{arkivo-ui-detail.png}}
+    \caption{Artifact Detail Page}
+    \label{fig:wireframe2}
+  \end{subfigure}
+  \endgroup
+  \caption{Artifact Web UI Implementation}
+  \label{fig:web-implementation}
+\end{figure}
+
+Also a basic "About" page was created, with a short description of what the project is about. This page also acts as the landing page when a user accesses the main site URL.
+
+\begin{figure}[H]
+    \centering
+    \begingroup
+    \setlength{\fboxsep}{0pt} % No padding between box and content
+    \setlength{\fboxrule}{1pt} % Thickness of the border
+    \fcolorbox{gray}{white}{\includegraphics[width=0.75\linewidth]{arkivo-landing.png}}
+    \endgroup
+    \caption[About Page]{About Page}
+    \label{fig:about-page}
+\end{figure}
 
 
 
+The completion of this Mile signals the end of the development phase of this project.
+
+\subsection {Mile 1}
+
+To deploy the system in production first we need to select a virtual private server (\indexacronym{vps}) hosting company that is reasonably priced for our storage needs. The calculation is based on the disk space used in our testing environment.
+
+\begin{table}[h]
+\footnotesize
+\centering
+\begin{tabular}{|l|r|}
+\hline
+\textbf{Description} & \textbf{Space Required (GB)} \\ \hline
+IPFS                 & 79.0                         \\ \hline
+Database             & 29.4                         \\ \hline
+\textbf{Total}       & \textbf{108.4}               \\ \hline
+\end{tabular}
+\caption{\texttt{ARKIVO} Storage Requirements}
+\label{table:storage-req}
+\end{table}
+
+
+As we can see from \autoref{table:storage-req}, the test instance of our application is using just under 110GB of disk space. Therefore we need to look for a virtual server with 150GB or more of space, to have some spare margin.
+
+After evaluating a number of hosting options, Hetzner\footnotemark[9] was found to offer the most reasonably priced virtual servers, so it was chosen as the hosting provider for \texttt{ARKIVO}.
+The CX42 option was selected, which provides the required space, and offers 16GB of RAM, which allows for more caching of assets in RAM when serving content. The cost of this server is EUR 15.90 per month.
+
+\footnotetext[9]{https://www.hetzner.com/cloud/}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{virtual-server-price.png}
+    \caption[Choice of Virtual Server]{Choice of Virtual Server}
+    \label{fig:vps-choice}
+\end{figure}
+
+The application was successfully installed, using Docker containers for all components. An ngnix webserver docker container acts as a reverse proxy for the main app and for the IPFS node, and it also handles SSL termination. The SSL certificate was acquired by using the Let's Encrypt Certbot.
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=0.75\textwidth]{vps-docker.svg}
+    \caption[Docker Containers]{Docker Containers}
+    \label{fig:docker-containers}
+\end{figure}
+
+Note: at the time of writing, in addition to ports 80 and 443, ngnix is also forwarding port 8080 to the app. This is a temporary requirement as if facilitates ``hot-fixes'' without the need for code re-deployment, which is useful during this early stage of development.
+
+\vspace{0.5cm}
+
+\texttt{ARKIVO} is live and accessible at: \texttt{https://arkivo.art/}
+
+
+\section{Database Schema}
+
+There are 5 main tables in the database schema:
+
+\begin{enumerate}
+	\item \texttt{artifacts} - the main table for storing the artifact metadata
+	\item \texttt{snapshots} - contains all the snaphots taken. It has a one-to-many relationship with \texttt{artifacts}
+	\item \texttt{origins} - contains all the origins (\texttt{schema, domain, port}) that artifacts connect to. It has a many-to-many relationship with \texttt{artifacts}, using a pivot table \texttt{artifact\_origin}
+	\item \texttt{tags} - contains all the tags used by artifacts. It has a many-to-many relationship with \texttt{artifacts}, using a pivot table \texttt{artifact\_tag}
+	\item \texttt{identities} - contains metadata about artists. It should have a many-to-many relationship with \texttt{artifacts}, but this was postponed for a future iteration as handling multiple artist OBJKTs (collabs) will require work that is outside the scope of this thesis.
+\end{enumerate}
+
+There are also 2 additional tables \texttt{adonis\_schema} and \texttt{adonis\_schema\_versions} which are used by AdonisJS to manage database schema migrations, and not relevant for this thesis.
+
+The Entity Relationship Diagram is illustrated in \autoref{fig:db-entity-relationship}.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{arkivo_schema.png}
+    \caption[Entity Relationship Diagram]{Entity Relationship Diagram}
+    \label{fig:db-entity-relationship}
+\end{figure}
 
 
 
+\section{Catalogue Management}
+
+Currently the management of the archive's catalogue is all done through CLI on the server, using AdonisJS \texttt{node ace} command facility.
+The following commands were created to facilitate the initialisation of a new \texttt{ARKIVO} instance:
+
+{\footnotesize
+\begin{verbatim}
+artifacts:discover         Discovers new artifacts' metadata from
+                           the specified platform, optionally
+                           pinning their payloads
+
+artifacts:pin              Fetches and Pins already existing
+                           artifacts records
+
+artifacts:snapshot         Take a snapshot of an artifact
+
+artifacts:updateMetadata   Update all token metadata for the
+                           specified platform
+\end{verbatim}
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-\subsection{Risk Analysis}
-
-Mention other risk analysis tools \cite{l2beatL2BEATStateLayer2024}
-
-TODO:
-* Asset storage (private servers, IPFS, Arweave)
-* Libraries/Dependencies
-* Networked Dependencies (type, blockchain indexer vs other APIs, public endpoints or private)
-* Open source or not (obfuscated code, code running on private infra)
-
-
-
-
-
-
-
-
-\section {Prototype 1 - genartdex}
-
-\section{System Architecture}
-
-boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text.
-
+\section{Other Notes on the Artifact}
 
 \subsection{Webpage metadata}
 
@@ -432,19 +676,11 @@ After experimenting with different metadata standards \cite{DevExposing_metadata
 \end{figure}
 
 
-
-\subsection{Snapshots}
-
-The first snapshot is important, as it is used for the initial classification of the OBJKT, as well as to establish a baseline record, against which future snapshots can be compared.
-Therefore it should be taken immediately after discovery/ingestion.
-
-
-
 \subsection{Encapsulation of internal IDs}
 
 In normal circumstances the listing of a model, like Artifact, would include the unique ID of that model as stored in the database, for example: \texttt{/artifacts/45}
 
-However this ID is unique to this instance of the application, and it can vary based on the timing of artifact discovery between other instances.
+However this ID is unique to this instance of the application, and it can change based on the timing of artifact discovery between other instances.
 For this reason it is imperative that none of the internal IDs generated by the database are exposed to the user.
 
 In order to achieve this, all URLs must be generated using only public identifiers which uniquely identify a model, in the case of an artifact: \texttt{blockchain /  smart contract / tokenId}.
@@ -470,60 +706,14 @@ This strategy allows us to have shorter, but still unique URLs, which do not exp
 
 \texttt{/artifacts/HEN/230177}
 
-Of course, the long-form URL should also work.
+Even in the cases where a URL is shortened, the long-form URL also works.
 
-\subsection{Infrastructure}
-
-A typical centralised application would be sensible to settle for state-of-the-art deployment platforms like Amazon ACS, DigitalOcean, Heroku, or Microsoft Azure. Not only do these commercial infrastructure solutions offer reliable up-time with fast Internet access, but also a wide range of geographically dispersed data centres across the world for maximum resiliency. It is theoretically possible to deploy a distributed and decentralised (control) solution across these platforms from an application point of view, however at the infrastructure level, the control would be centralised on a small number of industry players, which are an easy target for censorship requests from governments (ref needed).
-
-\subsection{Smart Contracts}
-
-boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text.
-
-\subsection{Authentication}
-
-todo: authentication vs authorisation vs access control
-
-One of the main benefits of web3-style authentication is that it does not require any user credentials stored in the application's database. Since all web3 users have their public keys publicly registered on the blockchain, any user can identify themselves by \emph{connecting} their web3 wallet and signing a custom message provided by the application. This way the application can verify who the user is and that they are in possession of the private key, therefore validating their authentication credentials.
-
-\section{Open Source}
-
-Open sourcing this project was essencial because...
 
 \subsection{Open Source License}
 
-The choice of license...
+This artifact was open sourced under the MIT License.
+Open sourcing the project is important because anyone should be able to run an instance and replicate the archive. This follows the philosophy behind web3, which was discussed in Motivation chapter.
 
-
-The choice of license for this project was ... due to...
-
-
-
-\section{Security: Detecting and Dealing with Malicious Code}
-
-In this section I will talk about the security aspects of code-base artworks.
-
-
-
-
-
-
-
-
-
-\section{Prototype Evaluation}
-
-
-boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text.
-
-\subsection{System Performance}
-
-boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text.
-
-\subsection{End-user study}
-
-
-The 'Networked Only' checkbox caused some confusion, as one user assumed it was a filter which should instantly be reflected on the results as one checks or unchecks it. Although not originally intended as an auto-updating filter (actual filters were not implemented) the behaviour of the checkbox was altered, by adding an \texttt{onchange} event which submits the form every time it is checked or unchecked. This results in an experience that is more aligned with the user's expectations, and is a reasonable compromise until a proper filtering system is put in place.
 
 
 
