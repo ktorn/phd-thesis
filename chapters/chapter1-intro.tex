@@ -11,15 +11,13 @@ This work explores that dilemma, and examines the conservation of networked-base
 
 This thesis contains many terms which were born out of the crypto community and may be unfamiliar to the reader. Even the term \emph{crypto} itself, with its Greek origins, has been adopted by the cryptocurrency community, thus appropriating a term which until recently had been used mostly by the cryptography community. For this reason this document contains an extensive glossary, starting from page \pageref{sec:glossary}, where many of the terms are defined.
 
-\todo if I have time, I may provide some of the blockchain and smart contract background here, as well as the crypto culture, decentralisation, values, etc
-
 \section{Motivation}
 
 To better understand my motivation for this work, as well as contextualise some of the research and development decisions made during the study, it is helpful for the reader to review a brief timeline of my personal experience in the crypto space and how it led to this research topic. Due to its personal nature, I took the liberty of using a more informal tone in this section.
 
 \subsection*{Bitcoin}
 
-I first came across Bitcoin in 2011, and experienced the basic use case of installing the Bitcoin-QT software on my laptop and receiving a small transaction (0.02 BTC) from a public faucet ran by early bitcoin developer Gavin Andersen \cite{lucasHowGavinAndresen2022}. As many people at that time, I failed to understand the significance of such a transaction. From a user experience perspective it was underwhelming.  The interface was rudimentary, and the transaction took a while to appear as confirmed. Paypal was miles ahead, or so I thought. This mis-judgement of the merits of the technology due to a very limited understanding, or even complete ignorance, of such a technology is unfortunately very common in the crytocurrency space.
+I first came across Bitcoin in 2011, and experienced the basic use case of installing the Bitcoin-QT software on my laptop and receiving a small transaction (0.02 BTC) from a public faucet ran by early bitcoin developer Gavin Andersen \cite{lucasHowGavinAndresen2022}. As many people at that time, I failed to understand the significance of such a transaction. From a user experience (\indexacronym{ux}) perspective it was underwhelming.  The interface was rudimentary, and the transaction took a while to appear as confirmed. Paypal was miles ahead, or so I thought. This mis-judgement of the merits of the technology due to a very limited understanding, or even complete ignorance, of such a technology is unfortunately very common in the crytocurrency space.
 
 It wasn't until 2013 that I looked into Bitcoin again. This time I read the Bitcoin whitepaper \cite{nakamotoBitcoinPeertopeerElectronic2008} and my world view changed. Technologically the proposition was simple: here is a piece of software which, if enough people run it on their own devices, and adopt it as a legitimate way to communicate value with others, has the potential to redefine the relationship between money, the state, and the people.
 
@@ -42,17 +40,17 @@ In the summer of 2017 I came across Tezos, a project still in its inception stag
 This was exciting to me because it promised to address the main problem that had led me to exit the Ethereum ecosystem. In addition to that, it would also use a proof-of-stake consensus algorithm from day one, resulting in a much more energy efficient and ecologically friendly blockchain.
 
 
-Ironically, after delays due to extensive \gls{off-chain} governance issues and disputes between the project co-founders and the president of the Tezos Foundation, who eventually stepped down \cite{irreraExclusiveTezosFounders2017}, Tezos finally launched in September 2018 \cite{daleBillionTezosBlockchain2018}. The delay in the launch is sometimes referred to as a reason why Tezos fell behind other projects in the crypto space, both in terms of developer mindshare as well as overall relevance, in what is a very competitive market.
+Ironically, after delays due to extensive governance issues and disputes between the project co-founders and the president of the Tezos Foundation, who eventually stepped down \cite{irreraExclusiveTezosFounders2017}, Tezos finally launched in September 2018 \cite{daleBillionTezosBlockchain2018}. The delay in the launch is sometimes referred to as a reason why Tezos fell behind other projects in the crypto space, both in terms of developer mindshare as well as overall relevance, in what is a very competitive market.
 
-The following three years saw a modest amount of development around Tezos especially in the areas of \gls{decentralisedfinance} and gaming, however adoption of the chain remained relatively low, as measured by the low transaction volume recorded on-chain, allowing detractors to classify it as a \emph{\gls{ghost-chain}}. In March 2021 all that was about to change.
+The following three years saw a modest amount of development around Tezos especially in the areas of \gls{decentralisedfinance} and gaming, however adoption of the chain remained relatively low, as measured by the low transaction volume recorded on the chain, encouraging detractors to classify it as a \emph{\gls{ghost-chain}}, as an analogy to a ghost town. In March 2021 all that was about to change.
 
 
 \subsection*{Hic Et Nunc (HEN)}
 
 
-Hic et Nunc (\indexacronym{hen}) was an NFT marketplace created by Brazilian developer Rafael Silva and launched on the Tezos blockchain in March 2021, becoming the first to do so on that chain, and in the process beating rival marketplace Kalamint, who was still in closed beta.
+Hic et Nunc (\indexacronym{hen}) was an NFT marketplace developed by Brazilian developer Rafael Silva, a former social scientist from Brasília. Lima launched HEN on the Tezos blockchain in March 2021, becoming the first to do so on that chain, and in the process beating rival marketplace Kalamint, who was still in closed beta.
 
-At a time when the NFT market was experiencing a boom cycle \needcite , many artists, especially those from the Global South, were priced out of the fast increasing gas prices on Ethereum, on account of the high demand for block space. At the same time environmentally conscious artists raised concerns about Ethereum's high carbon footprint, since at that time it still operated on a \gls{proofofwork} consensus algorithm \cite{lemercierProblemEthereumCryptoArt2021}. With Tezos offering very low transactions costs, and also being environmentally friendly due to its \gls{proofofstake} consensus algorithm, HEN's launch on Tezos provided a solution for these two groups of artists. Prominent artists like Joanie Lemercier and Mario Klingemann quickly saw the potential of the platform and started promoting it amongst their peers. With an iconic minimalistic and raw interface, the platform invoked an underground culture of experimental and avant-garde digital art. It also intentionally lacked any kind of artist signup process or similar kinds of gatekeeping. Anyone with as little as 0.5 XTZ (approximately \$2.5 USD at the time) in a Tezos wallet could mint an artwork on HEN. After only a few weeks, HEN rose in popularity and became a boiling pot of creativity and experimentation.
+At a time when the NFT market was experiencing a boom cycle \cite{haywardBiggestCryptoStory2021} , many artists, especially those from the Global South, were priced out of the fast increasing gas prices on Ethereum, on account of the high demand for block space. At the same time environmentally conscious artists raised concerns about Ethereum's high carbon footprint, since at that time it still operated on a \gls{proofofwork} consensus algorithm \cite{lemercierProblemEthereumCryptoArt2021}. With Tezos offering very low transactions costs, and also being environmentally friendly due to its \gls{proofofstake} consensus algorithm, HEN's launch on Tezos provided a solution for these two groups of artists. Prominent artists like Joanie Lemercier and Mario Klingemann quickly saw the potential of the platform and started promoting it amongst their peers. With an iconic minimalistic and raw interface, the platform invoked an underground culture of experimental and avant-garde digital art. It also intentionally lacked any kind of artist signup process or similar kinds of gatekeeping. Anyone with as little as 0.5 XTZ (approximately \$2.5 USD at the time) in a Tezos wallet could mint an artwork on HEN. After only a few weeks, HEN rose in popularity and became a boiling pot of creativity and experimentation \cite{evansBrazilDIYEcofriendly2021}.
 
 Pioneering museum strategist, and curator Diane Drubay, reflecting on the HEN experiment, stated:
 
@@ -61,11 +59,10 @@ Pioneering museum strategist, and curator Diane Drubay, reflecting on the HEN ex
 \end{quotation}
 
 
-
-By May 2021 HEN overtook OpenSea, the largest NFT marketplace in Ethereum, in number of active users \cite{nelsonWhereAreYour2022}. This sudden rise in usage can be clearly observed on the number of transactions and smart contract calls on the Tezos blockchain which started climbing just after March 2021, see \autoref{fig:tezos-tx-vol}.
+By May 2021 HEN overtook OpenSea, the largest NFT marketplace in Ethereum, in number of active users \cite{nelsonWhereAreYour2022} \cite{evansBrazilDIYEcofriendly2021}. This sudden rise in usage can be clearly observed on the number of transactions and smart contract calls on the Tezos blockchain which started climbing just after March 2021, see \autoref{fig:tezos-tx-vol}.
 
 Each NFT platform on Tezos adopts a token name for its NFTs, and Rafael Lima named the HEN tokens: \gls{OBJKT}, which is not an acronym.
-
+The term OBJKT was later \emph{adopted} by a rival marketplace, objkt.bid, which then became objkt.com, and which is today the largest NFT marketplace in the Tezos ecosystem.
 
 \begin{figure}[h]
     \centering
@@ -74,10 +71,9 @@ Each NFT platform on Tezos adopts a token name for its NFTs, and Rafael Lima nam
     \label{fig:tezos-tx-vol}
 \end{figure}
 
-
 \subsection*{Networked OBJKTs and ``Self-Aware'' Artworks}
 
-The platform supported the minting of OBJKTs using a variety of file formats, and one of those format was SVG (mimetype \texttt{image/svg+xml}). The SVG file standard allows for the embedding of JavaScript code, which is executed when rendering the file on a web browser.  On 14 Mar 2021 Lionel Radisson minted the first OBJKT with embedded JavaScript, ``The Magician''  \cite{makio135Magician2021}, and other artists quickly followed and started minting dynamic code-based artworks, such as Ricardo Cabello (a.k.a mrdoob)  with the interactive game ``Jumpy Dot'' \needcite which in the process became the first ever web-based interactive game minted as an NFT.
+HEN supported the minting of OBJKTs using a variety of file formats, and one of those format was SVG (mimetype \texttt{image/svg+xml}). The SVG file standard allows for the embedding of JavaScript code, which is executed when rendering the file on a web browser.  On 14 Mar 2021 French artist Lionel Radisson minted the first OBJKT with embedded JavaScript, ``The Magician''  \cite{makio135Magician2021}, and other artists quickly followed and started minting dynamic code-based artworks. Ricardo Cabello (a.k.a mrdoob), creator Three.js, minted the interactive game ``Jumpy Dot'' \cite{mrdoobJumpyDot2021} which became the first in-browser interactive game minted as an NFT \cite{rusherWhatDoesIt2021}.
 
 \begin{figure}[H]
     \centering
@@ -89,7 +85,7 @@ The platform supported the minting of OBJKTs using a variety of file formats, an
 
 Soon afterwards, the first few OBJKTs that made network (\indexacronym{http}) requests appeared. The first ones only loaded external webpages, or even played with recursion by loading the HEN website itself, but then these were quickly followed by OBJKTs that made calls to public \indexacronym{api}s.
 
-It was at this stage that Mario Klingemann (a.k.a. quasimondo) minted a conceptual OBJKT, ``Planned Obsolescence'', which involved an API call to a blockchain indexer, giving it access to a real-time list of collectors of that OBJKT. The piece started with a misty, dreamlike landscape painting, but each time a new collector acquired the OBJKT on the market, their Tezos wallet address would appear overlaid on top of the landscape, increasingly obscuring it, see \autoref{fig:plannedobsolescence}.
+It was at this stage that Mario Klingemann (a.k.a. quasimondo) minted a conceptual OBJKT, ``Planned Obsolescence'', which makes an HTTP request to a blockchain indexer API, giving it access to a real-time list of collectors of that OBJKT. The piece started with a misty, dreamlike landscape painting as a background, but each time a new collector bought the OBJKT, the artwork's JavaScript code would retrieve the collector's Tezos wallet address from the API, and displayed it on top of the landscape, increasingly obscuring it, see \autoref{fig:plannedobsolescence}.
 
 
 \begin{figure}[H]
@@ -105,7 +101,7 @@ This kickstarted a wave of self-referential, some would even call it ``self-awar
 This concept of ``self-awareness'' of an artwork struck a chord in me, and I decided to study it in detail. It soon became clear that this kind of artwork faces a number of challenges, which are discussed in \autoref{sec:challenges}.
 
 
-\subsection*{HEN Discontinuation and the Birth of Teia}
+\subsection*{HEN Discontinuation}
 \label{sub:teia}
 
 For reasons which are outside of the scope of this thesis, but which are reported at length in online articles \cite{straeubigHENTimelineHentimeline2024} \cite{siqueiraHicNuncStory2021a} \cite{tezosHistoryTeiaArt2022} \cite{smithHicNuncPart2022}, on November 11 2021, only 9 months since its launch, Rafael Lima decided to discontinue HEN. Without warning, the webserver which served the website's \indexacronym{ui} was taken down (\texttt{hicetnunc.xyz}), and the official twitter account was changed to show the message "discontinued".
@@ -134,7 +130,7 @@ As a Teia team member, my focus is the preservation of code-base OBJKTs, which a
 
 The biggest challenge facing a networked artwork is a mismatch between the immutability of the NFT and the fast changing nature of the environment in which it operates. This is not a problem for the vast majority of artworks, because they represent static assets, such as image, video, or sound files. As long as their file formats are supported by modern web browsers then they should continue to work for a reasonable amount of time.
 
-Code-based artworks, if they contain all the required software dependencies and assets , such that you can successfully render them on an off-line device, should in theory also last a reasonable amount of time, notwithstanding the need for emulation at a later stage.
+Code-based artworks, if they contain all the required software dependencies and assets, such that you can successfully render them on an off-line device, should in theory also last a reasonable amount of time, notwithstanding the need for emulation at a later stage.
 
 However an artwork that requires data from external sources runs a number of risks, because the data source can:
 
@@ -207,15 +203,19 @@ Although a comprehensive glossary is included at the end of this thesis, see pag
 
 \vspace{0.5cm}
 
-\textbf{networked artwork} - a networked artwork is a software artifact which initiates network requests, normally via HTTP or HTTPS, to an external URL which is outside of its own artifact directory (identified by a specific directory URL). Any network requests made for internal assets (which are relative and internal to the artifact's directory) are excluded from this definition.
-
-This is an important distinction, because any web-based artifact will normally make several HTTP requests to load local assets (fonts, css files, media files) but as long as these are stored within the artifact's own directory they should always be available to the artifact, therefore not posing a \emph{mutable dependency dilemma}. It should also be noted that the term code-based artwork will be used throughout this thesis to mean software artwork.
-
-\vspace{0.5cm}
-
 \textbf{cryptoart} - this refers to any artwork which is registered on a blockchain as an NFT, and which exists purely in digital format, without any physical components.
 
 It should be noted that this last assumption is really more a delimitation of scope for this work rather than a universal definition of cryptoart, some of which can indeed have physical components. It is important to clearly define this aspect of the work at the outset, as the conservation of physical artifacts requires a very different approach to digital-only artifacts.
+
+\vspace{0.5cm}
+
+\textbf{code-based art} - this refers to any artwork which is created in computer code and which requires a computer to execute it in real time in order to render the artwork. In the case of this study, it specifically refers to artworks that use web technologies (HTML, CSS, JavaScript, SVG, and others) which are rendered in real time by the viewer's web browser.
+
+\vspace{0.5cm}
+
+\textbf{networked artwork} - a specific kind of code-based art which initiates network requests, normally via HTTP or HTTPS, to an external URL which is outside of its own artifact directory (identified by a specific directory URL). Any network requests made for internal assets (which are relative and internal to the artifact's directory) are excluded from this definition.
+
+This is an important distinction, because any code-based artifact will normally make several HTTP requests to load local assets (fonts, css files, media files) but as long as these are stored within the artifact's own directory they should always be available to the artifact, therefore not posing a \emph{mutable dependency dilemma}.
 
 \vspace{0.5cm}
 
@@ -225,7 +225,9 @@ It should be noted that the term cryptoart has gained a negative reputation, due
 
 \textbf{conservation} - ``Conservation encompasses all those actions taken toward the long-term preservation of cultural heritage. Activities include examination, documentation, treatment, and preventive care, supported by research and education.''  \cite{WhatConservation}
 
-Regina Harsanyi, a preventive conservator of time-based media who works extensively with blockchain related artwork, during an interview for this study highlighted that the code of ethics followed by conservation professionals is also key to the definition of the term.
+\vspace{0.5cm}
+
+Regina Harsanyi, a preventive conservator of time-based media who works extensively with blockchain related artworks, during an interview for this study highlighted that the code of ethics followed by conservation professionals is also key to the definition of the term.
 
 \vspace{0.5cm}
 
@@ -238,11 +240,24 @@ The terms conservation and preservation are often used interchangeably in the di
 
 In summary, whereas preservation is the goal, conservation deals with the methods and techniques to achieve it.
 
+\vspace{0.5cm}
+
+\textbf{artifact} - ``an object made by a human being, typically an item of cultural or historical interest'' \cite{OxfordAdvancedLearner}. However it should be noted that this term is used extensively in this thesis in two distinct contexts:
+
+\begin{enumerate}
+    \item the software system, \texttt{ARKIVO}, which was developed as part of this research and constitutes its main contribution;
+    \item the crypto artworks which are the subject of the conservation techniques which this research explored.
+\end{enumerate}
+
+\vspace{0.5cm}
+
+It is somewhat unfortunate that this name collision occurred for these two types of artifacts, however both are used extensively in the Design Science Research literature, which was the methodology adopted for this study, as well as in the existing software systems that already deal with crypto artworks. It is hoped that, when reading the text, the reader will be able derive which type it is based on its immediate context. It is also for this reason that the other common use of this term, as a kind of error or anomaly, was avoided. 
+
 \section{Delimitation of Scope}
 
 The focus of this research is on the conservation of networked cryptoart, however the scope of the artifact created for the study is delimited to OBJKTs minted on the HEN smart contract on the Tezos blockchain, and thus the analysis, discussion and conclusion sections of the work will also be delimited to that scope.
 
-As mentioned above, this artifact will also only focus on digital-only OBJKTs. Although some artists have introduced a physical component to their OBJKTs, these will remain outside the scope of this study.
+As mentioned above, this study will also only focus on digital-only OBJKTs. Although some artists have introduced a physical component to their OBJKTs, these will remain outside the scope of this study.
 
 Having said that, the Related Work section will provide a broader view and review artworks that may fall outside this scope, in order to provide additional context to the area of cryptoart.
 

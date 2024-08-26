@@ -30,6 +30,15 @@
 \usepackage{makecell}
 \usepackage{multirow}
 
+% non splittable code listings
+\floatstyle{plain}
+\newfloat{listing}{htbp}{lop}[chapter]
+\floatname{listing}{Listing}
+
+% non splittable verbatims
+\floatstyle{plain}
+\newfloat{VerbatimEnv}{htbp}{lop}[chapter]
+\floatname{VerbatimEnv}{Verbatim}
 
 \usepackage{fancyhdr}
 \fancypagestyle{plain}{%
@@ -75,6 +84,8 @@
   \monthname[\THEMONTH], \THEYEAR}
 
 \makenoidxglossaries
+
+
 
 % Redefine the TOC page title 
 \renewcommand{\contentsname}{Table of Contents}
@@ -188,6 +199,10 @@
   \originalcleardoublepage
 }
 
+\renewcommand{\lstlistlistingname}{List of Code Listings}
+
+% prevent large gaps in the middle of pages. prefer them at bottom
+\raggedbottom
 
 \begin{document}
 
@@ -222,32 +237,30 @@
 \singlespacing
 
 
+
+\let\cleardoublepage\clearpage
+
 % Add ToC entry for the Table of Contents itself
 \cleardoublepage
 \addcontentsline{toc}{chapter}{Table of Contents}
 \tableofcontents
+\clearpage
 
-\cleardoublepage
 \addcontentsline{toc}{chapter}{\listfigurename}
 \listoffigures
+\clearpage
 
-\cleardoublepage
 \addcontentsline{toc}{chapter}{\listtablename}
 \listoftables
+\clearpage
 
 
-\renewcommand{\lstlistlistingname}{List of Code Listings}
-
-\cleardoublepage
 \addcontentsline{toc}{chapter}{List of Code Listings}
 \lstlistoflistings
+\clearpage
 
-
-
-\cleardoublepage
 \printnoidxglossary[type=acronym, title={List of Acronyms}, toctitle={List of Acronyms}]
-\cleardoublepage
-
+\clearpage
 
 % Restore original cleardoublepage command
 \let\cleardoublepage\originalcleardoublepage
@@ -278,13 +291,14 @@
 % Apply the page style to the main chapters
 \pagestyle{mainchapterstyle}
 
+\let\cleardoublepage\clearpage
 
-\include{chapters/chapter1-intro}
-\include{chapters/chapter2-relatedwork}
-\include{chapters/chapter3-method}
-\include{chapters/chapter4-dev}
-\include{chapters/chapter5-data-discuss}
-\include{chapters/chapter6-conclusion}
+\input{chapters/chapter1-intro}
+\input{chapters/chapter2-relatedwork}
+\input{chapters/chapter3-method}
+\input{chapters/chapter4-dev}
+\input{chapters/chapter5-data-discuss}
+\input{chapters/chapter6-conclusion}
 
 \cleardoublepage
 \label{sec:glossary}
@@ -300,18 +314,31 @@
 
 %\clearpage
 
+\cleardoublepage
+\chapter*{References} % Manually specify References as a chapter
+\addcontentsline{toc}{chapter}{References} % Add it to the Table of Contents
+
+% Suppress the automatic "References" title by apacite
+\renewcommand{\refname}{} % For article class or similar
+\renewcommand{\bibname}{}  % For book/report class or similar
+
+% Prevent the bibliography from adding an empty section to the ToC
+\begingroup
+\renewcommand{\addcontentsline}[3]{}
 \bibliographystyle{apacite}
 \bibliography{references}
-%\bibliographystyle{plainurl}
+\endgroup
+
+
 
 % Apply plain page style after references
 \cleardoublepage
 \pagestyle{plainpagestyle}
-
+\input
 \include{backmatter/appendix-pub}
 \include{backmatter/appendix-chainleft}
 \include{backmatter/appendix-chatgpt}
 
-\layout
+%\layout
 
 \end{document}

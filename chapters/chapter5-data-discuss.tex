@@ -177,6 +177,414 @@ All tests were carried out from Pingdom's North America - USA - Washington DC lo
 The overall performance in terms of latency is good, although there is room for improvement. The initial page load still spends a significant amount of time in the \texttt{wait} stage, expire headers are needed, and gzip compression should also be added. Having said that, the assets loaded from the IPFS node performed better than expected.
 
 
+\section{IPFS Pinning Verification}
+
+One important outcome from developing and launching this artifact, was that it would contribute to the storage and availability of the assets from the artworks which it catalogues, by pinning their CIDs on the IPFS network. To verify that this is the case, one can use online tools which test and report whether a node does indeed do this, such as the IPFS Check tool by Fleek\footnotemark[2].
+
+\footnotetext[2]{https://ipfs-check.on.fleek.co/}
+
+Before doing this we need to gather some information, namely our IPFS node PeerID, and the CID of an artwork's asset that we want to test.
+
+For the IPFS node PeerID, we need to gain shell access to the docker container:
+
+\texttt{docker exec -it arkivo\_ipfs /bin/sh}
+
+And then run the command:
+
+\texttt{ipfs id}
+
+This returns a listing as follows:
+
+\begin{lstlisting}[language=, caption={IPFS ID Listing}, label={lst:ipfs-id}] 
+{
+	"ID": "12D3KooWLgNwdHQspFbSSTPSGzarCLL9iQZ4byGfaTpMNfHqBxsA",
+	"PublicKey": "CAESIKFkyOEovylxWF8BqSpzIi/8CgexN5oNumjWEHg8OKSp",
+	"Addresses": [
+		"/ip4/127.0.0.1/tcp/4001/p2p/12D3KooWLgNwdHQspFbSSTPSGzarCLL9iQZ4byGfaTpMNfHqBxsA",
+		"/ip4/127.0.0.1/udp/4001/quic-v1/p2p/12D3KooWLgNwdHQspFbSSTPSGzarCLL9iQZ4byGfaTpMNfHqBxsA",
+		"/ip4/127.0.0.1/udp/4001/quic-v1/webtransport/certhash/uEiAlIZyEYPy9E79U7avKgVdYjhygiz4Z-Oxf8UqEIGQ-BA/certhash/uEiAfDpKQb46669VLVqNw__1QB27Bibr2BGU3QEnZQ4XiBQ/p2p/12D3KooWLgNwdHQspFbSSTPSGzarCLL9iQZ4byGfaTpMNfHqBxsA",
+		"/ip4/167.235.68.63/tcp/4001/p2p/12D3KooWLgNwdHQspFbSSTPSGzarCLL9iQZ4byGfaTpMNfHqBxsA",
+		"/ip4/167.235.68.63/udp/4001/quic-v1/p2p/12D3KooWLgNwdHQspFbSSTPSGzarCLL9iQZ4byGfaTpMNfHqBxsA",
+		"/ip4/167.235.68.63/udp/4001/quic-v1/webtransport/certhash/uEiAlIZyEYPy9E79U7avKgVdYjhygiz4Z-Oxf8UqEIGQ-BA/certhash/uEiAfDpKQb46669VLVqNw__1QB27Bibr2BGU3QEnZQ4XiBQ/p2p/12D3KooWLgNwdHQspFbSSTPSGzarCLL9iQZ4byGfaTpMNfHqBxsA",
+		"/ip4/172.18.0.7/tcp/4001/p2p/12D3KooWLgNwdHQspFbSSTPSGzarCLL9iQZ4byGfaTpMNfHqBxsA",
+		"/ip4/172.18.0.7/udp/4001/quic-v1/p2p/12D3KooWLgNwdHQspFbSSTPSGzarCLL9iQZ4byGfaTpMNfHqBxsA",
+		"/ip4/172.18.0.7/udp/4001/quic-v1/webtransport/certhash/uEiAlIZyEYPy9E79U7avKgVdYjhygiz4Z-Oxf8UqEIGQ-BA/certhash/uEiAfDpKQb46669VLVqNw__1QB27Bibr2BGU3QEnZQ4XiBQ/p2p/12D3KooWLgNwdHQspFbSSTPSGzarCLL9iQZ4byGfaTpMNfHqBxsA"
+	],
+	"AgentVersion": "kubo/0.29.0/3f0947b/docker",
+	"Protocols": [
+		"/ipfs/bitswap",
+		"/ipfs/bitswap/1.0.0",
+		"/ipfs/bitswap/1.1.0",
+		"/ipfs/bitswap/1.2.0",
+		"/ipfs/id/1.0.0",
+		"/ipfs/id/push/1.0.0",
+		"/ipfs/kad/1.0.0",
+		"/ipfs/lan/kad/1.0.0",
+		"/ipfs/ping/1.0.0",
+		"/libp2p/autonat/1.0.0",
+		"/libp2p/circuit/relay/0.2.0/hop",
+		"/libp2p/circuit/relay/0.2.0/stop",
+		"/libp2p/dcutr",
+		"/x/"
+	]
+}
+\end{lstlisting}
+
+Our IPFS node ID, which was automatically generated the first time we started the node, appears in line 2:
+\begin{center}
+\texttt{12D3KooWLgNwdHQspFbSSTPSGzarCLL9iQZ4byGfaTpMNfHqBxsA}
+\end{center}
+For a CID to test with, we can access an artwork on the system, such as\\ \texttt{https://arkivo.art/artifacts/HEN/8333}, expand the Artifact URIs section, and click the Artifact URI, which opens the artifact's URI on a new window.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{how-to-find-cid1.png}
+    \caption[Finding Artwork IPFS CID (part 1)]{Finding Artwork IPFS CID (part 1)}
+    \label{fig:find-cid-1}
+\end{figure}
+
+The actual IPFS CID appears on the URL, between \texttt{ipfs/} and \texttt{?creator}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{how-to-find-cid2.png}
+    \caption[Finding Artwork IPFS CID (part 2)]{Finding Artwork IPFS CID (part 2)}
+    \label{fig:find-cid-1}
+\end{figure}
+
+In this example, the CID is:
+\begin{center}
+\texttt{QmaBAtgp6CKJwW6R4xKpNdcmjuzF132erhKExqo4wh6FCV}
+\end{center}
+
+With the \texttt{Peer ID} and the artwork's artifact CID, we can access the Fleek IPFS Check tool, and start the check. Making sure to prefix our Peer ID with \texttt{/p2p/}:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{fleek-ipfs-check.png}
+    \caption[Testing IPFS]{Testing IPFS}
+    \label{fig:fleek-test}
+\end{figure}
+
+As can be verified in \autoref{fig:fleek-test} our node is accessible on the IPFS network, reports that it has the CID, and is also advertising its availability on the networks DHT, making it easier for other nodes to find it.
+
+An additional check we can make is from an independent IPFS node. For example, using the IPFS node in the development server which is located in Macau, we can run a command to find IPFS nodes which are seeding a CID:
+
+\begin{lstlisting}[language=, caption={Verification of CID availability from external node}, label={lst:ipfs-verify-macau}] 
+dan@ipfs:~$ ipfs routing findprovs QmaBAtgp6CKJwW6R4xKpNdcmjuzF132erhKExqo4wh6FCV
+12D3KooWAJJJwXsB5b68cbq69KpXiKqQAgTKssg76heHkg6mo2qB
+12D3KooWLgNwdHQspFbSSTPSGzarCLL9iQZ4byGfaTpMNfHqBxsA
+12D3KooWEHx9v2SGvFewuatTvzzGxQC1PQZPRer2ys8fYipiM1zi
+12D3KooWNTSFywHjGbmGN1aEqJNp54pDKaiwqpthRrvFZETo37pW
+12D3KooWNTSFywHjGbmGN1aEqJNp54pDKaiwqpthRrvFZETo37pW
+12D3KooWJ8YAF6DiRxrzcxoeUVjSANYxyxU55ruFgNvQB4EHibpG
+12D3KooWHEzPJNmo4shWendFFrxDNttYf8DW4eLC7M2JzuXHC1hE
+12D3KooWGtYkBAaqJMJEmywMxaCiNP7LCEFUAFiLEBASe232c2VH
+\end{lstlisting}
+
+As can be seen in \autoref{lst:ipfs-verify-macau}, line 3 shows \texttt{ARKIVO}'s IPFS node. It should be noted that seeding peers are not all necessarily pinning the CID. It is simply an indication that those peers currently have a copy of the CID and are making it available to the network, but for some it could be a temporary cache and the CID could be garbage collected by those nodes at any point.
+
+Something else worth noting is that sometimes, even when pinning content, the results from the IPFS check tool may return a failed check relating to multiash missing from the DHT, see \autoref{ig:fleek-test2}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{fleek-ipfs-check2.png}
+    \caption[Testing IPFS]{Testing IPFS}
+    \label{fig:fleek-test2}
+\end{figure}
+
+This is normal, and it is due to the fact that, by default, IPFS nodes only advertise their content every 22h \cite{KuboConfigFile2024}, and it may expire from the DHT. Normally this is not a problem, since other nodes, even those not pinning the CIDs, will likely be making them available to the network. There are tradeoffs for increasing the frequency of these provisioning messages, and normally it is a matter of hardware resources. For now we will keep the default value of 22h.
+
+
+\subsection{Exhaustive IPFS Pin List Verification}
+
+The above checks provide a very basic verification that the system is pinning content, but checking a single CID or even a handful of CIDs manually hardly constitutes a systematic evaluation of the artifact.
+Therefore another method was employed, which does an exhaustive check, of every CID stored in the system's database.
+The process is as follows:
+
+\begin{enumerate}
+    \item export every unique CID from the artifacts stored in the postgres database
+    \item export every CID pinned by the ipfs node
+    \item cross check the two data sets to find any discrepancies, such as CIDs present in one dataset but missing from the other
+\end{enumerate}
+
+Step 1, involves running the following SQL query:
+
+\begin{lstlisting}[language=SQL, caption={SQL to export all IPFS CIDs store in DB}, label={lst:db-export-cids}] 
+SELECT DISTINCT cid AS unique_cid_count
+FROM (
+    SELECT metadata_uri AS cid FROM artifacts
+    UNION ALL
+    SELECT artifact_uri AS cid FROM artifacts
+    UNION ALL
+    SELECT display_uri AS cid FROM artifacts
+    UNION ALL
+    SELECT thumbnail_uri AS cid FROM artifacts
+) AS combined_cids;
+\end{lstlisting}
+
+The database exported dataset contained 47,493 records and was saved as \texttt{arkivo-db-cids.txt}. A partial listing of the file is as follows:
+
+\begin{lstlisting}[language=, caption={Exported CIDs from postgres}, label={lst:db-export-cids-list}] 
+ipfs://QmSbeMcatTg86Yjdva2RW7cQDSZtZWGpCbTMMaYNv44kuA
+ipfs://QmV6G8cwEbQ1AGeQjCNDNj1kRZq4UBmmRsZi9yRr594vSh
+ipfs://QmThtdTz2LD1u8uoP1zV9qtrfShcm1WSBVXHNfLTLZwHPD
+ipfs://QmZuBNwDxegm6RFsU7KRxxkqy6G1y2oHiotnZqFPnMFUQx
+ipfs://QmRuTHQAC3naGCxxPTCTrnrb1oXEbANhNwUwyUsaCwbhfB
+...
+\end{lstlisting}
+
+Step 2, requires that we export a similar dataset from the IPFS node:
+
+\begin{lstlisting}[language=, caption={IPFS command to export pinned CIDs}, label={lst:ipfs-export-cids}] 
+ipfs pin ls --type=recursive > ipfs-node-pins.txt
+\end{lstlisting}
+
+The ipfs node exported dataset contained 46,942 records and was saved as \texttt{arkivo-db-cids.txt}. A partial listing of the file is as follows:
+
+\begin{lstlisting}[language=, caption={Exported CIDs from IPFS node}, label={lst:ipfs-export-cids-list}] 
+QmRQYgQGFjNJBudPnVEwA3jzBKaDWna943DCdCamdphdJU recursive
+QmSZ2ieYnJjK9PQPrjM5Pe8ieaDfDJZJ58LuV4ijmJtayT recursive
+QmUYa7jmBaWoGWAT4SdUA1R2kA7kZF4mKzMXhFYN356t2A recursive
+QmWFjEUgYu6SrzSX3hJ64GHVpfNNcvWcgS9EK9hqzt2tmU recursive
+QmauH5zh1UZjWoFKxQ33MW8YuepvUnUsUqzqoB3Scy6tvq recursive
+...
+\end{lstlisting}
+
+There is a discrepancy of 47,493 - 46,942 = 551 records which needs to be investigated.
+
+To perform a full cross-check between the two datasets a python program\footnotemark[3] was written that automates this process. The program ingests both files, compares them, and outputs 3 files:
+
+\footnotetext[3]{https://github.com/seda-studio/arkivo/blob/main/utils/ipfs-pin-verification/compare-tool.py}
+
+\begin{enumerate}
+    \item \texttt{output-arkivo-cids-ok.txt} - all CIDs which are present in both datasets. These are the CIDs which are properly pinned.
+    \item \texttt{output-arkivo-cids-unpinned.txt} - all CIDs present in the database file, but not pinned by the IPFS node. Any records here would be of concern.
+    \item \texttt{output-ipfs-node-unknown.txt} - all CIDS pinned by the IPFS node but not in the database file. Any records here would be odd, and deserved investigation.
+\end{enumerate}
+
+After running the python script the results were as follows:
+
+
+\begin{table}[h]
+\footnotesize
+\centering
+\begin{tabular}{|l|r|}
+\hline
+\textbf{File} & \textbf{Total CIDs} \\ \hline
+output-arkivo-cids-ok.txt                 & 46,924                         \\ \hline
+output-arkivo-cids-unpinned.txt             & 569                         \\ \hline
+output-ipfs-node-unknown.txt       & 18               \\ \hline
+\end{tabular}
+\caption{IPFS CID Pinning Cross Check Results}
+\label{table:cross-check-results}
+\end{table}
+
+\subsubsection{Analysis of Unpinned CIDs}
+
+A preliminary visual examination of \texttt{output-arkivo-cids-unpinned.txt} reveals a vast majority of unconventionally formatted entries, or even entries which are not CIDs at all. These correspond to OBJKTs which were not minted via the HEN or Teia UIs, but rather used custom minters or were just minted manually by interacting directly with the HEN smart contract, which anyone can do as the smart contract does not restrict who can interact with it.
+
+\begin{lstlisting}[language=, caption={Unconventional Format CIDs}, label={lst:bad cids}] 
+...
+QmameE36rwswxEQCf6UV53kqsopD3Tprtv6km9rG1UPzHy?seed=tengil
+QmameE36rwswxEQCf6UV53kqsopD3Tprtv6km9rG1UPzHy?seed=8bit
+QmPVSET5pHD7EwC7KXZy2Bzah9G8UusnzcbQ7ZdcHaGi1T?seed=7az2!346fdsg4?
+QmameE36rwswxEQCf6UV53kqsopD3Tprtv6km9rG1UPzHy?seed=bolitaeslaperritamasguapadeluniverso
+QmameE36rwswxEQCf6UV53kqsopD3Tprtv6km9rG1UPzHy?seed=amour%20amour
+QmameE36rwswxEQCf6UV53kqsopD3Tprtv6km9rG1UPzHy?seed=purespider
+javascript:alert('hi');
+QmameE36rwswxEQCf6UV53kqsopD3Tprtv6km9rG1UPzHy?seed=NFTs%20are%20dead
+QmameE36rwswxEQCf6UV53kqsopD3Tprtv6km9rG1UPzHy?seed=Fort%20Gallery%20NfT
+QmameE36rwswxEQCf6UV53kqsopD3Tprtv6km9rG1UPzHy?seed=noisynft
+QmameE36rwswxEQCf6UV53kqsopD3Tprtv6km9rG1UPzHy?seed=TEZOS
+...
+\end{lstlisting}
+
+One type of record consists of CIDs followed by a URL query, such `?seed=`. These are custom generative artworks which take a URL parameter as seed. The artist sets up their own website where collectors were able to input their own text as a seed to the artwork, visualise the result, and then collect that iteration as a permanently minted HEN OBJKT.
+
+After manual analysis of the file, 4 instances of this kind of CID were found:
+
+
+\begin{table}[h]
+\footnotesize
+\centering
+\begin{tabular}{|l|r|}
+\hline
+\textbf{CID} & \textbf{Total records} \\ \hline
+QmameE36rwswxEQCf6UV53kqsopD3Tprtv6km9rG1UPzHy	                & 430                         \\ \hline
+QmPVSET5pHD7EwC7KXZy2Bzah9G8UusnzcbQ7ZdcHaGi1T	            & 62                         \\ \hline
+QmWNkc1ZqEVmFxG7JDLjY4jJefkyhdwxAUegimnxFi4qSr       & 54               \\ \hline
+QmVZ59sqM2QVbSXJcb8c4P9Abu35Tq3smfrFJi5VMwA3vo      & 6               \\ \hline
+\textbf{Total}      &       552         \\ \hline
+\end{tabular}
+\caption{Custom Generative Art CIDs}
+\label{table:custom-generative-cids}
+\end{table}
+
+These 4 CIDs are all from the same artist account\footnotemark[4], which belongs to generative artist @shig\_nft\footnotemark[5] , who created a series of these projects, under the name ``Procedural Symbols''. A couple of samples of the artwork are included here:
+
+\footnotetext[4]{https://teia.art/art-o-matic}
+\footnotetext[5]{https://x.com/shig\_nft}
+
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{OBJKT-230702.png}
+    \caption{This belongs in a museum :: Procedural Symbols \#61/1000. Source: \\https://arkivo.art/artifacts/HEN/230702\\}
+    \label{fig:image1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{OBJKT-653867.png}
+    \caption{ktorn likes blueeeeeeeeeeeeeeeeeeeee :: Procedural Symbols (H=N) \#545/1000. Source: \\https://arkivo.art/artifacts/HEN/653867}
+    \label{fig:image2}
+  \end{subfigure}
+  \caption{Sample ``Procedural Symbols'', which add URL queries to IPFS CIDs}
+  \label{fig:procedural-symbols}
+\end{figure}
+
+However the artist was also careful to mint each of the above CIDs as well formatted CID, without the URL query. This means both HEN, Teia, and now \texttt{ARKIVO} successfully pin them, and therefore those 552 records can be safely ignored as they will all work, as verified by the artworks illustrated in \autoref{fig:procedural-symbols}.
+
+We are therefore left with 17 CIDs unaccounted for:
+
+
+\begin{lstlisting}[language=, caption={17 Remaining Unconventional Format CIDs}, label={lst:17-bad-cids}] 
+k51qzi5uqu5dm198e6gwnuihom8ht49z8u2qu2amjvo32380enkgfmh8riyrx9
+javascript:alert('hi');
+ipns/k51qzi5uqu5dhxiw7jv2i10s3o3xga5bw2wkc945zyvtpk0smrxejx632h11v4/cover.jpg
+https://ipfs.io/ipns/k51qzi5uqu5dhxiw7jv2i10s3o3xga5bw2wkc945zyvtpk0smrxejx632h11v4
+https://ipfs.io/ipfs/QmadbYeKWMQAiaeTmg9e7M9HQGbVjwsibPpF4rWSr5rhuk/?id=22
+ipns://k51qzi5uqu5dhxiw7jv2i10s3o3xga5bw2wkc945zyvtpk0smrxejx632h11v4/cover.jpg
+QmXvAQAcu1wVBCRjSoJsJczkiq18ZQ6XLjgMG7k67pBL8D?id=123
+ipns://k51qzi5uqu5dhxiw7jv2i10s3o3xga5bw2wkc945zyvtpk0smrxejx632h11v4
+https://ipfs.io/ipns/k51qzi5uqu5dhxiw7jv2i10s3o3xga5bw2wkc945zyvtpk0smrxejx632h11v4/cover.jpg
+k51qzi5uqu5dhxiw7jv2i10s3o3xga5bw2wkc945zyvtpk0smrxejx632h11v4/cover.jpg
+Qme1GBYaCfg7ZJjDBppZj4WDbvE94AD7gA5NeyLtKrvdKM?seed=SH!G%20made%20this%20%5C@/
+QmU7kxXjA8mXRNEZi21joc62fCdYMgVDnErYCYr3EyH4sJ
+QmfJegSaQ3SicrB6eW2XxUkYfkvvCTNkQKSAZbknmZA6zQ?seed=This is a test!
+QmVQwyh9hNJVPzUmnTYFqY6bvX6PGUGxEyF1w45M9R1Brn
+undefined
+ipns/k51qzi5uqu5dm198e6gwnuihom8ht49z8u2qu2amjvo32380enkgfmh8riyrx9
+\end{lstlisting}
+
+
+After checking each one, 15 were found to be failed tests, as artists were experimenting with the possibilities. Most belong to OBJKTs which have been burned by the artists. However 2 CIDs were found to be valid and belong to existing artworks indexed by our artifact.
+
+\begin{lstlisting}[language=, caption={17 Remaining Unconventional Format CIDs}, label={lst:17-bad-cids}] 
+QmU7kxXjA8mXRNEZi21joc62fCdYMgVDnErYCYr3EyH4sJ
+QmVQwyh9hNJVPzUmnTYFqY6bvX6PGUGxEyF1w45M9R1Brn 
+\end{lstlisting}
+
+Both are thumbnails, belonging to OBJKTs 767305 and 796127, respectively. It is unclear why these 2 CIDs, out of a total 46,924 CIDs, failed to get pinned. The ipfs pinning worker, similarly to the snapshot worker, will re-try an operation 3 times, as per the configuration of the redis queue. However these retries are immediate, and not delayed, so a temporary network issue, or some other problem could have affected these.
+
+Nevertheless, one of the CLI management commands that we developed allow us to issue a pin request for any OBJKT. The syntax for the command is:\\
+{
+\footnotesize{\texttt{node ace artifacts:pin <blockchain> <smart-contract-address> <token-id>}}\\
+}
+
+
+This command will attempt a pin (or re-pin) of all CIDs associated with an OBJKT: metadata, artifact, display, and thumbnail.
+\begin{lstlisting}[language=, caption={Command to Pin OBJKT}, label={lst:17-bad-cids}] 
+# node ace artifacts:pin tezos KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton 767305
+chain: [tezos]
+contract: [KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton]
+token_id: [767305]
+[ info ]  Token sent for processing: 767305
+#
+# node ace artifacts:pin tezos KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton 796127
+chain: [tezos]
+contract: [KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton]
+token_id: [796127]
+[ info ]  Token sent for processing: 796127
+\end{lstlisting}
+
+To verify that the command worked, we tried to access the URLs from our IPFS node before and after running it.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{before-pin.png}
+    \caption[OBJKT thumbnail before pin]{OBJKT thumbnail before pin}
+    \label{fig:before-pin}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{767305-thumb.png}
+    \caption{``Purple Haze - Teddi'' by killjoyink. Source: \\https://arkivo.art/artifacts/HEN/767305}
+    \label{fig:purple-haze}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{796127-thumb.png}
+    \caption{``Freedom'' by Vlas Belov art. Source: \\https://arkivo.art/artifacts/HEN/796127}
+    \label{fig:freedom}
+  \end{subfigure}
+  \caption{OBJKT thumbnails after pin retry}
+  \label{fig:2-repinned-cids}
+\end{figure}
+
+With this, we can now conclude that all valid CIDs are successfully pinned by our IPFS node. However we still have 18 CIDs pinned by the IPFS node which are not in our database, therefore unaccounted for.
+
+
+\subsubsection{Analysis of Unknown CIDs}
+
+The list of 18 unknown CIDs is as follows:
+
+\begin{lstlisting}[language=, caption={Command to Pin OBJKT}, label={lst:18-unknown-cids}] 
+QmVi33nTqwUZbL64d7Ab9EPPW4npmQRxMhE1E8VQnQZsHf
+QmaxptTRV7we3QubVsiNcpSf74zmCrsKrXYS1wH6NfjHDm
+QmYBWDdBpQwP1QgPZo94Mx8VM6XNr2xRmpVhAcLrHhZNhd
+QmU9eBL6T7zAGV48o462LDvB4YPNnYjpmgQDQaB7PTboNP
+QmdcamM7GogJxh3uBQkoGkw7CpJzghbVubFknvTw9tNPpm
+QmacVsizqR49aqeKaxWCVBuD77mbKh9xf2CRnVJ6aPkRQq
+Qmd5mT8GYEeDp2zG5jqEndZKoqn882FMzcbFmYdhxzrubz
+QmZRUBYuDfsT1oWzD91ZdHbnrBsaSY78awYoB9ihAfn3df
+Qmd8w32fPqa1niDQpQqooxznhB5qjsFdmw713pcDcaV6VW
+QmTHGKahi8bG4W6MV4bsvjSpgr6DThiWP9LbhT1extuwpU
+QmPgLV9BVygyPy3x3C3qNWGWJoJZtDD5P4JAVXq6g7siG9
+QmTCaF4prs5ndNVsBoCsHGHBRYyLLKQeryTyA6hDtMTk1R
+Qme1GBYaCfg7ZJjDBppZj4WDbvE94AD7gA5NeyLtKrvdKM
+QmcSfymXa4rgip9QdqmP8xFNERBmLdWZxd3vGkN7QxMR75
+QmRzvn7672UYPniAvz4ofh9dmDNF2NvjEeyBtBEvbcuQ29
+QmYuApfJaKy8tcMCrjgjQ8nGMdqrq75kQ5qA5aSikCD96F
+QmVp8W3xQCCFU4PHrUQgyb4yfFeR1SL3gM2xtvS6sdEiK8
+QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn
+\end{lstlisting}
+
+Two of the CIDs were done manually as a means to test the IPFS node, so are accounted for. However the 16 remaining ones are unknown, and the vast majority seem to be trailers for a Chinese TV soap opera.
+The most plausible theory is that, during the deployment of the artifact in production, a few hours elapsed in which the firewall was not yet in place, and remote nodes were able to access our node's private API port (5001) and remotely requested the pinning of those CIDs.
+
+Since we already have the firewall in place now, it is just a matter of cleaning those CIDs from our node, which we did with the command: \texttt{ipfs pin rm <CID>}, followed by a \texttt{ipfs repo gc} to garbage collect any remains of CIDs which should not be there.
+
+Additionally, we enabled the option \texttt{NoFetch = true} on the IPFS node configuration, which ensures our node only serves content which is explicitly pinned, and will not attempt to fetch any other CIDs requested via the public gateway. Only requests from our application, via the (now private) API port will pin new content to our node.
+
+This was an invaluable, as well as slightly comical, lesson and reminder on how to deploy IPFS nodes, or any other application for that matter: have the firewall in place \emph{before} deployment!
+
+\subsection{Verifying IPFS Data Integrity}
+
+Verifying that all CIDs are pinned is only half of the work. We also need to check the data integrity of all pinned content on the node. To achieve that, IPFS offers a command which exhaustively checks the data integrity of every pinned CID: \texttt{ipfs pin verify}. This command can take some time to complete, with over 46000 CIDs to verify, for that reason the command was prefixed by \texttt{time} to determine how long it takes to execute.
+
+\begin{lstlisting}[language=, caption={Internal IPFS pin verification}, label={lst:ipfs-pin-verification}] 
+/ # time ipfs pin verify
+real	5m 30.82s
+user	0m 0.07s
+sys	  0m 0.05s
+\end{lstlisting}
+
+As can be seen in \autoref{lst:ipfs-pin-verification}, it ran in 5m30s and returned no errors, therefore our storage's integrity is verified.
+
+
+\section{Snapshot Verification}
+
+\todo network calls and screenshots
 
 
 \section{Data Analysis}

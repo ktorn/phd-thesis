@@ -142,3 +142,69 @@ In order to facilitate the reproducibility of the findings, all the source code 
     \item the data exported from the database, and the R source files are available at: \todo
 \end{enumerate}
 
+
+\todo development environment
+
+\todo tools used
+
+
+\section{Research and Development Tools}
+
+
+\subsection{Journaling}
+
+During the research and development, journaling was employed as a research method, primarily using two tools:
+
+\begin{enumerate}
+    \item Obsidian\footnotemark[1]: a note taking desktop app, for text-based note taking. This app allows rich formatting of notes using Markdown, and the linking of documents together, similarly to a wiki. It was useful to be able to quickly copy/paste text excerpts, quotes, code snippets, and other bits of information which were useful to record for later use;
+    \item Goodnotes\footnotemark[2]: a note taking mobile app, for hand-written notes on a tablet device like an iPad. This was used as the primary idea brainstorming tool, but also to take notes whenever the work laptop was not readily available. It syncs with a companion desktop app, so the notes would also be available on the work laptop.
+\end{enumerate}
+
+Below are samples of notes taken with these tools:
+
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.75\textwidth]{obsidian.png}
+    \caption[Sample Journal Entry on Obsidian]{Sample Journal Entry on Obsidian}
+    \label{fig:obsidian}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \centering
+    \begingroup
+    \setlength{\fboxsep}{0pt} % No padding between box and content
+    \setlength{\fboxrule}{0.5pt} % Thickness of the border
+    \fcolorbox{gray}{white}{\includegraphics[width=0.75\textwidth, page=1]{handwritten-notes.pdf}}
+    \endgroup
+    \caption[Sample Journal Entry in GoodNotes]{Sample Journal Entry in GoodNotes}
+    \label{fig:goodnotes}
+  \end{subfigure}
+  \caption{Sample Journal Entries}
+  \label{fig:sample-journal}
+\end{figure}
+
+
+
+
+\footnotetext[1]{https://obsidian.md/}
+\footnotetext[2]{https://www.goodnotes.com/}
+
+
+\subsection{Thesis Writing}
+
+This thesis was written using LaTeX, a free and open source software system for typesetting documents, which is widely popular in the communication and publication of scientific documents. The main reason for this choice was a concern that Microsoft Word might struggle in terms of performance when dealing with an increasingly large document, with many images, and references. From this point of view this proved to be a wise decision, as the full thesis can be rendered to a PDF file in less than 10 seconds. However it also proved to be a double-edged sword. LaTeX is a complex system, with many commands and configuration options, some of which may have unexpected interactions with each other. Several times unexpected formatting errors occurred in one part of the document, whilst attempting to fix another part, because of these interactions.
+It needs to be noted that when dealing with these problems, ChatGPT was an invaluable tool. Most of the technical issues were resolved simply by copy/pasting the LaTeX document source code into a prompt and describing the issue that was happening in the rendered document. Invariably the LLM would identify the issue and suggest the correct LaTeX commands to solve it. If ChatGPT were a person, it would have featured in the acknowledgments section of this thesis.
+
+The editing was done in TeXShop, a free and open source visual editor for MacOS, and the document was structured as one main file, which contained the preamble and overall document structure, and then individual chapters were included as separate files. Frontmatter sections, such as the title, abstract, and acknowledgments, were also all separated into individual files. This allowed for easier browsing and scrolling of each section, however when searching for text across the whole document one must then rely on the rendered PDF.
+
+
+
+For most diagrams Google Draw, which is a part of the Google Docs suite, was used. The reason for this is that it allowed for very fast diagram sketching, which can be exported as \indexacronym{svg} files. Then these files can be imported into the LaTeX document and adjusted for size without any loss of quality.
+
+Inkscape, another free and open source vector graphics tool, was used to extract vector-based diagrams from existing literature. For example, \autoref{fig:is-research-framework} in page \pageref{fig:is-research-framework}, is a vector based diagram which was exported from the original article PDF, using Inkscape. Care was taken to convert all text into vector paths, so as to scale properly in this document.
+
+

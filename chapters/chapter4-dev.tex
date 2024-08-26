@@ -137,7 +137,7 @@ Iteration RQ1.2                  & Mile 3                              & Fetch a
 \end{table}
 
 
-\subsection {Mile 5}
+\subsection {Mile 5 - Determine search criteria}
 
 Mile 5 is really just an exploratory phase, which does not require any development. It involves accessing Teztok's GraphQL playground\footnotemark[7], exploring the schema available, and crafting a query that returns a list of OBJKTs of interest.
 
@@ -203,7 +203,7 @@ Following is a sample of a record returned by this query:
 
 
 
-\subsection {Mile 4}
+\subsection {Mile 4 - Query TezTok}
 
 Mile 4 is the beginning of development, and because it's the first we need to a barebones application. For this project the AdonisJS web framework was selected as the stack for the application, because it provides a full-stack MVC Framework, supports TypeScript, and follows a convention over configuration environment which helps speed up development. It also provides a very convenient way to create \indexacronym{cli} commands that we can use to control aspects of our application, such as starting batch jobs, or triggering specific actions.
 
@@ -242,7 +242,7 @@ Iteration RQ1.2                  & Mile 3                              & Fetch a
 \end{table}
 
 
-\subsection {Mile 3}
+\subsection {Mile 3 - Fetch and pin OBJKTs}
 
 In this Mile we will start pinning the OBJKTs assets in a local IPFS node. This is a significant milestone because from this moment onwards, the system is already delivering a useful service to the ecosystem. By pinning content and participating in the IPFS p2p network we are helping other nodes access the content.
 
@@ -290,7 +290,7 @@ RQ3 - What are the disk space requirements for storing all code-based HEN OBJKTs
 
 
 
-\subsection {Mile 2}
+\subsection {Mile 2 - Run OBJKT in sandbox and capture traffic}
 
 In this Mile we will use PlayWright to open each OBJKT and record any network calls initiated by the OBJKT. This is done in \texttt{SnapshotArtifactService}
 
@@ -330,7 +330,7 @@ done
 \end{lstlisting}
 
 
-\subsection {Mile 1}
+\subsection {Mile 1 - Classify Networked OBJKTs}
 
 At this stage we code the logic that checks whether an OBJKT makes external network requests, and when it does, record that in a \texttt{is\_networked} database field.
 
@@ -380,7 +380,7 @@ Iteration RQ2.1                  & Mile 1                              & Take sc
 \section {Iteration RQ2.1}
 
 
-\subsection {Mile 1}
+\subsection {Mile 1 - Screenshot OBJKT during Snapshot}
 
 Since we already have our snapshotting infrastructure in place, all we need is to take a screenshot at the end of the snapshotting process and store it. For now we will store the screenshots as base64-encoded PNGs in our snapshot record. This is not ideal in the long term, as the database will grow quite rapidly, but it works for the purposes of our research question, and that is all that is required when following the RQDD method.
 
@@ -457,13 +457,13 @@ This RQ only requires one iteration.
 \begin{tabular}{|l|c|l|}
 \hline
 \textbf{Iteration}        & \multicolumn{1}{l|}{\textbf{Mile}} & \textbf{Description}                                         \\ \hline
-\multirow{2}{*}{Iteration RQ4.1} & Mile 2                              & Develop web UI                   \\ \cline{2-3} 
+\multirow{2}{*}{Iteration RQ4.1} & Mile 2                              & Develop Web UI                   \\ \cline{2-3} 
                              & Mile 1                              & Deploy system in production \\ \hline
 \end{tabular}
 \caption{Iteration RQ4.1 Miles}
 \end{table}
 
-\subsection {Mile 2}
+\subsection {Mile 2 - Develop Web UI}
 
 To develop the web UI we start by sketching a basic wireframe to plan the layout of the pages. We only need 2 page templates, one for browsing the OBJKTs and another to display a particular OBJKT, see \autoref{fig:web-wireframe}.
 The browsing page will display 9 artworks at once, with a page navigation control at the bottom.
@@ -526,7 +526,7 @@ Also a basic "About" page was created, with a short description of what the proj
     \begingroup
     \setlength{\fboxsep}{0pt} % No padding between box and content
     \setlength{\fboxrule}{1pt} % Thickness of the border
-    \fcolorbox{gray}{white}{\includegraphics[width=0.75\linewidth]{arkivo-landing.png}}
+    \fcolorbox{gray}{white}{\includegraphics[width=0.50\linewidth]{arkivo-landing.png}}
     \endgroup
     \caption[About Page]{About Page}
     \label{fig:about-page}
@@ -536,7 +536,7 @@ Also a basic "About" page was created, with a short description of what the proj
 
 The completion of this Mile signals the end of the development phase of this project.
 
-\subsection {Mile 1}
+\subsection {Mile 1 - Deploy System in Production}
 
 To deploy the system in production first we need to select a virtual private server (\indexacronym{vps}) hosting company that is reasonably priced for our storage needs. The calculation is based on the disk space used in our testing environment.
 
@@ -569,6 +569,9 @@ The CX42 option was selected, which provides the required space, and offers 16GB
     \label{fig:vps-choice}
 \end{figure}
 
+
+\subsubsection{Docker Setup}
+
 The application was successfully installed, using Docker containers for all components. An ngnix webserver docker container acts as a reverse proxy for the main app and for the IPFS node, and it also handles SSL termination. The SSL certificate was acquired by using the Let's Encrypt Certbot.
 
 \begin{figure}[h]
@@ -578,11 +581,47 @@ The application was successfully installed, using Docker containers for all comp
     \label{fig:docker-containers}
 \end{figure}
 
-Note: at the time of writing, in addition to ports 80 and 443, ngnix is also forwarding port 8080 to the app. This is a temporary requirement as if facilitates ``hot-fixes'' without the need for code re-deployment, which is useful during this early stage of development.
+In order to ensure that all containers start automatically with each server reboot, it is important to include a \texttt{restart: unless-stopped} configuration option for each of the containers in the \texttt{docker-compose.prod.yml} file. In Listing \autoref{lst:docker-compose-detail} the docker-compose configuration for one of the containers (the IPFS pinning worker node) is listed.
+
+\begin{listing}[H]
+  \caption{Example of a container definition in docker-compose}
+  \label{lst:docker-compose-detail}
+  \begin{lstlisting}[language=]
+  worker-ipfs:
+    container_name: arkivo_worker_ipfs
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+    build:
+      context: .
+      dockerfile: ./docker/worker-ipfs/Dockerfile
+    env_file:
+      - .env
+    environment:
+      - PG_HOST=postgres
+      - REDIS_HOST=redis
+    volumes:
+      - ./:/home/node/app
+  \end{lstlisting}
+\end{listing}
 
 \vspace{0.5cm}
 
-\texttt{ARKIVO} is live and accessible at: \texttt{https://arkivo.art/}
+\subsubsection{Firewall Setup}
+
+Another important consideration when deploying the application to a production environment is the implementation of a firewall to restrict access to sensitive ports in the docker setup. By default, all ports exposed by the docker containers are also accessible publicly, even those that should only be used internally between docker containers, and this includes extremely sensitive ports such as the postgres database, redis database, and IPFS management ports.
+One would expect that installing and configuring the default Ubuntu firewall, UFW, would suffice. However through experimentation this was found not to be the case. Docker and UFW both modify the system's underlying \texttt{iptables} rules, resulting in unexpected results. There are methods of configuring UFW with Docker \cite{jarrousseHowUseUFW2023}\cite{fengChaifengUfwdocker2024}, but these include compromises in terms of internal connectivity, are rather complex to setup, and result in a brittle system which could easily break with a simple software update. For this reason the choice was to enable an external firewall solution provided by the VPS host provider as part of the VPS. There is no extra charge for this feature. As shown in \autoref{fig:firewallrules}, in addition to the ports specified in \autoref{fig:docker-containers}, port 22 was open to allow SSH access to the server. The firewall rules are illustrated in \autoref{fig:firewallrules}.
+
+
+With the firewall in place, and docker containers deployed, \texttt{ARKIVO} is live and accessible at: \texttt{https://arkivo.art/}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{hetzner-firewall.png}
+    \caption[VPS Firewall Rules]{VPS Firewall Rules}
+    \label{fig:firewallrules}
+\end{figure}
 
 
 \section{Database Schema}
@@ -602,7 +641,7 @@ There are also 2 additional tables \texttt{adonis\_schema} and \texttt{adonis\_s
 The Entity Relationship Diagram is illustrated in \autoref{fig:db-entity-relationship}.
 
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{arkivo_schema.png}
     \caption[Entity Relationship Diagram]{Entity Relationship Diagram}
@@ -616,8 +655,14 @@ The Entity Relationship Diagram is illustrated in \autoref{fig:db-entity-relatio
 Currently the management of the archive's catalogue is all done through CLI on the server, using AdonisJS \texttt{node ace} command facility.
 The following commands were created to facilitate the initialisation of a new \texttt{ARKIVO} instance:
 
-{\footnotesize
-\begin{verbatim}
+
+
+\begin{VerbatimEnv}[H]
+  \caption{Commands for Catalogue Management}
+  \label{verb:cli-management}
+  \footnotesize
+  \begin{verbatim}
+
 artifacts:discover         Discovers new artifacts' metadata from
                            the specified platform, optionally
                            pinning their payloads
@@ -630,7 +675,7 @@ artifacts:snapshot         Take a snapshot of an artifact
 artifacts:updateMetadata   Update all token metadata for the
                            specified platform
 \end{verbatim}
-}
+\end{VerbatimEnv}
 
 
 

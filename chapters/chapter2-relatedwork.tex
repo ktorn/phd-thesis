@@ -4,189 +4,26 @@
 This chapter reviews literature and existing work which is of relevance to this study. It is structured in 6 main sections:
 
 \begin{enumerate}
-    \item A brief introduction to blockchain, smart contracts and NFTs
-    \item An overall view of the architecture of Teia and HEN OBJKTs
-    \item A review of Net Art conservation theory
+    \item A review of Digital Art conservation theory
     \item A review of the Open Archival Information System (OAIS)
     \item A review of web archiving tools
+    \item An introduction to blockchain, smart contracts and NFTs
+    \item An overall view of the architecture of Teia and HEN OBJKTs
     \item A survey of representative artworks
     \item A tentative taxonomy of cryptoart
 \end{enumerate}
 
 \vspace{0.5cm}
 
-The review follows a narrative approach, with the goal of understanding the contextual background in which this work is situated. However it should be noted that there was a delimitation in the selection of academic papers reviewed, as only those which were made available as open access were included. In addition to academic papers, a number of books were reviewed, in the areas of blockchain art, netart, digital art conservation and information systems. A number of web resources in the area of art conservation were also consulted. 
+The review follows a narrative approach, with the goal of understanding the contextual background in which this work is situated. However it should be noted that there was a delimitation in the selection of materials reviewed, as only those which were made available as open access were included. In addition to academic papers, a number of books were reviewed, in the areas of blockchain art, netart, digital art conservation and information systems. A number of web resources in the area of art conservation were also consulted. 
 
 Due to the novel area of networked crypto art, there is not a lot of existing academic literature published in this specific topic. For this reason, the research for this work relied primarily on the existing work of conservation of the Web, the extensive literature on art conservation in general, particularly that which focused on code-based art and netart, and also on a review of actual code-based cryptoart artworks.
 
 This forms the theoretical framework on which this work builds upon.
 
+\section{Digital Art Conservation}
 
-\section{Blockchain Technology and NFTs}
-
-
-\subsection{Blockchain}
-\label{sub:blockchain}
-
-The concept behind a blockchain is not new. It was first introduced by Stuart Haber and Scott Stornetta in 1991 in the Journal of Cryptology \cite{haberHowTimeStampDigital1991}. The problem they were trying to solve was: how can we trust historical records when digital media is so easy to manipulate, and how can we do so without having to trust a central authority? Their solution relied on one-way hashing functions.
-
-
-\begin{figure}[h]
-    \centering
-    \includesvg[width=0.5\textwidth]{hashing}
-    \caption[One-way hashing examples]{Examples of one-way hashing (here SHA1 was used). The same input always produces the same hash. Different inputs produce different hashes, even if the difference is just one character, or even one bit.}
-    \label{fig:hashing}
-\end{figure}
-
-Haber and Stornetta's solution involved combining the hash of a document into the data input for the next document hash, resulting in a recursive chain of hashes which had an important property: any change to any of the documents, no matter how small, would break the chain of hashes from that point onwards.
-By weekly publishing the latest hash of the chain, which they did in the``Notices'' classified advertisements section of a the New York Times \cite{whitakerArtBlockchainPrimer2019}, they effectively created the first time-stamped proofs of the immutability of those digital documents, and arguably the world's first blockchain.
-
-\begin{figure}[h]
-    \centering
-    \includesvg[width=0.5\textwidth]{hash-chains}
-    \caption[Illustration of a chain of hashes]{Illustration of a chain of hashes}
-    \label{fig:hashing}
-\end{figure}
-
-
-\subsection{Bitcoin}
-
-Satoshi Nakamoto \cite{nakamotoBitcoinPeertopeerElectronic2008a}  adopted this concept of an immutable data chain and added the required components to turn it into a global decentralised ledger, where financial transactions can be recorded. These components were:
-
-\begin{enumerate}
-    \item a peer-to-peer network of nodes running the same software, which validate all transactions added to the ledger 
-    \item cryptographic signatures, so that transactions spending or transferring a particular asset are only accepted by the network when signed by the asset's owner
-    \item the ordering of transactions into blocks, which are linked together by their hashes
-    \item a lottery system that determines which node on the network is eligible to publish the next block
-    \item a proof-of-work system with self-adjusting difficulty so that on average only one node is able to win the lottery every 10 minutes. Also the proof-of-work required for altering old blocks becomes exponentially larger with each block added, as an attacker would need to produce more proof-of-work than the rest of the honest nodes combined
-    \item a fungible token, bitcoin, which is used to economically reward nodes who successfully publish blocks and is the native asset traded on the ledger
-    \item in addition to block rewards, block producing nodes (miners) also receive fees paid by each transaction which was included in their block
-\end{enumerate}
-
-\vspace{0.5cm}
-
-Although the blockchain contains a full history of all transactions ever made since its inception, Bitcoin stores the current state of the ledger, in other words, the index of who owns what, in a set of unspent transaction outputs (\indexacronym{utxo}). As the name suggests, this is the list of all transactions which have not yet been spent by their recipients.
-
-With his invention, Bitcoin, Satoshi created the first decentralised cryptocurrency, which exhibits several key properties:
-
-\begin{enumerate}
-    \item \textbf{Decentralisation}: peer-to-peer network of nodes, operates without any central authority
-    \item  \textbf{Censorship resistance}: transactions cannot be stopped of censored by any central authority
-    \item  \textbf{Permissionless}: anyone with access to the Internet can download the software and participate on the network
-    \item  \textbf{Immutability}: transactions added to the blockchain become immutable, as explained above
-    \item  \textbf{Transparency}: all transactions on the ledger are public, and independently verifiable, removing the need for trust (trustless)
-\end{enumerate}
-
-\vspace{0.5cm}
-
-
-\subsection{Ethereum}
-
-As mentioned in the Introduction, Ethereum built on the concept of a blockchain, but unlike Bitcoin it does not use a UTXO approach. Instead, it uses an account-based model as a representation the state of the ledger. There are two types of accounts in Ethereum: Externally Owned Accounts (EOAs) which are controlled by a person's private key and are used to send and receive assets; and Contract Accounts which contain code that gets executed when it receives a transaction from an EOA. The code is executed by the Ethereum Virtual Machine (EVM) which makes changes to the persistent state storage, see \autoref{fig:smartcontract}.
-
-\begin{figure}[h]
-    \centering
-    \includesvg[width=0.75\textwidth]{smartcontract}
-    \caption[Diagram of Smart Contract]{Diagram of Smart Contract}
-    \label{fig:smartcontract}
-\end{figure}
-
-Just like in Bitcoin, transactions in Ethereum must pay a fee to the block producers, called gas fee. In the case of interactions with smart contracts, the gas is consumed during the execution of the code, with each instruction (opcode) costing a varying amount of gas corresponding to the computational complexity of that instruction. Any unused gas is returned back to the EOA. Gas is paid in Gwei, which is a denomination of Ether, Ethereum's native cryptocurrency.
-
-Ethereum standards, like ERC-20, allow the creation of fungible tokens which can be traded across different wallets and \gls{decentralised application}s (\indexacronym{dapp}s) built on Ethereum \needcite, which led to the \gls{initial coin offering} (\indexacronym{ico}) hype of 2017. \needcite
-
-
-\subsection{Non-Fungible Tokens}
-
-The ERC-721 standard is used for the creation of unique and non-divisible NFTs, each with a unique identifier, such that they are not fungible as their ERC-20 counterparts.
-Due to the limited storage available on the blockchain, the ERC-721 standard defined as part of its \texttt{ERC721Metadata} a \texttt{tokenURI} field which should point to an external location where the actual NFT metadata should be stored. In turn, this metadata should follow the ERC721 Metadata JSON Schema, and includes the name and description of the NFT, and another URI, this time to the actual NFT media asset \cite{ERC721NonFungibleToken}.
-
-%\begin{lstlisting}[style=jsonCode,caption={ERC721 Metadata JSON Schema}] 
-
-
-
-\begin{lstlisting}[language=HTML, caption={ERC721 Metadata JSON Schema}]
-{
-    "title": "Asset Metadata",
-    "type": "object",
-    "properties": {
-        "name": {
-            "type": "string",
-            "description": "Identifies the asset to which this NFT represents"
-        },
-        "description": {
-            "type": "string",
-            "description": "Describes the asset to which this NFT represents"
-        },
-        "image": {
-            "type": "string",
-            "description": "A URI pointing to a resource with mime type image/* representing the asset to which this NFT represents. Consider making any images at a width between 320 and 1080 pixels and aspect ratio between 1.91:1 and 4:5 inclusive."
-        }
-    }
-}
-\end{lstlisting}
-
-Even though some early NFT marketplaces stored their NFT metadata and assets in private servers, leading to a loss of the assets when they shutdown \cite{gallenHistoryNFTMarketplaces2023}, nowadays most marketplaces store these in decentralised file storage networks like IPFS and ArWeave, which are more resilient  see \autoref{sec:offchain_storage} - \nameref{sec:offchain_storage}.
-
-
-\begin{figure}[h]
-    \centering
-    \includesvg[width=\textwidth]{nft-diagram}
-    \caption[Components on an NFT]{Components on an NFT}
-    \label{fig:nftcomponents}
-\end{figure}
-
-
-
-\subsection{Off-Chain Storage}
-\label{sec:offchain_storage}
-
-As mentioned above, in order to avoid single-points of failure while storing NFT assets off-chain, most NFTs use decentralised file storage solutions to store their assets. Several projects offer such solutions, but lately two projects have gained relevance in this area: \gls{interplanetaryfilesystem} and ArWeave. 
-
-
-\subsubsection{InterPlanetary File System}
-\label{sec:ipfs}
-
-IPFS is a suite of protocols for organising and transferring data over a \gls{peertopeer} network, using content addressing rather than location addressing, such as domain names or IP addresses.
-Content addressing works by hashing the contents of the file, or smaller chunks when the file is big enough. This hash is known in IPFS as a \gls{contentidentifier}. IPFS then uses these CIDs to organise the assets in a Merkle \gls{directed acyclic graph} allowing for efficient storage and retrieval.
-CIDs are mapped onto the nodes (peerIDs) which host them, using a \gls{distributed hash table}. Through network gossiping the nodes can quickly find a peer which hosts a CID. Nodes also cache CIDs which are retrieved through them, temporarily increasing their availability on the network.
-However cached CIDs are eventually garbage collected. To ensure the long term availability of a file on the IPFS network, at least one node must \emph{pin} that content, which is to say, it prevents its own garbage collector from removing it, and advertises itself a host of that CID.
-Since a CID is a hash of the content it assures the immutability chain between the on-chain NFT record and its off-chain asset.
-For those who do not wish to run their own IPFS nodes in order to pin data, there are commercial services available which will do it for a fee, such as Pinata\footnotemark[1], and Infura\footnotemark[2]. There is also Filecoin\footnotemark[3], a blockchain project which offers a decentralised marketplace linking storage node providers with paying users.
-
-\footnotetext[1]{https://www.pinata.cloud/}
-\footnotetext[2]{https://www.infura.io/}
-\footnotetext[3]{https://filecoin.io/}
-
-\subsubsection{ArWeave}
-\label{sec:arweave}
-
-ArWeave is an alternative to IPFS. It relies on a blockchain architecture to provide permanent storage but, unlike traditional blockchains which suffer from scalability issues in terms of storage, ArWeave nodes shard the data amongst themselves, rather than keeping a full copy of the data in each node.
-It also uses a similar content addressing strategy to IPFS and, unlike IPFS, it only requires a one-off payment for perpetual data storage (where perpetual is defined as at least the next 200 years) \needcite
-
-\subsection{On-Chain Storage}
-
-It should be noted that even thought the majority of NFTs follow an off-chain strategy for asset storage, some NFT projects seek to host all their assets directly inside one or more smart contracts, in what is called on-chain storage. The rationale is that on-chain storage is the safest type of storage, since both the NFT and its metadata and media are stored in the same medium. Even though this argument has some merit, it is not without controversy. As more data is added to a blockchain it increases the storage costs for nodes, which can compromise on the level of decentralisation of the network. For this reason many blockchains look for strategies to reduce the storage requirements, for example, by allowing classes of nodes to prune some parts of the data leaving only a much smaller subset of nodes as fully archival nodes. Since multipurpose blockchains are meant to cater to a wide variety of use cases, the argument against on-chain storage of NFT media is that it represents a tragedy of the commons problem \needcite .
-
-
-\section{Teia and HEN OBJKT architecture}
-
-In order to understand the overall structure in which OBJKTs exist, we will examine the architecture of the Teia platform.
-
-\begin{figure}[H]
-    \centering
-    \includesvg[width=\textwidth]{hen-teia-components}
-    \caption[Teia and HEN OBJKT architecture]{Teia and HEN OBJKT architecture}
-    \label{fig:teia-arch}
-\end{figure}
-
-
-\todo change section title and complete this, with diagrams
-
-
-\section{Net Art Conservation Theory}
-
-Due to the lack of existing literature on the conservation of networked cryptoart, a reasonably good starting point is the study of net art.
+Due to the lack of existing literature on the conservation of networked cryptoart, a reasonably good starting point is the study of digital art, and where possible, focusing on net art.
 
 Net art is an art movement which started in the early 1990s and gained prominence in the middle of the decade, likely fuelled by the rise in popularity of the World Wide Web. It uses the Internet as a medium, and is usually highly interactive often invoking the participation of the viewer \cite{kholeifInternet_ArtBirthWeb2023}. Although there is no clear consensus on a definition of net art, this study will adopt the definition proposed by Rhizome on their Net Art Anthology: "art that acts on the network, or is acted on by it" \cite{WhatNetArt2017}.
 This emphasis on the interaction between the art and the network was famously capture by MTAA in 1997, see \autoref{fig:simplenetartdiag}.
@@ -379,6 +216,176 @@ Also, since there is a significant overlap on the preservation and restoration n
 
 
 
+
+\section{Blockchain Technology and NFTs}
+
+
+\subsection{Blockchain}
+\label{sub:blockchain}
+
+The concept behind a blockchain is not new. It was first introduced by Stuart Haber and Scott Stornetta in 1991 in the Journal of Cryptology \cite{haberHowTimeStampDigital1991}. The problem they were trying to solve was: how can we trust historical records when digital media is so easy to manipulate, and how can we do so without having to trust a central authority? Their solution relied on one-way hashing functions.
+
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=0.5\textwidth]{hashing}
+    \caption[One-way hashing examples]{Examples of one-way hashing (here SHA1 was used). The same input always produces the same hash. Different inputs produce different hashes, even if the difference is just one character, or even one bit.}
+    \label{fig:hashing}
+\end{figure}
+
+Haber and Stornetta's solution involved combining the hash of a document into the data input for the next document hash, resulting in a recursive chain of hashes which had an important property: any change to any of the documents, no matter how small, would break the chain of hashes from that point onwards.
+By weekly publishing the latest hash of the chain, which they did in the``Notices'' classified advertisements section of a the New York Times \cite{whitakerArtBlockchainPrimer2019}, they effectively created the first time-stamped proofs of the immutability of those digital documents, and arguably the world's first blockchain.
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=0.5\textwidth]{hash-chains}
+    \caption[Illustration of a chain of hashes]{Illustration of a chain of hashes}
+    \label{fig:hashing}
+\end{figure}
+
+
+\subsection{Bitcoin}
+
+Satoshi Nakamoto \cite{nakamotoBitcoinPeertopeerElectronic2008a}  adopted this concept of an immutable data chain and added the required components to turn it into a global decentralised ledger, where financial transactions can be recorded. These components were:
+
+\begin{enumerate}
+    \item a peer-to-peer network of nodes running the same software, which validate all transactions added to the ledger 
+    \item cryptographic signatures, so that transactions spending or transferring a particular asset are only accepted by the network when signed by the asset's owner
+    \item the ordering of transactions into blocks, which are linked together by their hashes
+    \item a lottery system that determines which node on the network is eligible to publish the next block
+    \item a proof-of-work system with self-adjusting difficulty so that on average only one node is able to win the lottery every 10 minutes. Also the proof-of-work required for altering old blocks becomes exponentially larger with each block added, as an attacker would need to produce more proof-of-work than the rest of the honest nodes combined
+    \item a fungible token, bitcoin, which is used to economically reward nodes who successfully publish blocks and is the native asset traded on the ledger
+    \item in addition to block rewards, block producing nodes (miners) also receive fees paid by each transaction which was included in their block
+\end{enumerate}
+
+\vspace{0.5cm}
+
+Although the blockchain contains a full history of all transactions ever made since its inception, Bitcoin stores the current state of the ledger, in other words, the index of who owns what, in a set of unspent transaction outputs (\indexacronym{utxo}). As the name suggests, this is the list of all transactions which have not yet been spent by their recipients.
+
+With his invention, Bitcoin, Satoshi created the first decentralised cryptocurrency, which exhibits several key properties:
+
+\begin{enumerate}
+    \item \textbf{Decentralisation}: peer-to-peer network of nodes, operates without any central authority
+    \item  \textbf{Censorship resistance}: transactions cannot be stopped of censored by any central authority
+    \item  \textbf{Permissionless}: anyone with access to the Internet can download the software and participate on the network
+    \item  \textbf{Immutability}: transactions added to the blockchain become immutable, as explained above
+    \item  \textbf{Transparency}: all transactions on the ledger are public, and independently verifiable, removing the need for trust (trustless)
+\end{enumerate}
+
+\vspace{0.5cm}
+
+
+\subsection{Ethereum}
+
+As mentioned in the Introduction, Ethereum built on the concept of a blockchain, but unlike Bitcoin it does not use a UTXO approach. Instead, it uses an account-based model as a representation the state of the ledger. There are two types of accounts in Ethereum: Externally Owned Accounts (EOAs) which are controlled by a person's private key and are used to send and receive assets; and Contract Accounts which contain code that gets executed when it receives a transaction from an EOA. The code is executed by the Ethereum Virtual Machine (EVM) which makes changes to the persistent state storage, see \autoref{fig:smartcontract}.
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=0.75\textwidth]{smartcontract}
+    \caption[Diagram of Smart Contract]{Diagram of Smart Contract}
+    \label{fig:smartcontract}
+\end{figure}
+
+Just like in Bitcoin, transactions in Ethereum must pay a fee to the block producers, called gas fee. In the case of interactions with smart contracts, the gas is consumed during the execution of the code, with each instruction (opcode) costing a varying amount of gas corresponding to the computational complexity of that instruction. Any unused gas is returned back to the EOA. Gas is paid in Gwei, which is a denomination of Ether, Ethereum's native cryptocurrency.
+
+Ethereum standards, like ERC-20, allow the creation of fungible tokens which can be traded across different wallets and \gls{decentralised application}s (\indexacronym{dapp}s) built on Ethereum \needcite, which led to the \gls{initial coin offering} (\indexacronym{ico}) hype of 2017. \needcite
+
+
+\subsection{Non-Fungible Tokens}
+
+The ERC-721 standard is used for the creation of unique and non-divisible NFTs, each with a unique identifier, such that they are not fungible as their ERC-20 counterparts.
+Due to the limited storage available on the blockchain, the ERC-721 standard defined as part of its \texttt{ERC721Metadata} a \texttt{tokenURI} field which should point to an external location where the actual NFT metadata should be stored. In turn, this metadata should follow the ERC721 Metadata JSON Schema, and includes the name and description of the NFT, and another URI, this time to the actual NFT media asset \cite{ERC721NonFungibleToken}.
+
+%\begin{lstlisting}[style=jsonCode,caption={ERC721 Metadata JSON Schema}] 
+
+
+
+\begin{lstlisting}[language=HTML, caption={ERC721 Metadata JSON Schema}]
+{
+    "title": "Asset Metadata",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Identifies the asset to which this NFT represents"
+        },
+        "description": {
+            "type": "string",
+            "description": "Describes the asset to which this NFT represents"
+        },
+        "image": {
+            "type": "string",
+            "description": "A URI pointing to a resource with mime type image/* representing the asset to which this NFT represents. Consider making any images at a width between 320 and 1080 pixels and aspect ratio between 1.91:1 and 4:5 inclusive."
+        }
+    }
+}
+\end{lstlisting}
+
+Even though some early NFT marketplaces stored their NFT metadata and assets in private servers, leading to a loss of the assets when they shutdown \cite{gallenHistoryNFTMarketplaces2023}, nowadays most marketplaces store these in decentralised file storage networks like IPFS and ArWeave, which are more resilient  see \autoref{sec:offchain_storage} - \nameref{sec:offchain_storage}.
+
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=\textwidth]{nft-diagram}
+    \caption[Components on an NFT]{Components on an NFT}
+    \label{fig:nftcomponents}
+\end{figure}
+
+
+\subsection{Hyperstructures}
+
+\todo https://jacob.energy/hyperstructures.html
+
+\subsection{Off-Chain Storage}
+\label{sec:offchain_storage}
+
+As mentioned above, in order to avoid single-points of failure while storing NFT assets off-chain, most NFTs use decentralised file storage solutions to store their assets. Several projects offer such solutions, but lately two projects have gained relevance in this area: \gls{interplanetaryfilesystem} and ArWeave. 
+
+
+\subsubsection{InterPlanetary File System}
+\label{sec:ipfs}
+
+IPFS is a suite of protocols for organising and transferring data over a \gls{peertopeer} network, using content addressing rather than location addressing, such as domain names or IP addresses.
+Content addressing works by hashing the contents of the file, or smaller chunks when the file is big enough. This hash is known in IPFS as a \gls{contentidentifier}. IPFS then uses these CIDs to organise the assets in a Merkle \gls{directed acyclic graph} allowing for efficient storage and retrieval.
+CIDs are mapped onto the nodes (peerIDs) which host them, using a \gls{distributed hash table}. Through network gossiping the nodes can quickly find a peer which hosts a CID. Nodes also cache CIDs which are retrieved through them, temporarily increasing their availability on the network.
+However cached CIDs are eventually garbage collected. To ensure the long term availability of a file on the IPFS network, at least one node must \emph{pin} that content, which is to say, it prevents its own garbage collector from removing it, and advertises itself a host of that CID.
+Since a CID is a hash of the content it assures the immutability chain between the on-chain NFT record and its off-chain asset.
+For those who do not wish to run their own IPFS nodes in order to pin data, there are commercial services available which will do it for a fee, such as Pinata\footnotemark[1], and Infura\footnotemark[2]. There is also Filecoin\footnotemark[3], a blockchain project which offers a decentralised marketplace linking storage node providers with paying users.
+
+\footnotetext[1]{https://www.pinata.cloud/}
+\footnotetext[2]{https://www.infura.io/}
+\footnotetext[3]{https://filecoin.io/}
+
+\subsubsection{ArWeave}
+\label{sec:arweave}
+
+ArWeave is an alternative to IPFS. It relies on a blockchain architecture to provide permanent storage but, unlike traditional blockchains which suffer from scalability issues in terms of storage, ArWeave nodes shard the data amongst themselves, rather than keeping a full copy of the data in each node.
+It also uses a similar content addressing strategy to IPFS and, unlike IPFS, it only requires a one-off payment for perpetual data storage (where perpetual is defined as at least the next 200 years) \needcite
+
+\subsection{On-Chain Storage}
+
+It should be noted that even thought the majority of NFTs follow an off-chain strategy for asset storage, some NFT projects seek to host all their assets directly inside one or more smart contracts, in what is called on-chain storage. The rationale is that on-chain storage is the safest type of storage, since both the NFT and its metadata and media are stored in the same medium. Even though this argument has some merit, it is not without controversy. As more data is added to a blockchain it increases the storage costs for nodes, which can compromise on the level of decentralisation of the network. For this reason many blockchains look for strategies to reduce the storage requirements, for example, by allowing classes of nodes to prune some parts of the data leaving only a much smaller subset of nodes as fully archival nodes. Since multipurpose blockchains are meant to cater to a wide variety of use cases, the argument against on-chain storage of NFT media is that it represents a tragedy of the commons problem \needcite .
+
+
+\section{Teia and HEN OBJKT architecture}
+
+In order to understand the overall structure in which OBJKTs exist, we will examine the architecture of the Teia platform.
+
+\begin{figure}[H]
+    \centering
+    \includesvg[width=\textwidth]{hen-teia-components}
+    \caption[Teia and HEN OBJKT architecture]{Teia and HEN OBJKT architecture}
+    \label{fig:teia-arch}
+\end{figure}
+
+
+\todo change section title and complete this, with diagrams
+
+
+
+
+
+
 \section{Crypto-Art}
 
 \todo mention ClubNFT
@@ -412,6 +419,14 @@ Tezos as the art chain (mention participation in basel
 Chainleft kindly shared a more detailed description of each category by private message, which can be found in \nameref{appx:chainleft-taxonomy}, page \pageref{appx:chainleft-taxonomy}.
 
 
+\section{Tentative Taxonomy of Code-Based Cryptoart}
+\label{sec:interactivity}
+
+\todo MUST DO THIS, because it's referred to from \autoref{subsec:capture-interactive}.
+
+
+
+
 \subsection{NFT Marketplace Restrictions}
 
 It should be noted that some NFT marketplaces apply restrictions to networked artworks. This can be for a number of reasons.
@@ -428,13 +443,10 @@ Atomic Form combines the best of IPFS and Arweave into a single solution \cite{m
 
 
 
+\todo mention steve jones overlaid menu for dealing with changes in API URLs. these are methods of dealing with the mutable dependency dilemma!
 
 
 
-\section{Interactivity}
-\label{sec:interactivity}
-
-\todo MUST DO THIS, because it's referred to from \autoref{subsec:capture-interactive}.
 
 
 \subsection{Self-Awareness}
@@ -628,6 +640,9 @@ One interesting side-effect of maintain global consensus is that every full node
 
 
 
+\todo mention how OBJKTs do not show their native rendering resolution
+
+
 \subsection{Burn it: NFTs as reedemable vouchers}
 
 One of the most common interactions between collectors and projects is the act of collecting and burning tokens as a way to unlock other features in the project, access special drops, or others. Collectors have to weigh in the cost-opportunity of destroying a token in exchange for another which may, or may not, be more desirable for them, both from an economic and aesthetical point of view. Whilst creating an environment of engagement and gamification of the project, it can certainly be considered one of the most striking examples of commodification or art in the NFT world. The very act of permanently disposing of a piece of art in return for some kind of utility is arguably against the very ethos of ``art'' (that which has no utility).
@@ -651,8 +666,10 @@ We should also mention \indexacronym{nft}s here to see if the glossary updates i
 
 \section{Theoretical Framework}
 
-\todo
+\todo rhizome theory
 
+
+\todo web3 lens: sustainability, or ecosystem ecology
 
 
 
