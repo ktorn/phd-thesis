@@ -284,7 +284,7 @@ dan@ipfs:~$ ipfs routing findprovs QmaBAtgp6CKJwW6R4xKpNdcmjuzF132erhKExqo4wh6FC
 
 As can be seen in \autoref{lst:ipfs-verify-macau}, line 3 shows \texttt{ARKIVO}'s IPFS node. It should be noted that seeding peers are not all necessarily pinning the CID. It is simply an indication that those peers currently have a copy of the CID and are making it available to the network, but for some it could be a temporary cache and the CID could be garbage collected by those nodes at any point.
 
-Something else worth noting is that sometimes, even when pinning content, the results from the IPFS check tool may return a failed check relating to multiash missing from the DHT, see \autoref{ig:fleek-test2}
+Something else worth noting is that sometimes, even when pinning content, the results from the IPFS check tool may return a failed check relating to multiash missing from the DHT, see \autoref{fig:fleek-test2}
 
 \begin{figure}[H]
     \centering
@@ -597,9 +597,27 @@ boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerpl
 The 'Networked Only' checkbox caused some confusion, as one user assumed it was a filter which should instantly be reflected on the results as one checks or unchecks it. Although not originally intended as an auto-updating filter (actual filters were not implemented) the behaviour of the checkbox was altered, by adding an \texttt{onchange} event which submits the form every time it is checked or unchecked. This results in an experience that is more aligned with the user's expectations, and is a reasonable compromise until a proper filtering system is put in place.
 
 
-\section{Restauration Case Studies}
+\section{Restoration Case Studies}
 
 \todo
+
+
+\section{Archiving ARKIVO}
+
+As discussed in \todo, Teia's current UI prevents the WayBackMachine from successfully capturing the OBJKTs displayed on each page. By employing a simpler Web UI, \texttt{ARKIVO} allows such archiving. As an example we requested the capture of ``Generative Abstract Series 012'' by Yazid via the \texttt{ARKIVO} page, and the capture completed successfully, see \autoref{fig:awayback-arkivo}. This gives artworks catalogued by our system a chance of gaining yet another archival copy, and these copies could even outlast \texttt{ARKIVO} itself.
+
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \begingroup
+    \setlength{\fboxsep}{0pt} % No padding between box and content
+    \setlength{\fboxrule}{1pt} % Thickness of the border
+    \fcolorbox{gray}{white}{\includegraphics[width=0.75\linewidth]{wayback-and-arkivo.png}}
+    \endgroup
+    \caption[WayBackMachine snapshots Arkivo]{Generative Abstract Series 012 by Yazid, \\ a snapshot of Arkivo by WayBackMachine}
+    \label{fig:awayback-arkivo}
+\end{figure}
 
 
 \section{Discussion}

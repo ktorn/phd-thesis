@@ -30,6 +30,8 @@
 \usepackage{makecell}
 \usepackage{multirow}
 
+\usepackage[stable]{footmisc}
+
 % non splittable code listings
 \floatstyle{plain}
 \newfloat{listing}{htbp}{lop}[chapter]
@@ -266,6 +268,7 @@
 \let\cleardoublepage\originalcleardoublepage
 
 \mainmatter
+\doublespacing
 \cleardoublepage % Start double-sided layout on the next odd-numbered page
 \pagenumbering{arabic}
 
@@ -298,7 +301,8 @@
 \input{chapters/chapter3-method}
 \input{chapters/chapter4-dev}
 \input{chapters/chapter5-data-discuss}
-\input{chapters/chapter6-conclusion}
+\input{chapters/chapter6-other-conservation}
+\input{chapters/chapter7-conclusion}
 
 \cleardoublepage
 \label{sec:glossary}

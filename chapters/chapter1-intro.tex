@@ -113,7 +113,7 @@ For reasons which are outside of the scope of this thesis, but which are reporte
     \label{fig:discontinued}
 \end{figure}
 
-Fortunately, Lima had followed the web3 ideals of decentralisation and trustlessness when he designed and built HEN. The source code of the website's UI was open source and hosted on GitHub, and the smart contracts that the platform relied on were still operational on the Tezos blockchain, and did not contain any \emph{kill switch}, therefore they formed a sort of public utility infrastructure beyond the reach of their own creator. The artwork media assets were available on a public storage network (IPFS) and therefore were publicly accessible as well.
+Fortunately, Lima had followed the Web3 ideals of decentralisation and trustlessness when he designed and built HEN. The source code of the website's UI was open source and hosted on GitHub, and the smart contracts that the platform relied on were still operational on the Tezos blockchain, and did not contain any \emph{kill switch}, therefore they formed a sort of public utility infrastructure beyond the reach of their own creator. The artwork media assets were available on a public storage network (IPFS) and therefore were publicly accessible as well.
 
 The community that had formed around HEN quickly entered into action and in only a few hours several clones of the UI were setup online, in what the community calls ``mirrors'', allowing users to continue minting, and collecting OBJKTs just as they did before. Efforts were made to ensure the continuity of the media assets on IPFS, and this was also achieved successfully.
 
@@ -124,6 +124,8 @@ Today, Teia operates as a Decentralised Autonomous Organisation \gls{dao}, is le
 For disclosure, I am a member of the Teia core team, which consists of 19 community members who currently operate the platform and oversee the treasury my means of voting on a multisig smart contract on Tezos. The roadmap is to migrate the governance to a much larger DAO structure, where thousands of users who currently hold TEIA governance tokes, which were distributed based on their usage of the platform and contributions to project, can vote on proposals related to the project.
 
 As a Teia team member, my focus is the preservation of code-base OBJKTs, which are called Interactive OBJKTs in the platform's terminology.
+
+
 
 \section{Challenges}
 \label{sec:challenges}
@@ -144,7 +146,7 @@ However an artwork that requires data from external sources runs a number of ris
 
 Any of these events would pose a problem to a piece of software which cannot be modified to accommodate those changes. This mismatch between an immutable software artifact and an evolving environment in which it depends will be called the \emph{mutable dependency dilemma}.
 
-The long-term preservation of the digital assets required by the artworks is also problematic. As will be discussed in the following chapter, there are several approaches, each with pros and cons, however this is area of heated debate in cryptoart.
+The long-term preservation of the digital assets required by the artworks is also problematic. As will be discussed in the following chapter, there are several approaches, each with pros and cons, however this is area of heated debate in crypto art.
 
 An additional challenge is that these artworks often lack the required metadata to differentiate networked, from non-worked code-based artworks. This makes it difficult for a conservator to identify which artworks may need attention.
 
@@ -155,15 +157,15 @@ Finally, although not directly related to conservation, any code-base artwork ca
 In order to address the challenges outlined above, and from an information systems (\indexacronym{is}) perspective, two main goals arise for this work:
 
 \begin{itemize}
-	\item To design and implement a sustainable IS that can support the long-term preservation of networked cryptoart
-	\item To contribute to the body of knowledge in the area of networked cryptoart conservation
+	\item To design and implement a sustainable IS that can support the long-term preservation of networked crypto art
+	\item To contribute to the body of knowledge in the area of networked crypto art conservation
 \end{itemize}
 
 The reason why sustainability is explicitly included as an objective is because it is a requirement to support \emph{long-term} preservation, and even though there are many types of sustainability which should be considered, in this context the key factor is economic sustainability.
 
 \section{Contributions}
 
-The principal contribution of this work is an open-source web-based software artifact, \texttt{ARKIVO.ART}, which:
+The principal contribution of this work is an open-source web-based software artifact, \texttt{ARKIVO}, which:
 
 \begin{enumerate}
 	\item indexes all code-based OBJKTs minted on the HEN smart contract
@@ -173,20 +175,24 @@ The principal contribution of this work is an open-source web-based software art
 	\item stores a copy of all artwork assets
 \end{enumerate}
 
-The source code for \texttt{ARKIVO.ART} can be accessed from:
+\vspace{0.5cm}
+
+The system is live, accessible at \texttt{https://arkivo.art} and its source code can be accessed from:
 
 \texttt{https://github.com/seda-studio/arkivo}
 
 \vspace{0.5cm}
 
-A secondary technical contribution is a physical device, intended to be run from home, that contributes to the storing of the artwork digital assets. This component is key for the decentralisation, and long term economic sustainability of the project. 
+A secondary contribution is the proposal and implementation of a new method for the creation of mutable crypto art based on blockchain version control, which can be considered a kind of preventive conservation technique.
+
+Thirdly, a physical device is proposed, intended to be run from home, that contributes to the storing of the artwork digital assets. This component is key for the decentralisation, and long term economic sustainability of the project. 
 
 \vspace{0.5cm}
 
 In addition to these artifacts, this work makes the following contributions to the body of knowledge:
 
 \begin{enumerate}
-    \item Taxonomy and classification of code-based cryptoart
+    \item Taxonomy and classification of code-based crypto art
     \item Identification of networked OBJKTs minted on the HEN smart-contract
     \item Analysis of the total asset size, and rate of growth of all code-based OBJKTs minted on the HEN smart-contract
     \item Case studies of restoration attempts of a sample of networked OBJKTs
@@ -201,23 +207,27 @@ Although a comprehensive glossary is included at the end of this thesis, see pag
 
 \vspace{0.5cm}
 
-\textbf{cryptoart} - this refers to any artwork which is registered on a blockchain as an NFT, and which exists purely in digital format, without any physical components.
-
-It should be noted that this last assumption is really more a delimitation of scope for this work rather than a universal definition of cryptoart, some of which can indeed have physical components. It is important to clearly define this aspect of the work at the outset, as the conservation of physical artifacts requires a very different approach to digital-only artifacts.
+\textbf{crypto art} - this refers to any artwork which is registered on a blockchain as an NFT, and which exists purely in digital format, without any physical components.
 
 \vspace{0.5cm}
 
-\textbf{code-based art} - this refers to any artwork which is created in computer code and which requires a computer to execute it in real time in order to render the artwork. In the case of this study, it specifically refers to artworks that use web technologies (HTML, CSS, JavaScript, SVG, and others) which are rendered in real time by the viewer's web browser.
+It should be noted that this last assumption is really more a delimitation of scope for this work rather than a universal definition of crypto art, some of which can indeed have physical components. It is important to clearly define this aspect of the work at the outset, as the conservation of physical artifacts requires a very different approach to digital-only artifacts.
 
 \vspace{0.5cm}
 
-\textbf{networked artwork} - a specific kind of code-based art which initiates network requests, normally via HTTP or HTTPS, to an external URL which is outside of its own artifact directory (identified by a specific directory URL). Any network requests made for internal assets (which are relative and internal to the artifact's directory) are excluded from this definition.
+\textbf{code-based art} - this refers to any artwork which is created with computer code and which requires a computer to execute it in real time in order to render the artwork. The term \emph{encoded} is also used in some of the literature. In the case of this study, it specifically refers to artworks that use web technologies (HTML, CSS, JavaScript, SVG, and others) which are rendered in real time by the viewer's web browser.
+
+\vspace{0.5cm}
+
+It follows then that \emph{code-based crypto art} refers to artworks based on computer code which are registered as NFTs on a blockchain.
+
+\vspace{0.5cm}
+
+\textbf{networked art} - a specific kind of code-based art which initiates network requests, normally via HTTP or HTTPS, to an external URL which is outside of its own artifact directory (identified by a specific directory URL). Any network requests made for internal assets (which are relative and internal to the artifact's directory) are excluded from this definition.
+
+\vspace{0.5cm}
 
 This is an important distinction, because any code-based artifact will normally make several HTTP requests to load local assets (fonts, css files, media files) but as long as these are stored within the artifact's own directory they should always be available to the artifact, therefore not posing a \emph{mutable dependency dilemma}.
-
-\vspace{0.5cm}
-
-It should be noted that the term cryptoart has gained a negative reputation, due to its association with the controversial world of cryptocurrencies, with stems from their highly speculative nature and the public perception that crypto is mostly a vehicle for financial fraud. Although there is undoubtedly some truth to these claims, the potential of technology to support digital artists is undeniable, and thus I believe that the term \emph{cryptoart} is worth promoting in a positive light, differentiating it from the \emph{bad} side of crypto.
 
 \vspace{0.5cm}
 
@@ -225,7 +235,7 @@ It should be noted that the term cryptoart has gained a negative reputation, due
 
 \vspace{0.5cm}
 
-Regina Harsanyi, a preventive conservator of time-based media who works extensively with blockchain related artworks, during an interview for this study highlighted that the code of ethics followed by conservation professionals is also key to the definition of the term.
+Regina Harsanyi, a preventive conservator of time-based media who works extensively with blockchain related artworks, during an interview for this study highlighted that the code of ethics followed by conservation professionals is also key to the definition of the term \cite{americaninstitutefrorconservationCodeEthicsGuidelines}.
 
 \vspace{0.5cm}
 
@@ -253,24 +263,28 @@ It is somewhat unfortunate that this name collision occurred for these two types
 
 \section{Delimitation of Scope}
 
-The focus of this research is on the conservation of networked cryptoart, however the scope of the artifact created for the study is delimited to OBJKTs minted on the HEN smart contract on the Tezos blockchain, and thus the analysis, discussion and conclusion sections of the work will also be delimited to that scope.
+The focus of this research is on the conservation of networked crypto art, however the scope of the artifact created for the study is delimited to OBJKTs minted on the HEN smart contract on the Tezos blockchain, and thus the analysis, discussion and conclusion sections of the work will also be delimited to that scope.
 
-As mentioned above, this study will also only focus on digital-only OBJKTs. Although some artists have introduced a physical component to their OBJKTs, these will remain outside the scope of this study.
-
-Having said that, the Related Work section will provide a broader view and review artworks that may fall outside this scope, in order to provide additional context to the area of cryptoart.
+Having said that, \autoref{sec:survey-crypto-art} (\nameref{sec:survey-crypto-art}, page \pageref{sec:survey-crypto-art})  will provide a broader view and review artworks that may fall outside this scope, in order to provide additional context to the area of crypto art. Namely it will review artworks minted in other platforms and blockchains.
 
 \section{Relevance of Research}
 
-Although the scope of the research may seem narrow, the focus of the research is of significant relevance to cultural heritage of cryptoart.
-HEN, even if short-lived, is widely acknowledged to represent one of the most important cultural events and social experiments that happened in the world of cryptoart, not only because of the art, but also for demonstrating the importance of web3 decentralisation \cite{rcsEarlyDaysHic2023} \cite{baileyHicNuncBrings2021} \cite{drubayHowHicNunc2021}.
-In addition, the type of art which is the focus of this study, networked art, is one that HEN pioneered in this field and hence of the utmost importance to be preserved.
+Although the scope of the research may seem narrow, the subject on which it focuses is of significant relevance to the cultural heritage of crypto art.
+HEN, even if short-lived, is widely acknowledged to represent one of the most important cultural events and social experiments that happened in the world of crypto art, not only because of the art, but also for demonstrating the importance of web3 principles \cite{rcsEarlyDaysHic2023} \cite{baileyHicNuncBrings2021} \cite{drubayHowHicNunc2021}.
+In addition to this, networked crypto art is a type of art that artists pioneered on HEN and hence of the utmost importance to be preserved.
 
 \section{Structure of the Thesis}
 
-This chapter introduced the motivation for this study, identified the main challenges of networked cryptoart and outlined the goals and contributions of the study, followed by definitions of key terms, as well as determining the scope of the study.
+This chapter introduced the motivation for this study, identified the main challenges of networked crypto art and outlined the goals and contributions of the study, followed by definitions of key terms, as well as determining the scope of the study. The remainder of the thesis is structured as follows:
 
-The remainder of the thesis is structured as follows:
+Chapter 2 reviews related work, including digital art conservation theory, existing archival standards and tools, the technical architecture of existing HEN OBJKTs, provides a survey of representative artworks and proposes a tentative taxonomy of code-based crypto art.
 
+Chapter 3 introduces the research questions and describes the methodology used in this study, namely Design Science Research, as well as the methods and tools used as part of the research and development.
 
-\todo
+Chapter 4 provides a detailed account of the prototyping phases when developing the artifact.
 
+Chapter 5 describes the systematic analysis and evaluation of the artifact. It also provides a discussion on the lessons learned during its development.
+
+Chapter 6 introduces a new paradigm for the creation of mutable and evolving crypto art, and discusses other techniques for the conservation of this kind of art.
+
+Chapter 7 summarises the main points of the thesis, provides a set of recommended best practices for creating code-based crypto art, and outlines ideas for future work.
