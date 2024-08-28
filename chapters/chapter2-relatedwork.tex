@@ -28,6 +28,7 @@ This emphasis on the interaction between the art and the network was famously ca
 
 \begin{figure}[h]
     \centering
+    \captionsetup{justification=centering}
     \includegraphics[width=0.75\linewidth]{netartdiagram.png}
     \caption[Simple Net Art Diagram]{Simple Net Art Diagram. Source: MTAA \cite{NETARTANTHOLOGY2016a}}
     \label{fig:simplenetartdiag}
@@ -38,6 +39,7 @@ Net art shares many similarities with networked crypto art. In fact, if we try t
 
 \begin{figure}[h]
     \centering
+    \captionsetup{justification=centering}
     \includesvg[width=0.75\textwidth]{netart-crypto-art}
     \caption[Networked crypto art at the intersection of net art and crypto art]{Networked crypto art is at the intersection of net art and crypto art}
     \label{fig:netart-crypto-art}
@@ -45,7 +47,7 @@ Net art shares many similarities with networked crypto art. In fact, if we try t
 
 Net art belongs to a wider category of digital art, specifically born-digital art, which designates artworks created in a digital format from the outset, and which depends on the technology to operate \cite{innocentiKeepingBitsAlive2013}.
 
-\subsection{What is Conservation?}
+\subsection{Conservation}
 
 As defined in \autoref{sec:definitions} (\nameref{sec:definitions} , page \pageref{sec:definitions}), conservation consists of a number of activities taken toward achieving the long-term preservation of cultural heritage. There is a wide range of such activities, but after a systematic review of digital art conservation literature, the following emerged as the most common:
 
@@ -113,6 +115,7 @@ OldWeb.Today, which combines web-based \gls{emulation} of obsolete browsers, lik
 
 \begin{figure}[h]
     \centering
+    \captionsetup{justification=centering}
     \includegraphics[width=\linewidth]{oldweb.png}
     \caption[OldWeb.Today Browser Emulator]{OldWeb.Today Browser Emulator. Source: https://oldweb.today/ }
     \label{fig:oldweb}
@@ -131,25 +134,29 @@ If we access the test page\footnotemark[5] with a modern browser, such as Google
 \footnotetext[5]{\url{http://acid2.acidtests.org/\#top}}
 \footnotetext[6]{\url{http://acid2.acidtests.org/reference.html}}
 
-
-\begin{figure}[H]
+\begin{figure}[h]
   \centering
+  \begingroup
+  \setlength{\fboxsep}{0pt} % No padding between box and content
+  \setlength{\fboxrule}{1pt} % Thickness of the border
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \includegraphics[width=0.50\textwidth]{acid2-test.png}
+    \fcolorbox{gray}{white}{\includegraphics[width=\textwidth]{acid2-test.png}}
     \caption{ACID test v2 in 2024}
-    \label{fig:image1}
+    \label{fig:acid1}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \includegraphics[width=0.50\textwidth]{acid2-reference.png}
+    \fcolorbox{gray}{white}{\includegraphics[width=\textwidth]{acid2-reference.png}}
     \caption{ACID test v2 reference image}
-    \label{fig:image2}
+    \label{fig:acid2}
   \end{subfigure}
+  \endgroup
   \caption{ACID v2 test with modern browser}
   \label{fig:acid2-test}
 \end{figure}
+
 
 This is a reminder that following web standards today is no guarantee of the fidelity of renderings in the future. 
 
@@ -179,12 +186,13 @@ Several efforts have been initiated by digital art conservation community in an 
 
 The Variable Media Network is a project that provides a set of guidelines and taxonomies, and a questionnaire which can help guide conservators in documenting digital artworks \cite{depocasPermanenceChangeVariable2003}. For example, artworks can be classified as: contained, installed, performed, interactive, reproduced, interchangeable, encoded (our definition of code-based), and networked. Their questionnaire allows the recording of elements such as: stakeholders (persons, institutions, studios), artworks (title, year, description), components (material, environment, interaction), package (contained, installed, performed, interactive), questions (about storage, emulation, migration, reinterpretation), and allows the linking of these elements. For example a stakeholder, like an artist, can be linked to several artworks \cite{VariableMediaNetwork}.
 
-The project also implemented a questionnaire\footnotemark[10] as an interactive web-based application, as illustrated in \autoref{fig:vmnq}.
+The project also implemented a questionnaire\footnotemark[7] as an interactive web-based application, as illustrated in \autoref{fig:vmnq}.
 
-\footnotetext[10]{https://variablemediaquestionnaire.net/}
+\footnotetext[7]{https://variablemediaquestionnaire.net/}
 
 \begin{figure}[h]
     \centering
+    \captionsetup{justification=centering}
     \includegraphics[width=\linewidth]{variablemedianet-questionnaire.png}
     \captionsetup{justification=centering}
     \caption[Variable Media Network Questionnaire]{Variable Media Network Questionnaire. \\ Source: https://variablemediaquestionnaire.net/}
@@ -207,6 +215,7 @@ Their model structures the documentation across 4 main lifecycles of the artwork
 
 \begin{figure}[h]
     \centering
+    \captionsetup{justification=centering}
     \includegraphics[width=\linewidth]{docam-struct.png}
     \captionsetup{justification=centering}
     \caption[DOCAM Documentation Model - Lifecycle Events]{Lifecycle events of a work as per the DOCAM Documentation Model. \\ Source: https://www.docam.ca/en/documentation-model.html}
@@ -254,9 +263,9 @@ This model constitutes the gold standard for digital archives, and is quite appl
 
 \subsection{Archivematica}
 
-Archivematica\footnotemark[10] is a web-based digital archive that follows the OAIS standard and integrates with many other data repository systems. It is open source, well designed and reasonably well maintained. However it was not suitable as a base software stack for this project because it relies heavily on web2 style authentication (username and password) and therefore it does not suit the web3 culture that our artifact needs to cater for.
+Archivematica\footnotemark[8] is a web-based digital archive that follows the OAIS standard and integrates with many other data repository systems. It is open source, well designed and reasonably well maintained. However it was not suitable as a base software stack for this project because it relies heavily on web2 style authentication (username and password) and therefore it does not suit the web3 culture that our artifact needs to cater for.
 
-\footnotetext[10]{https://www.archivematica.org/en/}
+\footnotetext[8]{https://www.archivematica.org/en/}
 
 \subsection{Rhizome ArtBase}
 
@@ -317,6 +326,7 @@ The concept behind a blockchain is not new. It was first introduced by Stuart Ha
 
 \begin{figure}[h]
     \centering
+    \captionsetup{justification=centering}
     \includesvg[width=0.5\textwidth]{hashing}
     \caption[One-way hashing examples]{Examples of one-way hashing (here SHA1 was used). The same input always produces the same hash. Different inputs produce different hashes, even if the difference is just one character, or even one bit.}
     \label{fig:hashing}
@@ -327,6 +337,7 @@ By weekly publishing the latest hash of the chain, which they did in the``Notice
 
 \begin{figure}[h]
     \centering
+    \captionsetup{justification=centering}
     \includesvg[width=0.5\textwidth]{hash-chains}
     \caption[Illustration of a chain of hashes]{Illustration of a chain of hashes}
     \label{fig:hashing}
@@ -370,6 +381,7 @@ As mentioned in the Introduction, Ethereum built on the concept of a blockchain,
 
 \begin{figure}[h]
     \centering
+    \captionsetup{justification=centering}
     \includesvg[width=0.75\textwidth]{smartcontract}
     \caption[Diagram of Smart Contract]{Diagram of Smart Contract}
     \label{fig:smartcontract}
@@ -377,7 +389,7 @@ As mentioned in the Introduction, Ethereum built on the concept of a blockchain,
 
 Just like in Bitcoin, transactions in Ethereum must pay a fee to the block producers, called gas fee. In the case of interactions with smart contracts, the gas is consumed during the execution of the code, with each instruction (opcode) costing a varying amount of gas corresponding to the computational complexity of that instruction. Any unused gas is returned back to the EOA. Gas is paid in Gwei, which is a denomination of Ether, Ethereum's native cryptocurrency.
 
-Ethereum standards, like ERC-20, allow the creation of fungible tokens which can be traded across different wallets and \gls{decentralised application}s (\indexacronym{dapp}s) built on Ethereum \needcite, which led to the \gls{initial coin offering} (\indexacronym{ico}) hype of 2017. \needcite
+Ethereum standards, like ERC-20, allow the creation of fungible tokens which can be traded across different wallets and \gls{decentralised application}s (\indexacronym{dapp}s) built on Ethereum \cite{ERC20TokenStandarda}, which led to the \gls{initial coin offering} (\indexacronym{ico}) hype of 2017 \cite{cuffeRoleErc20Token2018}.
 
 
 \subsection{Non-Fungible Tokens}
@@ -385,11 +397,7 @@ Ethereum standards, like ERC-20, allow the creation of fungible tokens which can
 The ERC-721 standard is used for the creation of unique and non-divisible NFTs, each with a unique identifier, such that they are not fungible as their ERC-20 counterparts.
 Due to the limited storage available on the blockchain, the ERC-721 standard defined as part of its \texttt{ERC721Metadata} a \texttt{tokenURI} field which should point to an external location where the actual NFT metadata should be stored. In turn, this metadata should follow the ERC721 Metadata JSON Schema, and includes the name and description of the NFT, and another URI, this time to the actual NFT media asset \cite{ERC721NonFungibleToken}.
 
-%\begin{lstlisting}[style=jsonCode,caption={ERC721 Metadata JSON Schema}] 
-
-\todo provenance
-
-\begin{lstlisting}[language=HTML, caption={ERC721 Metadata JSON Schema}]
+\begin{lstlisting}[language=, caption={ERC721 Metadata JSON Schema}]
 {
     "title": "Asset Metadata",
     "type": "object",
@@ -410,99 +418,75 @@ Due to the limited storage available on the blockchain, the ERC-721 standard def
 }
 \end{lstlisting}
 
-Even though some early NFT marketplaces stored their NFT metadata and assets in private servers, leading to a loss of the assets when they shutdown \cite{gallenHistoryNFTMarketplaces2023}, nowadays most marketplaces store these in decentralised file storage networks like IPFS and ArWeave, which are more resilient  see \autoref{sec:offchain_storage} - \nameref{sec:offchain_storage}.
+Even though some early NFT marketplaces stored their NFT metadata and assets in private servers, leading to a loss of the assets when they shutdown \cite{gallenHistoryNFTMarketplaces2023}, nowadays most marketplaces store these in decentralised file storage networks like IPFS and ArWeave, which are more resilient  see \autoref{sec:offchain_storage} (\nameref{sec:offchain_storage}, \pageref{sec:offchain_storage}).
 
 
 \begin{figure}[h]
     \centering
+    \captionsetup{justification=centering}
     \includesvg[width=\textwidth]{nft-diagram}
-    \caption[Components on an NFT]{Components on an NFT}
+    \caption[Components on an NFT on on Ethereum]{Components on an NFT on Ethereum}
     \label{fig:nftcomponents}
 \end{figure}
-
-
-\subsection{Hyperstructures}
-
-\todo https://jacob.energy/hyperstructures.html
 
 \subsection{Off-Chain Storage}
 \label{sec:offchain_storage}
 
 As mentioned above, in order to avoid single-points of failure while storing NFT assets off-chain, most NFTs use decentralised file storage solutions to store their assets. Several projects offer such solutions, but lately two projects have gained relevance in this area: \gls{interplanetaryfilesystem} and ArWeave. 
 
-
 \subsubsection{InterPlanetary File System}
 \label{sec:ipfs}
 
 IPFS is a suite of protocols for organising and transferring data over a \gls{peertopeer} network, using content addressing rather than location addressing, such as domain names or IP addresses.
-Content addressing works by hashing the contents of the file, or smaller chunks when the file is big enough. This hash is known in IPFS as a \gls{contentidentifier}. IPFS then uses these CIDs to organise the assets in a Merkle \gls{directed acyclic graph} allowing for efficient storage and retrieval.
+Content addressing works by hashing the contents of the file, or smaller chunks (or blocks) when the file is big enough, see \autoref{fig:ipfs-cid-gen}. This hash is known in IPFS as a \gls{contentidentifier}. IPFS then uses these CIDs to organise the assets in a Merkle \gls{directed acyclic graph} allowing for efficient storage and retrieval. There are several reasons why files are split into smaller chunks, including faster parallel downloading from multiple nodes, and improving the changes of finding identical chunks between different files, which allows for chunk deduplication and hence savings in terms of storage space. \cite{juBlockchainTraceabilitySystem2022}
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includesvg[width=0.5\textwidth]{ipfs-cid-gen.svg}
+    \caption[Generation Principle of CID in IPFS]{Generation Principle of CID in IPFS. Source: \cite[p.3]{juBlockchainTraceabilitySystem2022}}
+    \label{fig:ipfs-cid-gen}
+\end{figure}
+
 CIDs are mapped onto the nodes (peerIDs) which host them, using a \gls{distributed hash table}. Through network gossiping the nodes can quickly find a peer which hosts a CID. Nodes also cache CIDs which are retrieved through them, temporarily increasing their availability on the network.
 However cached CIDs are eventually garbage collected. To ensure the long term availability of a file on the IPFS network, at least one node must \emph{pin} that content, which is to say, it prevents its own garbage collector from removing it, and advertises itself a host of that CID.
 Since a CID is a hash of the content it assures the immutability chain between the on-chain NFT record and its off-chain asset.
-For those who do not wish to run their own IPFS nodes in order to pin data, there are commercial services available which will do it for a fee, such as Pinata\footnotemark[7], and Infura\footnotemark[8]. There is also Filecoin\footnotemark[9], a blockchain project which offers a decentralised marketplace linking storage node providers with paying users.
+For those who do not wish to run their own IPFS nodes in order to pin data, there are commercial services available which will do it for a fee, such as Pinata\footnotemark[9], and Infura\footnotemark[10]. There is also Filecoin\footnotemark[11], a blockchain project which offers a decentralised marketplace linking storage node providers with paying users. Another service which specialises in pinning NFT assets is ClubNFT\footnotemark[12] which, for an annual fee, pins all the IPFS assets corresponding to the NFTs owned by each customer, as well as providing NFT discovery tools.
 
-\footnotetext[7]{https://www.pinata.cloud/}
-\footnotetext[8]{https://www.infura.io/}
-\footnotetext[9]{https://filecoin.io/}
-
-
-\todo mention ClubNFT
+\footnotetext[9]{https://www.pinata.cloud/}
+\footnotetext[10]{https://www.infura.io/}
+\footnotetext[11]{https://filecoin.io/}
+\footnotetext[12]{https://www.clubnft.com/}
 
 \subsubsection{ArWeave}
 \label{sec:arweave}
 
 ArWeave is an alternative to IPFS. It relies on a blockchain architecture to provide permanent storage but, unlike traditional blockchains which suffer from scalability issues in terms of storage, ArWeave nodes shard the data amongst themselves, rather than keeping a full copy of the data in each node.
-It also uses a similar content addressing strategy to IPFS and, unlike IPFS, it only requires a one-off payment for perpetual data storage (where perpetual is defined as at least the next 200 years) \needcite
+It also uses a similar content addressing strategy to IPFS and, unlike IPFS, it only requires a one-off payment for perpetual data storage (where perpetual is defined as at least the next 200 years) \cite{williamsArweaveProtocolEconomically2019}.
 
 \subsection{On-Chain Storage}
 
-It should be noted that even thought the majority of NFTs follow an off-chain strategy for asset storage, some NFT projects seek to host all their assets directly inside one or more smart contracts, in what is called on-chain storage. The rationale is that on-chain storage is the safest type of storage, since both the NFT and its metadata and media are stored in the same medium. Even though this argument has some merit, it is not without controversy. As more data is added to a blockchain it increases the storage costs for nodes, which can compromise on the level of decentralisation of the network. For this reason many blockchains look for strategies to reduce the storage requirements, for example, by allowing classes of nodes to prune some parts of the data leaving only a much smaller subset of nodes as fully archival nodes. Since multipurpose blockchains are meant to cater to a wide variety of use cases, the argument against on-chain storage of NFT media is that it represents a tragedy of the commons problem \needcite .
+It should be noted that even thought the majority of NFTs follow an off-chain strategy for asset storage, some NFT projects seek to host all their assets directly inside one or more smart contracts, in what is called on-chain storage. The rationale is that on-chain storage is the safest type of storage, since both the NFT and its metadata and media are stored in the same medium. Even though this argument has some merit, it is not without controversy. As more data is added to a blockchain it increases the storage costs for nodes, which can compromise on the level of decentralisation of the network. For this reason many blockchains look for strategies to reduce the storage requirements, for example, by allowing classes of nodes to prune some parts of the data leaving only a much smaller subset of nodes as fully archival nodes. Since multipurpose blockchains are meant to cater to a wide variety of use cases, the argument against on-chain storage of NFT media is that it represents a tragedy of the commons problem \cite{hardinTragedyCommonsPopulation1968}.
 
 
-\subsection{Provenance}
+\subsection{Main Challenges}
 
-Atomic Form combines the best of IPFS and Arweave into a single solution \cite{maneliusExtendingNFTMetadata2024}
-
-
-\subsection{Copyright Implications}
-\label{subsec:chap2_copyright}
-
-There is a general consensus throughout crypto art that the act of collecting an \indexacronym{nft} does not grant the collector any copyrights over the NFT's original artwork, which remain with the artist. However the practice of NFT marketplaces engaging in cross-listings, which means displaying the artwork for sale on platforms other than the one where the artist minted the work originally, is widespread. It's a practice that is not only accepted, but arguably even appreciated by artists, who gain a wider platform for displaying, and potentially selling, their artworks. This is something that would not normally happen with a museum or other traditional institutions, who always have to go through a step of acquisition of the artwork, along with conservation specific contract signing, before displaying or applying conservation techniques to it.
-
-For the design of our artifact, this means that merely displaying an artwork on an art conservation platform, by itself, should not not constitute a problem. However if the platform engages in automatic classification and displays such metadata along with the artwork, it may raise issues, as the artist may not agree with a particular classification or intervention. This is an area which needs further attention in future work.
-
-
-
-
-
-\subsection{NFT Marketplace Restrictions}
-
-It should be noted that some NFT marketplaces apply restrictions to networked artworks. This can be for a number of reasons.
-For example, OBJKT.com applies a security warning by default, with an option to disable it.
-
-
-\subsection{Main Issues}
+The following sections will highlight some of the main challenges faced by blockchain technology, code-based crypto art, and the crypto art ecosystem in general.
 
 \subsubsection{Scalability}
 
-One key aspect to remember is that adding more nodes to a network does not improve network scalability if each node must replicate the exact same computation as every other node, which is the case with most consensus and block validating nodes on a blockchain. Of course such wide replication of computation is still desired, for decentralisation purposes, as discussed in \ref{sec:lit_review:decentralisation}
+One of the main limitations of blockchains is that of scalability. In order to maintain a reasonable level of decentralisation, where regular users can run fully validating nodes, the blockchain size must be managed carefully. For this reason there is a very limited amount of block size available for transactions, which in turn limits the transaction throughput of the network. One must remember that adding more full nodes to a network does not improve network scalability if each node must store the same data and replicate the exact same computation as every other node, which is the case with most consensus and block validating nodes on a blockchain \cite{khanSystematicLiteratureReview2021}.
 
-
-\subsubsection{Moore's Law and Data Storage}
-
-\subsubsection{Economic Sustainability}
-
-mention VDP, its role in wg3.2 (beneficiaries), and how the idea spread to other marketplaces (https://docs.fxhash.xyz/pricing-and-supply)
-
-
-
-
+To alleviate this problem several solutions have been devised, the most common of which is what is called Layer 2 scaling. These involve performing transactions and computations on a separate chain or layer (L2) which then settles on the base blockchain layer (L1) \cite{zhouSolutionsScalabilityBlockchain2020}.
 
 \subsubsection{Code Security}
 
 One aspect that current digital and net art conservation theory does not cover, but which is a major concern for code-based crypto art is that of security.
 
 NFT marketplaces have a global reach. Anyone can publish a code-based artwork, which is essentially a web application, and have it accessed by hundreds or even thousands of users. To make matters worse, the majority of these NFT marketplace users are likely running crypto wallets on their devices which could be holding significant sums of cryptocurrency and NFTs. This makes NFT marketplaces a potential honey pot for malicious actors who will looking for the opportunity to drain the assets from users wallet. Attacks can either be direct by minting a malicious NFT, or indirect by infecting an open source library which may be used as a dependency by honest NFT artists. This kind of backdoor attack has already happened in the crypto industry when a malicious actor took over the maintenance of a popular javascript NPM module which was used as a dependency in the crypto wallet CoPay \cite{haworthPopularJavaScriptDependency2018}.
+
+This risk is one of the reasons why some marketplaces apply restrictions to networked artworks.
+For example, OBJKT.com applies a security warning by default, with an option to disable it.
 
 Even though addressing the security aspect of crypto art may seem to fall outside the scope of conservation efforts, the fact is that if a conservation tool is already automatically downloading and running artworks in a sandbox in order to snapshot them and preserve their evolution, then it is logical that it should also serve a useful function in this regard.
 
@@ -515,148 +499,356 @@ Strategies can involve code similarity checks \cite{ragkhitwetsagulComparisonCod
 Early detection systems based on machine learning \cite{schuttEarlyDetectionMalicious2012}, detection of malicious obfuscated JavaScript code \cite{likarishObfuscatedMaliciousJavascript2009} \cite{fassJaStFullySyntactic2018}, malicious code detection based on semantic analysis \cite{fangDetectingMaliciousJavaScript2020}.
 
 
-\todo ESLint
-
-
 However, research into techniques of camouflaging malicious code in a benign \gls{abstractsyntaxtree}
 \cite{fassHideNoSeekCamouflagingMalicious2019} serves as a timely reminder that this security minded endeavour may always become a cat and mouse game.
 
 
 This can also aid in identifying potential outdated libraries which could contain vulnerabilities or even current libraries which were attacked by hackers, looking to add backdoors or other crypto exploiting code.
 
+\subsubsection{Copyright Implications}
+\label{subsec:chap2_copyright}
 
+There is a general consensus throughout crypto art that the act of collecting an \indexacronym{nft} does not grant the collector any copyrights over the NFT's original artwork, which remain with the artist \cite{caglayanaksoyNFTsCopyrightChallenges2021a}. However the practice of NFT marketplaces engaging in cross-listings, which means displaying the artwork for sale on platforms other than the one where the artist minted the work originally, is widespread. It's a practice that is not only accepted, but arguably even appreciated by artists, who gain a wider platform for displaying, and potentially selling, their artworks. This is something that would not normally happen with a museum or other traditional institutions, who always have to go through a step of acquisition of the artwork, along with conservation specific contract signing, before displaying or applying conservation techniques to it.
 
+For the design of our artifact, this means that merely displaying an artwork on an art conservation platform, by itself, should not not constitute a problem. However if the platform engages in automatic classification and displays such metadata along with the artwork, it may raise issues, as the artist may not agree with a particular classification or intervention. This is an area which needs further attention in future work.
 
 
+\subsubsection{Economic Sustainability}
 
+A recurring issue in blockchain projects, is that there is not enough market activity to sustain their business models, resulting in as many as two-thirds of all projects not surviving past 3 years \cite{franjkovicCryptocurrencyGraveyardTwoThirds2024}. Much of this is due to macroeconomic factors, and market cycles which are outside the control of the crypto community.
 
+However one could also argue that better structures of support can be put in place, so that those services on which one depends do not suddenly stop operating. To help address this issue, a concept proposed by the author is Value Distribution Protocol (VDP) \cite{HackcoinHongKong2015} \cite{farinhaGrokyaPrivacyFriendlyFramework2016}.
 
-\section{The Web3 Culture}
 
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{vdp-example1.png}
+    \caption{Example VDP Configuration File}
+    \label{fig:vdp1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{vdp-example2.png}
+    \caption{Example VDP File Linking}
+    \label{fig:vdp2}
+  \end{subfigure}
+  \caption{Example VDP Configuration Files. \\ Source: https://github.com/ktorn/vdp}
+  \label{fig:vdp-examples}
+\end{figure}
 
-\subsection{Decentralisation}
-\label{sec:lit_review:decentralisation}
 
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.75\linewidth]{vdp-opensource-usecase.png}
+    \captionsetup{justification=centering}
+    \caption[Value Distribution Protocol]{Value Distribution Protocol Example. \\ Source: https://github.com/ktorn/vdp}
+    \label{fig:vdp}
+\end{figure}
 
+The concept is based on the idea of splitting revenue amongst stakeholders, including a small donation to project dependencies which enabled that revenue to be generated in the first place. If each project subsequently does the same, a tree of dependencies emerges, where value can flow from the top, where economic transactions are taking place, down to every dependency, and down to individual contributors. The idea was originally proposed for funding key open source projects that the Internet infrastructure depends on, but which are often forgotten about, such as OpenSSL and GPG \cite{oberhausInternetWasBuilt2019}.
 
-Crypto attempts to replace hierarchical systems of power, where rules are ultimately enforced by the use of violence, which a non-hierarchical system where ``good'' and ``bad'' behaviours are encouraged or discouraged via economic incentives and/or penalties.
+This is relevant for this study since the main goal is to design and implement a sustainable artifact that can supports the long-term preservation of networked crypto art.
 
+In this context, some progress has been made within the Tezos ecosystem, with the introduction of a collab smart contract during HEN's hicathon \cite{HicathonDocsWG2021}, a project in which the author participated, and which allows artists to not only to split royalties amongst collaborators, but also to make small donations to \emph{beneficiaries} from their art sales royalties.
 
-
-\subsection{Social Contracts, Immutability and Hard Forks}
-
-
-\todo : explain why I changed my stance on code is law.
-
-This section will focus on one of crypto's core \emph{raisons d'être}, trustlessness.
-
-The term trustlessness, does not mean untrustworthy. Rather it represent's an effort to make trust obsolete, replacing it with transparency and a-priory agreed social contracts. These social contracts, represented by code, both at the blockchain protocol level, as well as written into smart contracts, become immutable agreements, and self-executing rules of engagement. This concept is so deeply engrained into the crypto culture that any scenarios that rely on individual's trustworthiness are only considered when absolutely unavoidable.
-
-Smart contracts play an important role in this concept, because once instantiated in a blockchain they become, by default, immutable. Participants that rely on the smart contract still need to verify that the code does what it is supposed to, and unintended and hard-to-find bugs are not only possible but unfortunately a common occurrence in this early stage of the smart contract industry. Even though these bugs can be exploited, leading to consequences which run counter to the intended social contract, the crypto community accepts this risk and tries to mitigate it with stricter contract development processes, and reviews and verifications. However, a smart contract which is purposefully designed to be mutable (a possibility under some circumstances) or which gives its creator or administrator powers that would require trust by the community on them, are naturally seen with suspicion and even counter to the accepted crypto culture values. In the early days of \indexglossary{ethereum} a name was given to this type of code-based social contract: rule of code.
-
-An important feature of immutable social contracts is that they prevent, or at least minimise, the unilateral ``cheating'' by any participant in a transaction or a serie of transactions. In crypto, the act of cheating other participants is called a ``rug pull'', which means the symbolic act of ``pulling the rug out from under the feet of the victims'' leaving them off-balance and causing them to fall.
-
-Immutability, however, does bring some inconveniences. Some times the immutable code fails to represent the expectation of the social contract, and this can happen for a number of reasons. For example, the code could have an unforeseen consequence due to a bug. Other times the needs of the community change with time and the social consensus evolves in ways which are incompatible with the original code. In some cases this evolution can even cause major fissures in the community, leading to a breakup in consensus, with major splits in the opinion of the best way forward. In these cases the immutable code is unable to adapt to a new reality, and the community has no option but to leave behind the original protocol, and jump to a new, modified protocol. We call this phenomenon a \emph{hard-fork}.
-
-There were notable hard-forks in the history of crypto (mention BTC/BCH, ETH/ETC, etc)
-
-Perhaps most importantly is that every participant in an activity is satisfied that their expectations are met by the system, and where opinions between them evolve and diverge, that the system provides a satisfactory and fair resolution to all stakeholders. 
-
-\subsection{Why Decentralisation?}
-(looking for a better heading. why do we need trustllessness, immutabilty, censorship resistence, etc)
-
-Activism through digital art, see \cite[p.~212]{hopeDigitalArtsIntroduction2014} , benefits greatly from low barriers of entry, lack of gatekeepers, and censorship resistance (both as infra resilience, and social structures), but how can it be counter-balanced with curation of content, policing of copy mints or copyright infringement, removal of illegal material (i.e. child porn, etc).
-
-Decentralisation as a way to remove single-points-of-failure, thus resilience to attack, was an intentional design decision of ARPANET, which led to the Internet we know today. \cite[p.10]{paulDigitalArt2015}
-
-
-
-\section{A New Type of Art}
-
-This thesis invites readers to look at networked art under a new light of sensorship-resistant long-lived preservation, powered by decentralised technologies. Rather than create its own visual aesthetic, this new kind of art may be characterised by a common set of processes and underlying architectures that afford it with the kind of long-lasting characteristic that is seldom attributed to digital medium art.
-Another factor that distinguishes it from previous net art is the ability of art pieces to be ``aware'' of their own existence in the marketplace, allowing them to react to actions such as being put up for sale, being sold, the monetary amounts involved, who owns them, etc.
-In theory, a piece of art could be created in such a way as to 'earn' a stipend from each sale, and through its own trading activity eventually earn enough as to be able to 'purchase' itself from its human owners, and gain some sort of freedom, or emancipation.
-Futhermore, it attempts to blend the seemingly conflicting forces of preservation and evolution.
-
-\subsection{Art as Revolution}
-
-``If revolution can give art its soul, then art can give revolution its mouthpiece'' - Anatoly Lunacharsky
-
-TODO: Refer to ``Art and Revolutio'' by Gerald Raunig (available in UMAC lib: NX 180 R45 Rau 2007)
-
-Walter Benjamin hailed the liberatory and transformative effects of mechanical reproduction on art, suggesting that ``mechanical reproduction erodes the 'aura' of a work of art, which results from its unique existence in a time and place, which revolutionized the social function of art and allowed it to be used for politics rather than ritual''. (Benjamin, 2002: 103-6 - cited in \cite[p.3]{gereArtTimeTechnology2006}
-
-
-
-
-
-
-\todo ---------
-This thesis contributes to the body of knowledge in the following ways:
-
-It proposes a new taxonomy for categorizing xxx which takes into account yyy, and zzz.
-
-Using this new taxonomy an extensive review and categorization of xxx was undertaken and is available online at https://abc.xyz
-
-It contributes to the field of digital art preservation by combining xxx with yyy in a novel way, and provides evidence of its efficacy in findings nnn.
-
-It demonstrates de economic viability of running decentralised infrastructure by incentivising xxx via the use of zzz, as seen in chapter yyy.
-
-In the field of information systems, it studies and reports on the application of xxx and yyy in the context of zzzz
-
-In conducting the research, the efficacy of using methodology xxx was tested in the context of uuu, revealing limitations yyy and zzz.
-\todo --------
-
-
-Digital assets like \gls{nonfungibletoken} are transforming the art world. An \indexacronym{nft} is a unique digital asset verified using blockchain technology.
-This document discusses various examples (EX) of digital assets and their conservation techniques. This is the nature of the \gls{nonfungibletoken}.
-
-
-
-\subsection{Historical Consensus - Conservation of Bugs}
-
-One interesting side-effect of maintain global consensus is that every full node must independently validate the whole chain, from it's genesis block until the latest block, which is commonly called the ``head'' of the blockchain. This means every full node, no matter how recently implemented, must be able to replicate every historical consensus rule, including any bugs in early node software, such that all historical block validation proceeds exactly as it did originally. Failure to replicate such bugs would potentially result in modern nodes considering historical blocks as invalid, hence refusing to follow the main historical chain and therefore forking the chain.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+In theory, if \texttt{ARKIVO} is perceived by artists as providing a useful service to networked crypto art, then by donating a small percentage of the royalties from the sales of those networked artworks to the project, then it could become economically sustainable.
 
 \section{Teia and HEN OBJKT architecture}
 
 In order to understand the overall structure in which OBJKTs exist, we will examine the architecture of the Teia platform.
 
-\begin{figure}[H]
+Three main smart contracts are currently used:
+
+\begin{itemize}
+    \item HEN Minter contract: \texttt{KT1Hkg5qeNhfwpKW4fXvq7HGZB9z2EnmCCA9} 
+    \item HEN FA2 Token (OBJKT): \texttt{KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton}
+    \item Teia Marketplace contract: \texttt{KT1PHubm9HtyQEJ4BBpMTVomq6mhbfNZ9z5w}
+\end{itemize}
+
+When an artist mints a new OBJKT, the following takes place:
+
+\begin{enumerate}
+    \item Artist fills in artwork details in the Teia UI (including title, description, tags, number of editions, and royalties)
+    \item Teia UI prepares the OBJKT metadata, and uploads it, along with the artwork's assets to IPFS, via Teia's own IPFS infrastructure
+    \item Teia UI prompts user to initiate the blockchain transaction, via their Tezos wallet
+    \item User's Tezos wallet calls \texttt{mint\_OBJKT} endpoint on the HEN Minter smart contract, including the metadata IPFS CID created in step 2.
+    \item The HEN Minter smart contract verifies the call, and calls \texttt{mint} on the HEN OBJKT (FA2) smart contract, where the OBJKTs are actually stored
+\end{enumerate}
+
+After a few moments, the transaction confirms on the blockchain and the indexers, TzKT and Teztok, will pick up the new mint, and index it. This then allows the Teia UI to pick up the change and show the minted OBJKT to the artist. The artist will see a balance of 
+
+At this stage the artist can list the OBJKT for sale, by making a subsequent transaction, which effectively transfers some editions from his wallet to the Teia Marketplace, where they can be collected by others for the specified price.
+
+\begin{figure}[h]
     \centering
+    \captionsetup{justification=centering}
     \includesvg[width=\textwidth]{hen-teia-components}
     \caption[Teia and HEN OBJKT architecture]{Teia and HEN OBJKT architecture}
     \label{fig:teia-arch}
 \end{figure}
 
+Once minted, an OBJKT's metadata becomes immutable. This means an OBJKT can only ever point at one CID and that cannot be changed.
 
-\todo change section title and complete this, with diagrams
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includesvg[width=\textwidth]{objkt-structure.svg}
+    \caption[HEN OBJKT Structure]{HEN OBJKT Structure}
+    \label{fig:objkt-struct}
+\end{figure}
 
-\todo mention how OBJKTs do not show their native rendering resolution
+\subsection{OBJKT metadata}
+
+An example OBJKT metadata is as follows:
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=, caption={Example OBJKT Metadata}]
+{
+  "name": "This is not an evolving artwork",
+  "description": "This OBJKT is only for testing purposes.",
+  "tags": [
+    "evolving",
+    "seda"
+  ],
+  "symbol": "OBJKT",
+  "artifactUri": "ipfs://QmbbgnKF94WowkANGrzRhJ4kZZaCjt85qC6ikW1XaaayBW",
+  "displayUri": "ipfs://QmbbgnKF94WowkANGrzRhJ4kZZaCjt85qC6ikW1XaaayBW",
+  "thumbnailUri": "ipfs://Qmac5jhpxNukkGm561jQN79Csp24s997PF51wvHxLKS3mz",
+  "creators": [
+    "tz1dd2tmTJFRJh8ycLuZeMpKLquJYkMypu2Q"
+  ],
+  "formats": [
+    {
+      "mimeType": "image/png",
+      "fileSize": 1706829,
+      "fileName": "not-evolving.png",
+      "dimensions": {
+        "value": "1024x1024",
+        "unit": "px"
+      },
+      "uri": "ipfs://QmbbgnKF94WowkANGrzRhJ4kZZaCjt85qC6ikW1XaaayBW"
+    },
+    {
+      "mimeType": "image/png",
+      "fileSize": 256717,
+      "fileName": "thumbnail_not-evolving.png",
+      "dimensions": {
+        "value": "350x350",
+        "unit": "px"
+      },
+      "uri": "ipfs://Qmac5jhpxNukkGm561jQN79Csp24s997PF51wvHxLKS3mz"
+    }
+  ],
+  "decimals": 0,
+  "isBooleanAmount": false,
+  "shouldPreferSymbol": false,
+  "rights": "cc-by-nc-4.0",
+  "date": "2024-08-26T15:13:18.882Z",
+  "mintingTool": "https://teia.art/mint"
+}
+\end{lstlisting}
+
+Note how how static image assets contain information about their dimensions (automatically extracted from the images by the Teia UI during the minting), however this is not the case of code-based OBJKTs (mime-type \texttt{application/x-directory}), also called \emph{Interactives} in HEN terminology, as can be seen in listing \autoref{lst:code-based-meta}:
+
+\begin{lstlisting}[language=, caption={Excerpt from Code-Based OBJKT Metadata}, label={lst:code-based-meta}]
+[snip]
+"formats": [
+    {
+      "fileSize": 1700696,
+      "fileName": "evolving-genesis-mint.zip",
+      "mimeType": "application/x-directory",
+      "uri": "ipfs://bafybeicx7ctb5n6bvalsdlmnsphizsopzejzw5zeqpurzu3jpkipmvxsle"
+    },
+    {
+      "mimeType": "image/png",
+      "fileSize": 1703771,
+      "fileName": "cover_evolving-genesis-mint.png",
+      "dimensions": {
+        "value": "1024x1024",
+        "unit": "px"
+      },
+      "uri": "ipfs://QmSHcauxV81hGvF89HF7VNXSeLpCJo4oPVSX7Gobns6Yfm"
+    },
+[snip]
+\end{lstlisting}
+
+This means we do not have the information about the native resolution of the code-based OBJKT at the time of minting, and this causes issues when rendering these artworks, as the size of the iframe cannot be adjusted accordingly. This is a known problem with code-based OBJKTs which will hopefully be addressed some time in the future, potentially by prompting the artist to supply that information during the minting.
+
+\subsection{Content-Security-Policy for Interactives}
+
+When minting a code-based (or Interactive) OBKJT via the HEN and now Teia UI, a Content-Security-Policy meta tag is injected into the OBJKT's \texttt{index.html} page. This is done by the Teia UI itself. The original intention being the restriction of network requests to a list of allowed domain names, for security purposes. However this security measure can be easily bypassed by anyone who mints an OBJKT by interacting directly with the smart contract, bypassing the Teia UI, or using a modified version of the Teia UI (which is open source).
+
+\begin{lstlisting}[language=, caption={Content-Security-Policy meta tag added to all Interactive OBJKTs}, label={lst:code-based-meta}]
+   <meta http-equiv="Content-Security-Policy" content="
+    upgrade-insecure-requests;
+    default-src
+      'none';
+    frame-src
+      'self';
+    child-src
+      'self';
+    script-src
+      'self'
+      'unsafe-inline'
+      'unsafe-eval'
+      blob:;
+    style-src
+      'self'
+      'unsafe-inline';
+    img-src
+      'self'
+      'unsafe-inline'
+      data:
+      blob:
+      https://ipfs.infura.io
+      https://cloudflare-ipfs.com/
+      https://ipfs.io/
+      https://gateway.pinata.cloud/;
+    font-src
+      'self'
+      https://ipfs.infura.io
+      https://cloudflare-ipfs.com/
+      https://fonts.googleapis.com/
+      https://ipfs.io/
+      https://gateway.pinata.cloud/;
+    connect-src
+      'self'
+      https://better-call.dev
+      https://*.better-call.dev
+      https://*.cryptonomic-infra.tech
+      https://cryptonomic-infra.tech
+      https://*.infura.io
+      https://infura.io
+      blob:
+      ws:
+      wss:
+      bootstrap.libp2p.io
+      preload.ipfs.io
+      https://api.etherscan.io
+      https://api.thegraph.com
+      https://*.tzkt.io
+      https://api.tzstats.com
+      https://*.wikidata.org
+      https://*.coinmarketcap.com
+      https://api.openweathermap.org
+      https://hicetnunc.xyz
+      https://*.hicetnunc.xyz;
+    manifest-src
+      'self';
+    base-uri
+      'self';
+    form-action
+      'none';
+    media-src
+      'self'
+      'unsafe-inline'
+      data:
+      blob:
+      https://ipfs.infura.io
+      https://cloudflare-ipfs.com/
+      https://ipfs.io/
+      https://gateway.pinata.cloud/;
+    prefetch-src
+      'self'
+      https://ipfs.infura.io
+      https://cloudflare-ipfs.com/
+      https://fonts.googleapis.com/
+      https://ipfs.io/
+      https://gateway.pinata.cloud/;
+    worker-src
+      'self'
+      'unsafe-inline'
+      blob:;">
+\end{lstlisting}
 
 
 \section{Survey of Code-Based Crypto Art}
-
-
 \label{sec:survey-crypto-art}
+
+In the following section several code-based crypto artworks will be reviewed. They were selected for their unique properties, with the goal of providing a representative sample of the types of artworks available and helping understand the challenges that they pose from a preservation point of view.
+
+\subsection{Configurable API Endpoints}
+
+Stevie Jones, a.k.a. 1x1, pioneered the use of an interactive options menu which allows the user to modify the IPFS endpoint domain name, hence dealing with the mutable dependency dilemma directly on the OBJKT. However the piece also makes a request to \texttt{api.better-call.dev}, and endpoint which is not longer available. According to Stevie, the request was to check if the viewer owned 2 previous editions of the series, in which case additional content would be unlocked. From a preservation perspective, the challenge with this piece is the fact that it is fully interactive, and it requires clicking on each track to initiate the respective network request. A single automated snapshot archive of this OBJKT will be highly incomplete, as it will be missing all the media.
+
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fragments-cross-main.png}
+    \caption{Front Cover}
+    \label{fig:vdp1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fragments-cross-menu.png}
+    \caption{Options UI, with IPFS URL config}
+    \label{fig:vdp2}
+  \end{subfigure}
+  \caption{Fragments from The Cross, Vol. 3 by Jules Maxwell \& Stevie Jones. \\ Source: https://teia.art/objkt/83079}
+  \label{fig:vdp-examples}
+\end{figure}
+
+
+\subsection{Requests to Private Server}
+
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.75\linewidth]{possible-landscape.png}
+    \captionsetup{justification=centering}
+    \caption[a possible landscape by Joanie Lemercier]{a possible landscape by Joanie Lemercier. \\ Source: https://teia.art/objkt/33076}
+    \label{fig:vdp}
+\end{figure}
+
+In a groundbreaking conceptual piece within the context of HEN, Joanie Lemercier, linked the act of collecting the piece with the drawing of a physical plotter landscape, which would be revealed within the OBJKT itself. Minted at a time when there were no restrictions on network request destinations, Lemercier uses requests to his own personal domain, \texttt{https://joanielemercier.com}, to load the assets for each print completed. Similarly to Stevie's Fragments of a Cross, it only initiates these requests when a user interacts with the piece.
+
+Since, according to Lemercier, this piece is now ``completed'', one single full snapshot, including the recording/archival of each and every landscape would suffice. This is is an important intervention as the assets in the private server are a much higher risk than assets stored in IPFS.
+
+\subsection{Requests to Indexers}
+
+Several networked HEN OBJKTs made use of requests to indexers, to retrieve the list of collectors, amount spent on the artwork, and other blockchain or market related data.
+We already mentioned ``Planned Obsolescence'' by Mario Klingemann, see page \pageref{fig:plannedobsolescence}.
+
+``Becoming-body'', a collab between Brazillian artists Jessica Luz and Carlos de Oliveira Junior (a.k.a. @vamoss), was created within the TIBUM residency. The artwork contains a series of 36 animated GIFs, which will swap each time the artwork is collected, see \autoref{fig:becoming-body}.
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.50\linewidth]{becoming-body.png}
+    \captionsetup{justification=centering}
+    \caption[Becoming-body by Jessica Luz and Carlos de Oliveira Junior]{Becoming-body by Jessica Luz and Carlos de Oliveira Junior. \\ Source: https://teia.art/objkt/168794}
+    \label{fig:becoming-body}
+\end{figure}
+
+
+\subsection{Requests to RPC nodes}
+
+Yazid, one of the most prolific author of networked OBJKTs on HEN, in ``OBJKTs (Mondrian Edition)'' ditched the dependency on indexers in favour of embedding the Taquito JS library, which enabled the piece to contact the RPC nodes directly. In addition to cycling through 2 RPC endpoints for extra resiliency, the RCP API is also more stable than indexer APIs. A testament to this resiliency is the fact that this OBJKT still works today. The OBJKT queries the blockchain for the latest OBJKT ID minted, and represents it as a series of bars in a Mondrian style, each column representing a digit of the number. See \autoref{fig:mondrian}.
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.50\linewidth]{objkts-mondrian.png}
+    \captionsetup{justification=centering}
+    \caption[OBJKTs (Mondrian Edition) by Yazid]{OBJKTs (Mondrian Edition) by Yazid. \\ Source: https://arkivo.art/artifacts/HEN/200599}
+    \label{fig:mondrian}
+\end{figure}
+
+
+\subsection{Custom Renderings Based on Ownership}
+
+
+
 
 
 \subsection{Blockchain as the Medium}
@@ -689,6 +881,7 @@ Tezos as the art chain (mention participation in basel
 
 \begin{figure}[h]
     \centering
+    \captionsetup{justification=centering}
     \includegraphics[width=0.75\linewidth]{chainleft-taxonomy.png}
     \caption[Onchain Runtime Art]{Onchain Runtime Art by @chainleft. Source: https://x.com/ChainLeftist/status/1757802497626767455}
     \label{fig:onchainruntimeart}
@@ -739,6 +932,7 @@ It should be noted that, determinism is also a reason why fxhash moderates any n
 
 \begin{figure}[h]
     \centering
+    \captionsetup{justification=centering}
     \includegraphics[width=0.5\linewidth]{aliak-data-as-landscape.png}
     \caption[Data as Landscape by AliaK]{Data as Landscape by AliaK, 2022. Source: https://www.fxhash.xyz/generative/13124}
     \label{fig:aliak-data-as-landscape}
