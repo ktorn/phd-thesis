@@ -149,7 +149,7 @@ We want all OBJKTs of mime-type \texttt{application/x-directory} and \\ \texttt{
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=HTML, caption={GraphQL query to retrieve OBJKTs of interest}] 
+\begin{lstlisting}[language=, caption={GraphQL query to retrieve OBJKTs of interest}] 
 query artifact_metadata {
   tokens(where: {_or: [{mime_type: {_eq: "application/x-directory"}},
     									 {mime_type: {_eq: "image/svg+xml"}}],
@@ -180,8 +180,7 @@ Following is a sample of a record returned by this query:
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=HTML, caption={Sample OBJKT Record }] 
-
+\begin{lstlisting}[language=, caption={Sample OBJKT Record }] 
 "tokens": [
       {
         "token_id": "229",
@@ -691,8 +690,8 @@ The \texttt{ArtifactController} now prepares a special data structure, \texttt{c
 After experimenting with different metadata standards \cite{DevExposing_metadataZotero}\cite{zahidOpenGraphMeta2023} , a solution was found using a mixture of standards, where Zotero can pull most of the relevant fields related to an artifact, as shown in \autoref{fig:zotero-metadata-comparison}
 
 
-\begin{lstlisting}[language=HTML, caption={Artifact page metadata}] 
-<title>{{ citationMetadata.title}} - arkivo.art</title>
+\begin{lstlisting}[language=, caption={Artifact page metadata}] 
+<title>{{citationMetadata.title}} - arkivo.art</title>
 <meta property="og:title" content="{{ citationMetadata.title }}">
 <meta property="og:type" content="website">
 <meta property="dc.creator" content="{{ citationMetadata.author }}">
@@ -754,23 +753,241 @@ This strategy allows us to have shorter, but still unique URLs, which do not exp
 
 Even in the cases where a URL is shortened, the long-form URL also works.
 
-
 \subsection{Open Source License}
 
 This artifact was open sourced under the MIT License.
 Open sourcing the project is important because anyone should be able to run an instance and replicate the archive. This follows the philosophy behind web3, which was discussed in Motivation chapter.
 
+\section{Decentralising IPFS Pinning}
+
+Although the current server setup has enough storage to hold the catalogue with one full set of snapshots, it does not have enough space for a second round of snapshots, which limits its usefulness in terms of documenting the evolution of the networked artworks. Increasing the size of the VPS is out of the question as it would work against the economic sustainability goal.
+One potential solution is to decentralised the IPFS pinning of snapshots by running IPFS nodes at home. Such nodes, whilst not enjoying the same bandwidth of a data centre, would still provide a valuable service by pinning the assets, making them available to other, faster, nodes who can cache them. Doing this only for snapshots would ensure that \texttt{ARKIVO} still performed reasonably well when serving the actual web pages with the artwork assets. Off-loading all snapshots would free up nearly 30GB of storage, which constitutes 20\% of the total server storage.
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=0.75\textwidth]{home-node.svg}
+    \caption[Offload Snapshots to Home Node]{Offload Snapshots to Home Node}
+    \label{fig:offload-snapshots}
+\end{figure}
+
+The plan is to configure the home node with IPFS, and a script that downloads each snapshot from \texttt{ARKIVO} and adds/pins it to the local IPFS node. Then, after a period of time, \texttt{ARKIVO} can start regularly checking if the CID of each snapshot is available on the IPFS network. When we are confident that the snapshots are regularly available on the IPFS network, then \texttt{ARKIVO} can start to remove them from the PostgreSQL database, leaving only the record ID and the respective IPFS CID.
+
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=0.50\textwidth]{arkivo-p2p.svg}
+    \caption[\texttt{ARKIVO} - Towards a p2p Architecture]{\texttt{ARKIVO} - Towards a p2p Architecture}
+    \label{fig:offload-snapshots}
+\end{figure}
+
+
+The hardware aquired was as follows:
+
+\begin{table}[H]
+\footnotesize
+\centering
+\begin{tabular}{|l|r|}
+\hline
+\textbf{Hardware}          & \textbf{Cost}    \\ \hline
+Raspberry Pi 4 - 8GB Model & US\$72           \\ \hline
+2TB SDD                    & US\$90           \\ \hline
+DeskPi Pro SDD enclosure   & US\$47           \\ \hline
+\textbf{Total}             & \textbf{US\$209} \\ \hline
+\end{tabular}
+\end{table}
+
+At current prices this is equivalent to one year's subscription to the ClubNFT service, and we can use this node to pin our personal collection of NFT assets, \texttt{ARKIVO} snapshots and potentially more.
+
+
+\subsection{Assembly of Node Hardware}
+
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{step-01.png}
+    \caption{Apply Thermal Pad to CPU}
+    \label{fig:step-01}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{step-02.png}
+    \caption{CPU with Thermal Pad}
+    \label{fig:step-02.png}
+  \end{subfigure}
+  \caption{Applying Thermal Pad to CPU}
+  \label{fig:node-steps-01-02}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{step-03.png}
+    \caption{Install CPU Heatsink}
+    \label{fig:step-03}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{step-04.png}
+    \caption{Attaching Raspberry Pi to Chassis}
+    \label{fig:step-04.png}
+  \end{subfigure}
+  \caption{Attaching Raspberry Pi}
+  \label{fig:node-steps-01-02}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{step-05.png}
+    \caption{Attach cable to TF card adapter}
+    \label{fig:step-05}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{step-06.png}
+    \caption{Install SDD}
+    \label{fig:step-06.png}
+  \end{subfigure}
+  \caption{Attaching SSD}
+  \label{fig:node-steps-01-02}
+\end{figure}
+
+
+\begin{figure}[H]
+  \vspace*{-\topskip} % Adjusts the space to force the image to the top
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{step-07.png}
+    \caption{Insert assembly into case}
+    \label{fig:step-06}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{step-08.png}
+    \caption{Close case and remove stickers}
+    \label{fig:step-08.png}
+  \end{subfigure}
+  \caption{Attaching SSD}
+  \label{fig:node-steps-01-02}
+\end{figure}
 
 
 
+\subsection{Node Software}
 
-\section{Decentralising IPFS pinning}
+Use the Raspberry SD Card Imager to image an SD card (in this case 16GB, but can be 8GB also) with the latest Raspberry Pi OS (64 bit).
+
+Boot the node with that image, and use the Raspbery SD Card Imager utility in that installation to image Raspberry Pi OS onto the SDD.
+
+Reboot the node, removing the SD card (we will no longer be needing it), since now we can boot directly from the SDD.
+
+Install the DeskPi Pro drivers and services so that it can automatically control the CPU fan based on heat.
 
 
-\todo write about the hardware
+\begin{lstlisting}[language=, caption={Install DeskPi drivers}, label={lst:installdeskpi}] 
+sudo apt get update
+git clone https://github.com/DeskPi-Team/deskpi.git 
+cd ~/deskpi/installation/RaspberryPiOS/64bit/
+sudo ./install-raspios-64bit.sh 
+\end{lstlisting}
 
 
+Install Docker
 
+\begin{lstlisting}[language=, caption={Install Docker on Node}, label={lst:installdeskpi}] 
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
 
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
 
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+sudo groupadd docker
+sudo usermod -aG docker $USER
+\end{lstlisting}
+
+Log out and login again to apply the changes.
+
+Now download and run our \texttt{ARKIVO} snapshot pinning service.
+
+\begin{lstlisting}[language=, caption={Install and run \texttt{ARKIVO} Node Software}, label={lst:screenshotcode}] 
+git clone https://github.com/seda-studio/arkivo-node
+cd arkivo-node
+docker compose up -d
+
+sudo apt install screen
+
+screen -S pinner
+
+python3 -m venv myenv
+source myenv/bin/activate
+pip install ipfshttpclient
+pip install tqdm
+python snapshot-pinner.py
+\end{lstlisting}
+
+This starts the download and pinning job. You can Ctrl + A to exit the screen, which leaves the job working in the background.
+
+You can monitor the progress of the tool in real time with: \texttt{tail -f successful\_operations.log}.
+
+\begin{lstlisting}[language=, caption={Output of Snapshot Pinning Job}, label={lst:installdeskpi}] 
+SNAPSHOT_ID: 81, CID: QmX47LTHHfQzE8YXytsuj9CtsjN5itecvewmJteJE39haq
+SNAPSHOT_ID: 83, CID: QmTXwFjt3KQRX8tUxNSVy2gwdoVy55WZW3tKHtTTbAtxfK
+SNAPSHOT_ID: 85, CID: QmdLNwARrE16KV4PmQLnuBNzrTSVfzBsSTRvunEG2Ytcsa
+SNAPSHOT_ID: 87, CID: QmRjpTTQfiupUdkM9WCkbruAqorufSmi8CGyF3BWjSF4tP
+SNAPSHOT_ID: 89, CID: QmTAejhXaqPtCREynYU1RanKhgoLpQgR1z4B2WgJHsnhx8
+SNAPSHOT_ID: 91, CID: QmXqjX3s3Prexoci1KkZjuZuVN7kmzSia6x6j3EUGp4smK
+SNAPSHOT_ID: 93, CID: QmTFjJnGihWSbYV3r1NfbTbZEeejLXC9SPfYSuHkkxmSAH
+SNAPSHOT_ID: 95, CID: QmPcGagcfc8YzDd9NuNfFbr8GCmNhwtiD8EvU6863asAWh
+SNAPSHOT_ID: 97, CID: QmVPruEnfFE8q8NZP6qUzM82CHh5t8CTnA28AmyviEdBgu
+SNAPSHOT_ID: 103, CID: QmbGqnEejGmd1TxZrAJt3zMHBG765YTQaGZKAED6C36Jd7
+SNAPSHOT_ID: 105, CID: QmaBbaidtAv5uZUAWs1fUrWFRPXMjaLKBEgBpXMR8vcR4b
+SNAPSHOT_ID: 107, CID: QmTWjVtpmAQyaVNW4t3HA8H989h1wiTDySNUrEUca5Pw69
+SNAPSHOT_ID: 109, CID: QmW16ZcAA8PdvUFWqfRRV99G2vrqPx21sNSKfXWBEBsMSH
+\end{lstlisting}
+
+This node was configured to only pin odd numbered snapshots, because we have a twin node, doing the even numbers.
+
+The power consumption was measured before (idling) and during the pinning operation. Idling the node consumes a steady 5W, and during the pinning it goes up by about 1W, for an average of 6W.
+
+The \texttt{ARKIVO} home node source code, and more detailed installation instructions can be found at: \texttt{https://github.com/seda-studio/arkivo-node}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{twin-nodes.png}
+    \caption{Two Home Nodes Pinning \\ Odd and Even Snapshot IDs}
+    \label{fig:twin-nodes}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{power-consumption.png}
+    \caption{Power Consumption Of One Home Node During Pinning}
+    \label{fig:power-consumption.png}
+  \end{subfigure}
+  \caption{Pinning Snapshots in Home Nodes}
+  \label{fig:pinning-home}
+\end{figure}
 

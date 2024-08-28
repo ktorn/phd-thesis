@@ -301,8 +301,8 @@
 \input{chapters/chapter3-method}
 \input{chapters/chapter4-dev}
 \input{chapters/chapter5-data-discuss}
-\input{chapters/chapter6-other-conservation}
-\input{chapters/chapter7-conclusion}
+%\input{chapters/chapter6-other-conservation}
+\input{chapters/chapter6-conclusion}
 
 \cleardoublepage
 \label{sec:glossary}
@@ -334,14 +334,13 @@
 \endgroup
 
 
-
 % Apply plain page style after references
 \cleardoublepage
 \pagestyle{plainpagestyle}
-\input
 \include{backmatter/appendix-pub}
 \include{backmatter/appendix-chainleft}
 \include{backmatter/appendix-chatgpt}
+\include{backmatter/appendix-evalform}
 
 %\layout
 

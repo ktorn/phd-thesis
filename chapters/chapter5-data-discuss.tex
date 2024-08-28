@@ -289,7 +289,7 @@ Something else worth noting is that sometimes, even when pinning content, the re
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{fleek-ipfs-check2.png}
-    \caption[Testing IPFS]{Testing IPFS}
+    \caption[Testing IPFS (No DHT)]{Testing IPFS (No DHT)}
     \label{fig:fleek-test2}
 \end{figure}
 
@@ -584,17 +584,103 @@ As can be seen in \autoref{lst:ipfs-pin-verification}, it ran in 5m30s and retur
 
 \section{Snapshot Verification}
 
-\todo network calls and screenshots
+Verifying the validity of the snapshots is significantly more difficult, because many things could go wrong unnoticed, for example a screenshot could fail to capture the rendering of the artwork.
+
+\begin{enumerate}
+    \item Verify that every artifact has one, and only one, snapshot recorded in the database;
+    \item Perform a systematic visual check of the screenshots
+    \item Perform a manual verification that the classification of artworks as networked is correct
+\end{enumerate}
+
+\subsection{Snapshot Record Integrity Verification}
+
+Here we want to run a SQL query that verifies that each artifact in the database has exactly one snapshot. 
+
+The first query we run checks if any artifacts do not have a snapshot:
+
+\begin{lstlisting}[language=SQL, caption={SQL - Check Missing Snapshots}, label={lst:sql-missing-snapshots}] 
+SELECT COUNT(id)
+FROM artifacts
+WHERE id NOT IN (
+    SELECT DISTINCT artifact_id
+    FROM snapshots
+);
+\end{lstlisting}
+
+And unfortunately we have a total of \texttt{174}. Similarly to the IPFS pinning worker, our snapshoting worker retries 3 times before giving up, so something wrong must be happening with these artifacts.
+
+After exporting the list of token\_ids affected,  another batch of snapshots was started, just for those artifacts. It became clear that something is indeed preventing these artifacts from getting snapshotted, with Playwright reporting several timeout errors. A visual inspection of a selection of the artifacts proved that it was loading on the web UI, so the IFPS asset was present in the system. One observation was that all these artifacts were quite \emph{heavy} in terms of CPU load, making the fan on the computer spin up. This could be an indication of the problem. After the batch of snapshots completed, the SQL query was retried and this time the number went down to \texttt{164}. This means 10 artifacts out of 174, succeeded in getting snapshotted this time around.
+
+Since we are indexing and hosting 21,390 artifacts, 164 represents only 0.766\% of the total, so it was decided that the snapshots for these artifacts would have to be revisited at a later stage.
+
+The reverse query was then used to find artifacts that may have more than one snapshot.
+
+
+\begin{lstlisting}[language=SQL, caption={SQL - Check Duplicate Snapshots}, label={lst:sql-missing-snapshots}] 
+SELECT COUNT(*)
+FROM (
+    SELECT artifact_id, COUNT(*) AS snapshot_count
+    FROM snapshots
+    GROUP BY artifact_id
+    HAVING COUNT(*) >= 2
+) AS subquery;
+\end{lstlisting}
+
+This returned a surprising count of \texttt{4345}. A quick follow-up query revealed 13 artifacts with 3 snapshots each, followed by a long tail of artifacts with 2 snapshots. This represents nearly 20\% of all artifacts having more than one snapshot. Since only one batch of snapshots was run, this could mean that there is an issue on the snapshot retry logic. A note was taken of this for future troubleshooting, and the duplicate snapshots were removed:
+
+\begin{lstlisting}[language=SQL, caption={SQL - Deleting Duplicate Snapshots}, label={lst:sql-missing-snapshots}] 
+DELETE FROM snapshots
+WHERE id NOT IN (
+    SELECT id FROM (
+        SELECT id,
+               ROW_NUMBER() OVER (PARTITION BY artifact_id ORDER BY created_at DESC) AS rn
+        FROM snapshots
+    ) AS ranked
+    WHERE rn = 1
+);
+\end{lstlisting}
+
+This concluded the basic snapshot record integrity check. Now we need to look into the actual content of the snapshots.
+
+\subsection{Snapshot Visual Verification}
+
+At a first glance the snapshot seems to have identified the external network call, and ignored the internal ones. It also captured the screenshot well.
+The full snapshot download worked as well. To verify that the network call was well identified it was run with the browser's developer tools open. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{snapshot-sample.png}
+    \caption[Sample Snapshot]{Sample Snapshot}
+    \label{fig:sample-snapshot}
+\end{figure}
+
+Additionally, the automatic classification was checked for correctness. It also passed, see \autoref{ig:sample-classfication}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{sample-classification.png}
+    \caption[Sample Classification]{Sample Classification}
+    \label{fig:sample-classfication}
+\end{figure}
+
+
+After this initial check a systematic verification took place. For every 50 pages of results, the first artifact on the page was checked following the same procedure as above. A total of 36 artifacts were manually verified and all passed the test.
+
+At this stage we were ready to involve stakeholders in the evaluation of the artifact.
+
+
+\subsection{Stakeholder Feedback}
+
+Several stakeholders were contacted, via twitter and discord, however due to lack of time, only 
+
+The 'Networked Only' checkbox caused some confusion, as one user assumed it was a filter which should instantly be reflected on the results as one checks or unchecks it. Although not originally intended as an auto-updating filter (actual filters were not implemented) the behaviour of the checkbox was altered, by adding an \texttt{onchange} event which submits the form every time it is checked or unchecked. This results in an experience that is more aligned with the user's expectations, and is a reasonable compromise until a proper filtering system is put in place.
+
+
 
 
 \section{Data Analysis}
 
 boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text.
-
-\subsection{End-user study}
-
-
-The 'Networked Only' checkbox caused some confusion, as one user assumed it was a filter which should instantly be reflected on the results as one checks or unchecks it. Although not originally intended as an auto-updating filter (actual filters were not implemented) the behaviour of the checkbox was altered, by adding an \texttt{onchange} event which submits the form every time it is checked or unchecked. This results in an experience that is more aligned with the user's expectations, and is a reasonable compromise until a proper filtering system is put in place.
 
 
 \section{Restoration Case Studies}
