@@ -73,7 +73,7 @@ The term OBJKT was later \emph{adopted} by a rival marketplace, objkt.bid, which
 
 \subsection*{Networked OBJKTs and ``Self-Aware'' Artworks}
 
-HEN supported the minting of OBJKTs using a variety of file formats, and one of those format was SVG (mimetype \texttt{image/svg+xml}). The SVG file standard allows for the embedding of JavaScript code, which is executed when rendering the file on a web browser.  On 14 Mar 2021 French artist Lionel Radisson minted the first OBJKT with embedded JavaScript, ``The Magician''  \cite{makio135Magician2021}, and other artists quickly followed and started minting dynamic code-based artworks. Ricardo Cabello (a.k.a mrdoob), creator Three.js, minted the interactive game ``Jumpy Dot'' \cite{mrdoobJumpyDot2021} which became the first in-browser interactive game minted as an NFT \cite{rusherWhatDoesIt2021}.
+HEN supported the minting of OBJKTs using a variety of file formats, and one of those format was SVG (mimetype \texttt{image/svg+xml}). The SVG file standard allows for the embedding of JavaScript code, which is executed when rendering the file on a web browser.  On 14 Mar 2021 French artist Lionel Radisson minted the first OBJKT with embedded JavaScript, ``The Magician''  \cite{makio135Magician2021}, and other artists quickly followed and started minting dynamic code-based artworks. Ricardo Cabello (a.k.a mrdoob), creator of Three.js, minted the interactive game ``Jumpy Dot'' \cite{mrdoobJumpyDot2021} which became the first in-browser interactive game minted as an NFT \cite{rusherWhatDoesIt2021}.
 
 \begin{figure}[H]
     \centering
@@ -103,7 +103,7 @@ This concept of ``self-awareness'' of an artwork struck a chord in me, and I dec
 \subsection*{HEN Discontinuation}
 \label{sub:teia}
 
-For reasons which are outside of the scope of this thesis, but which are reported at length in online articles \cite{straeubigHENTimelineHentimeline2024} \cite{siqueiraHicNuncStory2021a} \cite{tezosHistoryTeiaArt2022} \cite{smithHicNuncPart2022}, on November 11 2021, only 9 months since its launch, Rafael Lima decided to discontinue HEN. Without warning, the webserver which served the website's \indexacronym{ui} was taken down (\texttt{hicetnunc.xyz}), and the official twitter account was changed to show the message "discontinued".
+For reasons which are outside of the scope of this thesis, but which are reported at length in online articles \cite{straeubigHENTimelineHentimeline2024} \cite{siqueiraHicNuncStory2021a} \cite{tezosHistoryTeiaArt2022} \cite{smithHicNuncPart2022}, on November 11 2021, only 9 months since its launch, Rafael Lima decided to discontinue HEN. Without warning, the webserver which served the website's \indexacronym{ui} was taken down (\texttt{hicetnunc.xyz}), and the official twitter account was changed to show the message "discontinued", see \autoref{fig:discontinued}.
 
 \begin{figure}[h]
     \centering
@@ -120,11 +120,9 @@ After some time, the community converged on a particular HEN mirror, and after r
 
 Today, Teia operates as a Decentralised Autonomous Organisation \gls{dao}, is legally established as non-profit organisation, and continues to operate thanks to a team of volunteers.
 
-For disclosure, I am a member of the Teia core team, which consists of 19 community members who currently operate the platform and oversee the treasury my means of voting on a multisig smart contract on Tezos. The roadmap is to migrate the governance to a much larger DAO structure, where thousands of users who currently hold TEIA governance tokes, which were distributed based on their usage of the platform and contributions to project, can vote on proposals related to the project.
+For disclosure, I am a member of the Teia core team, which consists of 19 community members who currently operate the platform and oversee the treasury by means of voting on a multisig smart contract on Tezos. The roadmap is to migrate the governance to a much larger DAO structure, where thousands of users who currently hold TEIA governance tokes, which were distributed based on their usage of the platform and contributions to project, can vote on proposals related to the project.
 
 As a Teia team member, my focus is the preservation of code-base OBJKTs, which are called Interactive OBJKTs in the platform's terminology.
-
-
 
 \section{Challenges}
 \label{sec:challenges}
@@ -145,7 +143,7 @@ However an artwork that requires data from external sources runs a number of ris
 
 Any of these events would pose a problem to a piece of software which cannot be modified to accommodate those changes. This mismatch between an immutable software artifact and an evolving environment in which it depends will be called the \emph{mutable dependency dilemma}.
 
-The long-term preservation of the digital assets required by the artworks is also problematic. As will be discussed in the following chapter, there are several approaches, each with pros and cons, however this is area of heated debate in crypto art.
+The long-term preservation of the digital assets required by the artworks is also problematic. As will be discussed in the following chapter, there are several approaches, each with pros and cons, however this is an area of heated debate in crypto art.
 
 An additional challenge is that these artworks often lack the required metadata to differentiate networked, from non-worked code-based artworks. This makes it difficult for a conservator to identify which artworks may need attention.
 
@@ -161,6 +159,46 @@ In order to address the challenges outlined above, and from an information syste
 \end{itemize}
 
 The reason why sustainability is explicitly included as an objective is because it is a requirement to support \emph{long-term} preservation, and even though there are many types of sustainability which should be considered, in this context the key factor is economic sustainability.
+
+The first goal is the one that requires unpacking into actionable and answerable research questions, whereas the second goal will be collaterally achieved from treating the first.
+
+\section{Research Questions}
+
+The first question that must be addressed is one of scope. How many networked OBJKTs are there on the HEN smart contract? Currently this is not known, because there is a single category, \emph{Interactive OBJKTs} for all artworks with mime-type \texttt{application/x-directory}, and there is no information about whether or not they make external network calls. In addition to that, as already established in the introduction, we know that SVG OBJKTs (mime-type \texttt{image/svg+xml}) can also contain embedded scripts and thus can make network calls. So now we have 2 groups of OBJKTs but no idea how to identify the ones of interest to this study. For this reason the first research question is:
+
+\begin{itemize}
+	\item RQ1: Can we determine which code-based HEN OBJKTs are networked?
+\end{itemize}
+
+Then there is the issue of documenting what these network calls look like in terms of the data structures being transmitted between the OBJKT and their external environmet, so that they can inform conservators when the need arises to perform conservation interventions. At the same time, if we document these network calls, then perhaps we can also examine the rendering of the OBJKT so as to capture its aesthetic evolution. This leads to research question 2:
+
+\begin{itemize}
+	\item RQ2: Can we capture and document networked HEN OBJKTs aesthetic evolution?
+\end{itemize}
+
+Finally we turn out attention to the sustainability aspect of our goal. There is a wide range of elements involved the sustainability of digital archives \cite{visDigitalArchivingSustainable2024}, however as suggested in the introduction, the low hanging-fruit problem that we want to address first is that of economic sustainability. Even if infrastructure costs of digital archives are normally thwarted by the human resources costs \cite{CostsDigitalRepositories}, the assumption for this study is that, just like Teia, this project will rely on unpaid volunteer work. Therefore, two final research questions can be asked: 
+
+\begin{itemize}
+	\item RQ3: What are the disk space requirements for storing all code-based HEN OBJKTs' media assets?
+	\item RQ4: Can an online archive for HEN OBJKTs be economically self-sustainable?
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{table}[h!]
+\centering
+\footnotesize
+\begin{tabular}{|c|p{10cm}|}
+\hline
+\textbf{RQ\#} & \textbf{Research Question} \\ \hline
+RQ1 & Can we determine which code-based HEN OBJKTs are networked? \\ \hline
+RQ2 & Can we capture and document networked HEN OBJKTs aesthetic evolution? \\ \hline
+RQ3 & What are the disk space requirements for storing all code-based HEN OBJKTs' media assets? \\ \hline
+RQ4 & Can an online archive for HEN OBJKTs be economically self-sustainable? \\ \hline
+\end{tabular}
+\caption{Research Questions}
+\end{table}
+
 
 \section{Contributions}
 
@@ -258,7 +296,7 @@ In summary, whereas preservation is the goal, conservation deals with the method
 
 \vspace{0.5cm}
 
-It is somewhat unfortunate that this name collision occurred for these two types of artifacts, however both are used extensively in the Design Science Research literature, which was the methodology adopted for this study, as well as in the existing software systems that already deal with crypto artworks. It is hoped that, when reading the text, the reader will be able derive which type it is based on its immediate context. It is also for this reason that the other common use of this term, as a kind of error or anomaly, was avoided. 
+It is somewhat unfortunate that this name collision occurred for these two types of artifacts, however both are used extensively in the Design Science Research literature, which was the methodology adopted for this study, as well as in the existing software systems that already deal with crypto artworks. It is hoped that, when reading the text, the reader will be able to determine the type based on its immediate context. It is also for this reason that the other common use of this term, as a kind of error or anomaly, was avoided. 
 
 \section{Delimitation of Scope}
 
@@ -274,16 +312,14 @@ In addition to this, networked crypto art is a type of art that artists pioneere
 
 \section{Structure of the Thesis}
 
-This chapter introduced the motivation for this study, identified the main challenges of networked crypto art and outlined the goals and contributions of the study, followed by definitions of key terms, as well as determining the scope of the study. The remainder of the thesis is structured as follows:
+This chapter introduced the motivation for this study, identified the main challenges of networked crypto art and outlined the goals, research questions and contributions of the study, followed by definitions of key terms, as well as determining the scope of the study. The remainder of the thesis is structured as follows:
 
 Chapter 2 reviews related work, including digital art conservation theory, existing archival standards and tools, the technical architecture of existing HEN OBJKTs, provides a survey of representative artworks and proposes a tentative taxonomy of code-based crypto art.
 
-Chapter 3 introduces the research questions and describes the methodology used in this study, namely Design Science Research, as well as the methods and tools used as part of the research and development.
+Chapter 3 describes the methodology used in this study, namely Design Science Research, as well as the methods and tools used as part of the research and development.
 
 Chapter 4 provides a detailed account of the prototyping phases when developing the artifact.
 
 Chapter 5 describes the systematic analysis and evaluation of the artifact. It also provides a discussion on the lessons learned during its development.
 
-Chapter 6 introduces a new paradigm for the creation of mutable and evolving crypto art, and discusses other techniques for the conservation of this kind of art.
-
-Chapter 7 summarises the main points of the thesis, provides a set of recommended best practices for creating code-based crypto art, and outlines ideas for future work.
+Chapter 6 summarises the main points of the thesis, provides a set of recommended best practices for creating code-based crypto art, and outlines ideas for future work.

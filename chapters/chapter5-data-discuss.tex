@@ -669,28 +669,106 @@ After this initial check a systematic verification took place. For every 50 page
 At this stage we were ready to involve stakeholders in the evaluation of the artifact.
 
 
-\subsection{Stakeholder Feedback}
+\section{Stakeholder Feedback}
 
-Several stakeholders were contacted, via twitter and discord, however due to lack of time, only 
+Several stakeholders were contacted, via twitter and discord, however due to lack of time, only six participated. Three via a written evaluation form, and three agreed to be interviewed remotely via Discord and Google Meet.
 
-The 'Networked Only' checkbox caused some confusion, as one user assumed it was a filter which should instantly be reflected on the results as one checks or unchecks it. Although not originally intended as an auto-updating filter (actual filters were not implemented) the behaviour of the checkbox was altered, by adding an \texttt{onchange} event which submits the form every time it is checked or unchecked. This results in an experience that is more aligned with the user's expectations, and is a reasonable compromise until a proper filtering system is put in place.
+\subsection{Evaluation Form}
+
+The goal of the evaluation form was to help validate the classification capabilities of the artifact, as well as gather feedback about potential areas of improvement. The evaluation form can be found in Appendix 4, page \pageref{chap:evalform}.
+
+All three participants knew networked OBJKTs, were able to find them, and reported that the system correctly classified.
+
+Similarly, all three reported the successful classification of a code-based non-networked OBJKT.
+
+As far as what features they would like to see implemented, the following were mentioned:
+
+\begin{itemize}
+    \item Dark mode
+    \item Making tags browsable (currently they are only text)
+    \item Allow logging in with wallet, to visualise 'owner' specific versions of the artifacts
+    \item Option to only run an artifact after checking its list of network calls (for security purposes)
+    \item Only show "about page" as landing page the first time, then default to catalogue (using local storage)
+    \item Show how many results a search returned
+\end{itemize}
+
+One participant also mentioned that snapshots need more explanation. "Is it just a image snapshot? Does it store the returned metadata by every query that the OBJKT does? Where are the snapshots stored? IPFS? How can I access them? How are snapshots triggered? Regularly for all tokens? Are they triggered differently for different tokens?" (Participant)
+
+Another participant suggested that we replace the ``black'' thumbnails with actual thumbnails (potentially from snapshot screenshots).
+
+One participant reported the Metadata URL not working. This is because it was using the \texttt{ipfs://} prefix. It has now been fixed.
+
+Overall they found the design and functions user friendly. They could find their way easily.
+
+``Nice and clean interface, not cluttered, intuitive UI and easy to use'' (Participant)
+
+\subsection{Interviews}
+
+The interviews were conducted in a semi-structured way, starting with a walkthrough of the artifact, and letting the participant explore the system.
+Then a general discussion about code-based crypto art would take place, with the researcher sometimes nudging the participant with questions about the long-term preservation. 
+
+In general the system was received with enthusiasm, with one participant highlighting how important it is that this artifact focuses on HEN artworks, because of its cultural significance.
+
+One of the participants reiterated that snapshots need a bit more explaining, similarly to what had been mentioned by one of the evaluation form participants.
+
+Another participant mentioned that they would like to see a space where manual documentation can be added, either by the artist or by conservators, or both. "We need a document" (Participant).
+
+One of the questions asked was whether artists care about the type of restoration approaches. The participant believes that artists are generally more flexible about the types of intervention than conservators.
+
+One of the participants explained that not every aspect of an artwork can be open source, and thus for long term preservation a ``conservation package'' should be prepared to share with a museum or another cultural institution.
+
+An interesting topic of discussion was the need for a cross-platform standard for networked artworks. Allowing artworks to query certain kinds of data from its hosting platforms.
+
+One participant reminded that artworks should always have a ``fall-back'' static version, if the network fails.
+
+A participant expressed their wish for a hardware device that users can host at home for pinning their own collections.
+
+The participants agreed that there is a need for a conversation between artists, conservators, and platforms, about the way best way forward for preservation.
+
+On participant stated the importance for this work, because networked crypto art is ``the most native art form to the blockchain" (Participant).
 
 
+\section{Data Volume Trend}
+
+In this section we will extract and analyse data from the artifact, with the goal of gaining insights into the future storage requirements of \texttt{ARKIVO}.
+Firstly we will look at the trend in terms of data stored over time.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\linewidth]{graph-arkivo-ipfs-time.png}
+    \caption[IPFS Storage Over Time (Code-Based OBJKTs)]{IPFS Storage Over Time (Code-Based OBJKTs)}
+    \label{fig:graph-ipfs-time}
+\end{figure}
 
 
-\section{Data Analysis}
+As can be seen in \autoref{fig:graph-ipfs-time}, there has been a significant slowing down of growth in terms of storage requirements, which is positive from a cost of storage perspective. Since \texttt{ARKIVO} does not store market data, it is impossible to determine how this compares to the slowing down in market activity.
 
-boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text.
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{graph-net-vs-nonnet-tokens.png}
+    \caption{Networked vs Non-Networked (Number of Tokens)}
+    \label{fig:graph-net-nonnet}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{graph-net-vs-nonnet-size.png}
+    \caption{Networked vs Non-Networked (Artifact Size)}
+    \label{fig:graph-net-vs-nonnet-size}
+  \end{subfigure}
+  \caption{Networked vs Non-Networked}
+  \label{fig:net-vs-nonnet}
+\end{figure}
 
+\autoref{fig:net-vs-nonnet} reveals that networked OBJKTs constitute a minority in terms of number of tokens minted, with only 6.5\% of tokens, however that figure more than doubles if we analyse it from an artifact size perspective. This suggests that even though small in relative number, network OBJKTs are on average larger in size. It must be noted that there is a discrepancy between the total number of tokens shown in \autoref{fig:graph-net-nonnet} (16,652) and the total number of tokens originally reported in \autoref{sub:rq1_mile4} (\nameref{sub:rq1_mile4}, page \pageref{sub:rq1_mile4}), 21,394. This discrepancy is due to the fact that these graphs exclude burned OBJKTs, which are \texttt{4,742} in total.
 
-\section{Restoration Case Studies}
-
-\todo
-
+This data shows that it is feasible for \texttt{ARKIVO} to continue running on its current infrastructure, especially if we are able to offload snapshots to home nodes.
 
 \section{Archiving ARKIVO}
 
-As discussed in \todo, Teia's current UI prevents the WayBackMachine from successfully capturing the OBJKTs displayed on each page. By employing a simpler Web UI, \texttt{ARKIVO} allows such archiving. As an example we requested the capture of ``Generative Abstract Series 012'' by Yazid via the \texttt{ARKIVO} page, and the capture completed successfully, see \autoref{fig:awayback-arkivo}. This gives artworks catalogued by our system a chance of gaining yet another archival copy, and these copies could even outlast \texttt{ARKIVO} itself.
+As discussed in \autoref{subsec:archiveorg}, page \pageref{subsec:archiveorg}, Teia's current UI prevents the WayBack Machine from successfully capturing the OBJKTs displayed on each page. By employing a simpler Web UI, \texttt{ARKIVO} allows such archiving. As an example we requested the capture of ``Generative Abstract Series 012'' by Yazid via the \texttt{ARKIVO} page, and the capture completed successfully, see \autoref{fig:awayback-arkivo}. This gives artworks catalogued by our system a chance of gaining yet another archival copy, and these copies could even outlast \texttt{ARKIVO} itself.
 
 
 \begin{figure}[h]
@@ -708,9 +786,7 @@ As discussed in \todo, Teia's current UI prevents the WayBackMachine from succes
 
 \section{Discussion}
 
-
-boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text, boilerplate text.
-
+The following sections will provide additional discussion of relevance to this project.
 
 \subsection{Capturing Interactive Artworks}
 \label{subsec:capture-interactive}
@@ -780,5 +856,8 @@ All of the artworks which this project currently aims to cater for in terms of c
 Since most IPFS pinning services are paid for, there is a potential for abuse of free pinning services like Teia, and now Arkivo, by mining directory-x OBJKTs just as a way to store data on IPFS for free. The OBJKT might even render a piece of original art, but just as a facade for a much larger data payload. This would add to an archive's storage costs without contributing back in terms of donation, hurting its sustainability.
 
 
-On the other hand, if the art has value, 
+\section{Conclusion}
+
+This chapter provided a detailed and systematic evaluation of the artifact from several angles, such as web performance, IPFS pinning validation and stakeholder feedback.
+Several areas of improvement were identified, which will be addressed in future iterations of the project. The stakeholder feedback was particularly useful and encouraging as it validated the choice of topic of the study.
 

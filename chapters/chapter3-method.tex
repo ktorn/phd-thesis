@@ -1,53 +1,7 @@
 \chapter{Methodology}
 
-As stated in the introduction the main goals of this work are:
-
-\begin{itemize}
-	\item To design and implement sustainable information systems that can support the long-term preservation of networked crypto art
-	\item To contribute to the body of knowledge in the area of networked crypto art conservation
-\end{itemize}
-
-From a methodological perspective, the first goal is the one that requires unpacking into actionable and answerable research questions, whereas the second goal will be collaterally achieved from treating the first.
-
-\section{Research Questions}
-
-The first question that must be addressed is one of scope. How many networked OBJKTs are there on the HEN smart contract? Currently this is not known, because there is a single category, \emph{Interactive OBJKTs} for all artworks with mime-type \texttt{application/x-directory}, and there is no information about whether or not they make external network calls. In addition to that, as already established in the introduction, we know that SVG OBJKTs (mime-type \texttt{image/svg+xml}) can also contain embedded scripts and thus can make network calls. So now we have 2 groups of OBJKTs but no idea how to identify the ones of interest to this study. For this reason the first research question is:
-
-\begin{itemize}
-	\item RQ1: Can we determine which code-based HEN OBJKTs are networked?
-\end{itemize}
-
-Then there is the issue of documenting what these network calls look like in terms of the data structures being transmitted between the OBJKT and their external environmet, so that they can inform conservators when the need arises to perform conservation interventions. At the same time, if we document these network calls, then perhaps we can also examine the rendering of the OBJKT so as to capture its aesthetic evolution. This leads to research question 2:
-
-\begin{itemize}
-	\item RQ2: Can we capture and document networked HEN OBJKTs aesthetic evolution?
-\end{itemize}
-
-Finally we turn out attention to the sustainability aspect of our goal. There is a wide range of elements involved the sustainability of digital archives \cite{visDigitalArchivingSustainable2024}, however as suggested in the introduction, the low hanging-fruit problem that we want to address first is that of economic sustainability. Even if infrastructure costs of digital archives are normally thwarted by the human resources costs \cite{CostsDigitalRepositories}, the assumption for this study is that, just like Teia, this project will rely on unpaid volunteer work. Therefore, two final research questions can be asked: 
-
-\begin{itemize}
-	\item RQ3: What are the disk space requirements for storing all code-based HEN OBJKTs' media assets?
-	\item RQ4: Can an online archive for HEN OBJKTs be economically self-sustainable?
-\end{itemize}
-
-\vspace{0.5cm}
-
-\begin{table}[h!]
-\centering
-\footnotesize
-\begin{tabular}{|c|p{10cm}|}
-\hline
-\textbf{RQ\#} & \textbf{Research Question} \\ \hline
-RQ1 & Can we determine which code-based HEN OBJKTs are networked? \\ \hline
-RQ2 & Can we capture and document networked HEN OBJKTs aesthetic evolution? \\ \hline
-RQ3 & What are the disk space requirements for storing all code-based HEN OBJKTs' media assets? \\ \hline
-RQ4 & Can an online archive for HEN OBJKTs be economically self-sustainable? \\ \hline
-\end{tabular}
-\caption{Research Questions}
-\end{table}
-
-
-Based on these questions, the most appropriate methodological choices can be made.
+This chapter will describe the methodological approach to answering our research questions.
+It starts by selecting an overall philosophical paradigm, which will frame our approach to the problem. Then is describes the main research approaches. It introduces the main research methodology, and the specific research methods employed in this research project. 
 
 \section{Philosophical Paradigm}
 
@@ -84,7 +38,7 @@ More importantly, the iterative nature of DSR will be adapted to a pragmatic dev
 
 \section{Research Methods}
 
-This study primarily follows a quantitative research method, namely the systematic collection and analysis of the data produced by the artifact, in order to validate the artifact's ability to classify and document the OBJKTs as well as to determine the infrastructure requirements and financial costs.
+This study primarily follows a systematic collection and analysis of the data produced by the artifact, in order to validate the artifact's ability to classify and document the OBJKTs as well as to determine the infrastructure requirements and financial costs.
 
 In a secondary role, a qualitative strategy was also employed, with stakeholder interviews, to gather additional evidence of the accuracy of the artifact in classifying networked OBJKTs, and to receive feedback which may be useful for future iterations of the artifact.
 
@@ -123,9 +77,6 @@ Another key benefit of \gls{researchquestiondrivendev} is that, in the context o
 
 Finally, this method aligns with the Pragmatism paradigm, which serves as the theoretical foundation of this study.
 
-\subsection{Descriptive Statistics}
-
-In order to answer the research questions, the data generated by the artifact was exported from the artifact's database in tabular form, by means of a CVS file, and imported into the R statistics program, where it was analysed with the use of descriptive statistics.
 
 \subsection{Interviews with Stakeholders}
 
@@ -140,12 +91,7 @@ In order to facilitate the reproducibility of the findings, all the source code 
 
 \begin{enumerate}
     \item the source code of the artifact is available at:\\ \texttt{https://github.com/seda-studio/arkivo}
-    \item the data exported from the database, and the R source files are available at: \todo
 \end{enumerate}
-
-
-\section{Research and Development Tools}
-
 
 \subsection{Journaling}
 
