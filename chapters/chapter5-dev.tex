@@ -1,17 +1,17 @@
 \chapter{Artifact Development}
 \label{chap:dev}
 
-This chapter describes the development of the artifact, \texttt{ARKIVO.ART}, following the RQDD method introduced in the previous chapter.
+This chapter describes the development of the artifact, \texttt{ARKIVO.ART}, following the RQDD method introduced in \autoref{chap:method}.
 
 \section{Plan Breakdown}
 
 To answer a research question, one starts to plan what is required to answer the question, and then works backwards in incremental stages to where we are currently, leaving milestones (Miles) along the way, starting at 1 and going upwards as we get away from the goal. The analogy is that of a road, with side-road markers, each showing how many miles away we are from our destination.
 
-The decision of how to group the Miles into Iterations really depends on the complexity of each Mile, and their relationships and dependencies.
+The decision of \emph{how} to group the Miles into Iterations really depends on the complexity of each Mile, and their relationships and dependencies.
 
 Finally, all Mile and Iteration labels should be prefixed with the RQ number that they correspond to, for example: RQ1.Mile 5, RQ1.Iteration 1. This ensures unique identifiers across a project. However due to space limitations in this document, only Iterations will show the prefix.
 
-\autoref{fig:dev-plan} illustrates a model of this reverse-plan forward-execution method.
+\autoref{fig:dev-plan} illustrates a model of this reverse-planning forward-execution method.
 
 \begin{figure}[h]
     \centering
@@ -81,9 +81,9 @@ To discover the OBJKTs we can resort to existing indexers of the Tezos blockchai
 The TzKT API being generic, operates at a very low level, with endpoints that are closely related to the blockchain data, without abstraction layers.
 TezTok, on the other hand, specialises in NFTs so it creates an abstraction layer that is easier to work with, since it is NFTs we are interested in discovering. For this reason TezTok was chosen.
 
-Finally, we can move to the last stage, determining what search criteria to use when querying Teztok. This is Mile 5.
+Finally, we can move to the last stage, determining what search criteria to use when querying TezTok. This is Mile 5.
 
-Here is a summary of the five Miles. We will write them in the reverse order, as now we are going back towards our goal.
+Below is a summary of the five Miles. We will write them in the reverse order, as now we are going back towards our goal, see \autoref{tab:rq1-miles}.
 
 \vspace{0.5cm}
 
@@ -100,9 +100,10 @@ Mile 2 & Run OBJKT in Playwright sandbox and capture traffic \\ \hline
 Mile 1 & Analyse traffic and determine if the OBKJT is networked \\ \hline
 \end{tabular}
 \caption{The 5 Miles of Development for RQ1}
+\label{tab:rq1-miles}
 \end{table}
 
-With these in place we draft an iteration plan. This can always be changed later but will give a rough idea of how many iterations are required.
+With these in place we draft an iteration plan. This can always be changed later but will give a rough idea of how many iterations are required, see \autoref{tab:iter-plan}.
 
 
 \begin{table}[h]
@@ -118,12 +119,14 @@ Iteration RQ1.2                  & Mile 3                              & Fetch a
                              & Mile 1                              & Analyse traffic and determine if the OBKJT is networked      \\ \hline
 \end{tabular}
 \caption{Iteration Plan for RQ1}
+\label{tab:iter-plan}
 \end{table}
 
 
 
 \section {Iteration RQ1.1}
 
+In this section, the first iteration will be implemented, see \autoref{tab:iter-rq1-miles}.
 
 \begin{table}[H]
 \footnotesize
@@ -135,12 +138,13 @@ Iteration RQ1.2                  & Mile 3                              & Fetch a
                              & Mile 4                              & Query TezTok to identify which artworks to fetch (discovery) \\ \hline
 \end{tabular}
 \caption{Iteration RQ1.1 Miles}
+\label{tab:iter-rq1-miles}
 \end{table}
 
 
 \subsection {Mile 5 - Determine search criteria}
 
-Mile 5 is really just an exploratory phase, which does not require any development. It involves accessing Teztok's GraphQL playground\footnotemark[7], exploring the schema available, and crafting a query that returns a list of OBJKTs of interest.
+Mile 5 is really just an exploratory phase, which does not require any development. It involves accessing TezTok's GraphQL playground\footnotemark[7], exploring the schema available, and crafting a query that returns a list of OBJKTs of interest.
 
 \footnotetext[7]{https://graphiql.teztok.com/}
 
@@ -206,7 +210,7 @@ Following is a sample of a record returned by this query:
 \subsection {Mile 4 - Query TezTok}
 \label{sub:rq1_mile4}
 
-Mile 4 is the beginning of development, and because it's the first we need to a barebones application. For this project the AdonisJS web framework was selected as the stack for the application, because it provides a full-stack MVC Framework, supports TypeScript, and follows a convention over configuration environment which helps speed up development. It also provides a very convenient way to create \indexacronym{cli} commands that we can use to control aspects of our application, such as starting batch jobs, or triggering specific actions.
+Mile 4 is the beginning of development, therefore at this stage we need to develop a barebones application. For this project the AdonisJS web framework was selected as the stack for the application, because it provides a full-stack MVC Framework, supports TypeScript, and follows a convention over configuration environment which helps speed up development. It also provides a very convenient way to create \indexacronym{cli} commands that we can use to control aspects of our application, such as starting batch jobs, or triggering specific actions.
 
 In this Mile we need to:
 
@@ -215,7 +219,7 @@ In this Mile we need to:
 	\item Store each OBJKT metadata in a local Postgres database, which will serve as the main database of our application.
 \end{enumerate}
 
-
+To achieve this a basic \texttt{ArtifactsController} was created, see \autoref{fig:mile4-arch}.
 
 \begin{figure}[h]
     \centering
@@ -231,7 +235,9 @@ This concludes iteration RQ1.1. At this stage our database contains the metadata
 \section {Iteration RQ1.2}
 \label{sec:rq1.2}
 
-\begin{table}[h]
+In this section iteration RQ1.2 will be developed, which consists of a single Mile, see \autoref{fig:iter-rq1.2}.
+
+\begin{table}[H]
 \footnotesize
 \centering
 \begin{tabular}{|l|c|l|}
@@ -240,6 +246,7 @@ This concludes iteration RQ1.1. At this stage our database contains the metadata
 Iteration RQ1.2                  & Mile 3                              & Fetch and pin all OBJKTs of potential interest               \\ \hline
 \end{tabular}
 \caption{Iteration RQ1.2 Mile}
+\label{fig:iter-rq1.2}
 \end{table}
 
 
@@ -266,17 +273,15 @@ Tasks for Mile 3:
 \end{figure}
 
 
-After all OBJKTs are fetched and pinned, the IPFS node is using 79.3GB of disk size.
+At this stage the system architecture is illustrated in \autoref{fig:mile3-arch}, and after all OBJKTs are fetched and pinned, the IPFS node is using 79.3GB of disk size.
 
 \label{txt:rq3-answered}
-And just like that, Iteration RQ1.2 answered RQ3:
 
-\vspace{0.5cm}
-RQ3 - What are the disk space requirements for storing all code-based HEN OBJKTs’ media assets?
-\vspace{0.5cm}
+As a by-product of completing Iteration RQ1.2, the research question RQ3, ``what are the disk space requirements for storing all code-based HEN OBJKTs’ media asset'', is already answered.
 
 \section {Iteration RQ1.3}
 
+Iteration RQ1.3 contains 2 Miles, as show in \autoref{tab:iter-rq1.3}:
 
 \begin{table}[h]
 \footnotesize
@@ -288,19 +293,14 @@ RQ3 - What are the disk space requirements for storing all code-based HEN OBJKTs
                              & Mile 1                              & Analyse traffic and determine if the OBKJT is networked      \\ \hline
 \end{tabular}
 \caption{Iteration RQ1.3 Miles}
+\label{tab:iter-rq1.3}
 \end{table}
 
 
 
 \subsection {Mile 2 - Run OBJKT in sandbox and capture traffic}
 
-In this Mile we will use PlayWright to open each OBJKT and record any network calls initiated by the OBJKT. This is done in \texttt{SnapshotArtifactService}
-
-Tasks for Mile 2:
-\begin{enumerate}
-	\item Run each OBJKT in a Playwright sandbox and capture traffic, including URLs and any payloads
-\end{enumerate}
-
+In this Mile we will use PlayWright to open each OBJKT and record any network calls initiated by the OBJKT. This is done in \texttt{SnapshotArtifactService}.
 
 
 \begin{figure}[h]
@@ -367,6 +367,7 @@ RQ2 - Can we capture and document networked HEN OBJKTs aesthetic evolution?
 
 This question is more difficult to answer because we need to define what we mean by ``aesthetic evolution''. At its most simplistic level, the regular capturing of screenshots of the artwork might suffice in many instances. But artworks which are animated require a different approach, like a video recording. Others might be user interactive, and require yet a different strategy, see \autoref{subsec:capture-interactive}. External elements, like artist, curator, and conservator documentation, audience reactions, and many others, could also be considered a part of an artwork's aesthetic evolution. All these would require in-depth classification and analysis of the artwork, which is not feasible within the timeframe of this project. Therefore the scope will be reduced to the content delivered within the OBJKT's canvas. Also, having in mind the economic sustainability of the project, the decision was made to only take a static screenshot of the artwork during a snapshot to keep the storage space requirements to a minimum.
 
+Therefore the plan for RQ2 only contains one Iteration with one Mile, as show in \autoref{tab:iter-rq2}.
 
 \begin{table}[h]
 \footnotesize
@@ -377,10 +378,10 @@ This question is more difficult to answer because we need to define what we mean
 Iteration RQ2.1                  & Mile 1                              & Take screenshot of OBJKT during snapshot               \\ \hline
 \end{tabular}
 \caption{Iteration Plan for RQ2}
+\label{tab:iter-rq2}
 \end{table}
 
 \section {Iteration RQ2.1}
-
 
 \subsection {Mile 1 - Screenshot OBJKT during Snapshot}
 
@@ -449,7 +450,7 @@ The application developed for the previous RQs already suffices as a backend for
 
 Once deployed in production we will determine the recurring cost of hosting the system which will allow us to proceed with the break-even analysis.
 
-This RQ only requires one iteration.
+This RQ only requires one iteration, see \autoref{tab:iter-rq4}.
 
 \section {Iteration RQ4.1}
 
@@ -463,6 +464,7 @@ This RQ only requires one iteration.
                              & Mile 1                              & Deploy system in production \\ \hline
 \end{tabular}
 \caption{Iteration RQ4.1 Miles}
+\label{tab:iter-rq4}
 \end{table}
 
 \subsection {Mile 2 - Develop Web UI}
@@ -521,7 +523,7 @@ For the search facility, a checkbox was added to optionally restrict the search 
   \label{fig:web-implementation}
 \end{figure}
 
-Also a basic "About" page was created, with a short description of what the project is about. This page also acts as the landing page when a user accesses the main site URL.
+Also a basic ``About'' page was created, with a short description of what the project is about. This page also acts as the landing page when a user accesses the main site URL.
 
 \begin{figure}[h]
     \centering
@@ -616,7 +618,7 @@ Another important consideration when deploying the application to a production e
 One would expect that installing and configuring the default Ubuntu firewall, UFW, would suffice. However through experimentation this was found not to be the case. Docker and UFW both modify the system's underlying \texttt{iptables} rules, resulting in unexpected results. There are methods of configuring UFW with Docker \cite{jarrousseHowUseUFW2023}\cite{fengChaifengUfwdocker2024}, but these include compromises in terms of internal connectivity, are rather complex to setup, and result in a brittle system which could easily break with a simple software update. For this reason the choice was to enable an external firewall solution provided by the VPS host provider as part of the VPS. There is no extra charge for this feature. As shown in \autoref{fig:firewallrules}, in addition to the ports specified in \autoref{fig:docker-containers}, port 22 was open to allow SSH access to the server. The firewall rules are illustrated in \autoref{fig:firewallrules}.
 
 
-With the firewall in place, and docker containers deployed, \texttt{ARKIVO} is live and accessible at: \texttt{https://arkivo.art/}
+With the firewall in place, and docker containers deployed, \texttt{ARKIVO} is live and accessible at: \texttt{arkivo.art}
 
 \begin{figure}[H]
     \centering
@@ -658,13 +660,11 @@ Currently the management of the archive's catalogue is all done through CLI on t
 The following commands were created to facilitate the initialisation of a new \texttt{ARKIVO} instance:
 
 
-
-\begin{VerbatimEnv}[H]
-  \caption{Commands for Catalogue Management}
-  \label{verb:cli-management}
-  \footnotesize
-  \begin{verbatim}
-
+\begin{lstlisting}[language=,
+  caption={Commands for Catalogue Management},
+  label={lst:cli-management},
+  basicstyle=\footnotesize\ttfamily
+]
 artifacts:discover         Discovers new artifacts' metadata from
                            the specified platform, optionally
                            pinning their payloads
@@ -676,10 +676,7 @@ artifacts:snapshot         Take a snapshot of an artifact
 
 artifacts:updateMetadata   Update all token metadata for the
                            specified platform
-\end{verbatim}
-\end{VerbatimEnv}
-
-
+\end{lstlisting}
 
 \section{Other Notes on the Artifact}
 
@@ -763,7 +760,7 @@ Open sourcing the project is important because anyone should be able to run an i
 \section{Decentralising IPFS Pinning}
 
 Although the current server setup has enough storage to hold the catalogue with one full set of snapshots, it does not have enough space for a second round of snapshots, which limits its usefulness in terms of documenting the evolution of the networked artworks. Increasing the size of the VPS is out of the question as it would work against the economic sustainability goal.
-One potential solution is to decentralised the IPFS pinning of snapshots by running IPFS nodes at home. Such nodes, whilst not enjoying the same bandwidth of a data centre, would still provide a valuable service by pinning the assets, making them available to other, faster, nodes who can cache them. Doing this only for snapshots would ensure that \texttt{ARKIVO} still performed reasonably well when serving the actual web pages with the artwork assets. Off-loading all snapshots would free up nearly 30GB of storage, which constitutes 20\% of the total server storage.
+One potential solution is to decentralised the IPFS pinning of snapshots by running IPFS nodes at home, see \autoref{fig:offload-snapshots}. Such nodes, whilst not enjoying the same bandwidth of a data centre, would still provide a valuable service by pinning the assets, making them available to other, faster, nodes who can cache them. Doing this only for snapshots would ensure that \texttt{ARKIVO} still performed reasonably well when serving the actual web pages with the artwork assets. Off-loading all snapshots would free up nearly 30GB of storage, which constitutes 20\% of the total server storage. This would also pave the way to a future decentralised and p2p architecture for \texttt{ARKIVO}, see \autoref{fig:arkivo-p2p}.
 
 \begin{figure}[h]
     \centering
@@ -779,7 +776,7 @@ The plan is to configure the home node with IPFS, and a script that downloads ea
     \centering
     \includesvg[width=0.50\textwidth]{arkivo-p2p.svg}
     \caption[\texttt{ARKIVO} - Towards a p2p Architecture]{\texttt{ARKIVO} - Towards a p2p Architecture}
-    \label{fig:offload-snapshots}
+    \label{fig:arkivo-p2p}
 \end{figure}
 
 
@@ -803,6 +800,7 @@ At current prices this is equivalent to one year's subscription to the ClubNFT s
 
 \subsection{Assembly of Node Hardware}
 
+The assembly of the hardware is relatively straightforward. Some care is required when attaching the heatsink, as the standoffs supplied with the case are very similar but not identical and need to be attached in the right position relative to the Raspberry pi. The following figures illustrate the process:
 
 \begin{figure}[H]
   \centering
@@ -880,24 +878,22 @@ At current prices this is equivalent to one year's subscription to the ClubNFT s
     \caption{Close case and remove stickers}
     \label{fig:step-08.png}
   \end{subfigure}
-  \caption{Attaching SSD}
+  \caption{Completing node assembly}
   \label{fig:node-steps-01-02}
 \end{figure}
 
 
-
 \subsection{Node Software}
 
-Use the Raspberry SD Card Imager to image an SD card (in this case 16GB, but can be 8GB also) with the latest Raspberry Pi OS (64 bit).
+The Raspberry SD Card Imager was used to image an SD card (in this case 16GB, but can be 8GB also) with the latest Raspberry Pi OS (64 bit).
 
-Boot the node with that image, and use the Raspbery SD Card Imager utility in that installation to image Raspberry Pi OS onto the SDD.
+The node was then booted with that image, and we used the Raspbery SD Card Imager utility in that installation to image Raspberry Pi OS onto the SDD.
 
-Reboot the node, removing the SD card (we will no longer be needing it), since now we can boot directly from the SDD.
+With the operating system now imaged onto the SSD, the node was rebooted, this time removing the SD card (we will no longer be needing it), since now we can boot directly from the SDD.
 
-Install the DeskPi Pro drivers and services so that it can automatically control the CPU fan based on heat.
+The DeskPi Pro drivers and services were installed so that they can automatically control the CPU fan based on the temperature sensors built into the Raspberry Pi. The commands used are listed in \autoref{lst:installdeskpi}.
 
-
-\begin{lstlisting}[language=, caption={Install DeskPi drivers}, label={lst:installdeskpi}] 
+\begin{lstlisting}[language=, caption={Installation of DeskPi drivers}, label={lst:installdeskpi}] 
 sudo apt get update
 git clone https://github.com/DeskPi-Team/deskpi.git 
 cd ~/deskpi/installation/RaspberryPiOS/64bit/
@@ -905,9 +901,9 @@ sudo ./install-raspios-64bit.sh
 \end{lstlisting}
 
 
-Install Docker
+Docker was installed, as illustrated in \autoref{lst:installdocker}:
 
-\begin{lstlisting}[language=, caption={Install Docker on Node}, label={lst:installdeskpi}] 
+\begin{lstlisting}[language=, caption={Installation of Docker on Node}, label={lst:installdocker}] 
 # Add Docker's official GPG key:
 sudo apt-get update
 sudo apt-get install ca-certificates curl
@@ -928,9 +924,7 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 \end{lstlisting}
 
-Log out and login again to apply the changes.
-
-Now download and run our \texttt{ARKIVO} snapshot pinning service.
+After logging out and logging in again to apply the changes, we could then install and run our \texttt{ARKIVO} node snapshot pinning service. It consists of a basic python program that fetches the snapshots of OBJKTs from \texttt{ARKIVO} and pins them to IPFS using a local IPFS node.
 
 \begin{lstlisting}[language=, caption={Install and run \texttt{ARKIVO} Node Software}, label={lst:screenshotcode}] 
 git clone https://github.com/seda-studio/arkivo-node
@@ -948,11 +942,11 @@ pip install tqdm
 python snapshot-pinner.py
 \end{lstlisting}
 
-This starts the download and pinning job. You can Ctrl + A to exit the screen, which leaves the job working in the background.
+This starts the download and pinning job. Hitting Ctrl + A exits the screen, which leaves the job working in the background.
 
-You can monitor the progress of the tool in real time with: \texttt{tail -f successful\_operations.log}.
+We can then monitor the progress of the tool in real time with: \texttt{tail -f successful\_operations.log}.
 
-\begin{lstlisting}[language=, caption={Output of Snapshot Pinning Job}, label={lst:installdeskpi}] 
+\begin{lstlisting}[language=, caption={Output of Snapshot Pinning Job}, label={lst:pinningjob}] 
 SNAPSHOT_ID: 81, CID: QmX47LTHHfQzE8YXytsuj9CtsjN5itecvewmJteJE39haq
 SNAPSHOT_ID: 83, CID: QmTXwFjt3KQRX8tUxNSVy2gwdoVy55WZW3tKHtTTbAtxfK
 SNAPSHOT_ID: 85, CID: QmdLNwARrE16KV4PmQLnuBNzrTSVfzBsSTRvunEG2Ytcsa
@@ -993,3 +987,6 @@ The \texttt{ARKIVO} home node source code, and more detailed installation instru
   \label{fig:pinning-home}
 \end{figure}
 
+\section{Conclusion}
+
+In this chapter a detailed account of the implementation of the artifact was provided, following the RQDD method introduced in \autoref{chap:method}. This allowed the artifact's developmentg to efficiently answer the research questions. In order to improve the economic sustainability of the artifact, a hardware module was introduced, which allows the pinning of snapshots from home, which allows the releasing of significant amounts of disk space from the cloud-based installation.

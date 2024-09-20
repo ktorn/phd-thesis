@@ -1,4 +1,5 @@
 \chapter{Methodology}
+\label{chap:method}
 
 This chapter will describe the methodological approach to answering our research questions.
 It starts by selecting an overall philosophical paradigm, which will frame our approach to the problem. Then is describes the main research approaches. It introduces the main research methodology, and the specific research methods employed in this research project. 
@@ -38,7 +39,9 @@ More importantly, the iterative nature of DSR will be adapted to a pragmatic dev
 
 \section{Research Methods}
 
-This study primarily follows a systematic collection and analysis of the data produced by the artifact, in order to validate the artifact's ability to classify and document the OBJKTs as well as to determine the infrastructure requirements and financial costs.
+This project used a variety of research methods, both for the preliminary study of code-based artworks, which developed into a survey and taxonomy presented in chapter \autoref{chap:survey}, and also for the development of the artifact, and its evaluation, which are detailed in \autoref{chap:dev} and \autoref{chap:eval}, respectively.
+
+This study primarily follows a systematic collection and analysis of the data produced by the artifact, in order to validate the artifact's ability to classify and document the OBJKTs as well as to determine the infrastructure requirements and financial costs. An analysis of the rate of growth of the storage costs was also performed, with the use of the R statistics software.
 
 In a secondary role, a qualitative strategy was also employed, with stakeholder interviews, to gather additional evidence of the accuracy of the artifact in classifying networked OBJKTs, and to receive feedback which may be useful for future iterations of the artifact.
 
@@ -47,7 +50,7 @@ Even though both methodologies are used, due to the lack of integration or trian
 
 \subsection{Research Question Driven Development}
 
-In order to address the research questions, a new iterative development method was conceived, inspired in the agile development method \cite{shoreArtAgileDevelopment2021} but simplified and focused on answering the research questions. We'll call this method Research Question Driven Development (\indexacronym{rqdd}).
+In order to address the research questions, a new iterative development method was conceived, inspired both in the agile development method \cite{shoreArtAgileDevelopment2021} as well as in test-driven development \cite{beckTestdrivenDevelopmentExample2003} but simplified and focused on answering the research questions. We'll call this method Research Question Driven Development (\indexacronym{rqdd}).
 
 This process involves the development of an information system, the main artifact, and the observation of that artifact in a real world scenario. Each iteration is designed to either answer a research question, or to bring the artifact closer to such an answer in developmental terms.
 
@@ -87,11 +90,13 @@ In addition, three other stakeholders, all members of the Teia core team, tested
 
 \section{Reproducibility}
 
-In order to facilitate the reproducibility of the findings, all the source code and data collected (except interviews) was made available publicly:
+In order to facilitate the reproducibility of the findings, \texttt{ARKIVO}'s source code and data analysis source files, including the data exported from \texttt{ARKIVO}'s artifacts database table was made available publicly:
 
-\begin{enumerate}
-    \item the source code of the artifact is available at:\\ \texttt{https://github.com/seda-studio/arkivo}
-\end{enumerate}
+\begin{itemize}
+    \item the source code of \texttt{ARKIVO} is available at:\\ \texttt{https://github.com/seda-studio/arkivo}
+    \item the source code for the hardware pinning node is available at:\\ \texttt{https://github.com/seda-studio/arkivo-node}
+    \item the data exported from \texttt{ARKIVO}'s artifacts database table, and the R source file are available at: \\ \texttt{https://github.com/ktorn/phd-thesis/tree/main/data-analysis}
+\end{itemize}
 
 \subsection{Journaling}
 
@@ -143,4 +148,6 @@ For most diagrams Google Draw, which is a part of the Google Docs suite, was use
 
 Inkscape, another free and open source vector graphics tool, was used to extract vector-based diagrams from existing literature. For example, \autoref{fig:is-research-framework} in page \pageref{fig:is-research-framework}, is a vector based diagram which was exported from the original article PDF, using Inkscape. Care was taken to convert all text into vector paths, so as to scale properly in this document.
 
+\section{Conclusion}
 
+This chapter introduced the methodology used in this study, which follows a philosophy of pragmatism, and that is particularly suitable to Design Science Research (DSR). It also outlined the various research methods employed in the research, including the novel Research Question Driven Development (RQDD) method created for this study and which focuses the development of the artifact on the answering of the research questions. This method will be expanded upon in \autoref{chap:dev} - \nameref{chap:dev}, page \pageref{chap:dev}.

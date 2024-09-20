@@ -1,5 +1,5 @@
-
 \chapter{Artifact Evaluation and Discussion}
+\label{chap:eval}
 
 In this chapter we will evaluate the artifact from three perspectives:
 
@@ -471,7 +471,7 @@ ipns/k51qzi5uqu5dm198e6gwnuihom8ht49z8u2qu2amjvo32380enkgfmh8riyrx9
 \end{lstlisting}
 
 
-After checking each one, 15 were found to be failed tests, as artists were experimenting with the possibilities. Most belong to OBJKTs which have been burned by the artists. However 2 CIDs were found to be valid and belong to existing artworks indexed by our artifact.
+After checking each one, 15 were found to be failed tests, as artists were experimenting with the possibilities. Most belong to OBJKTs which have been burnt by the artists. However 2 CIDs were found to be valid and belong to existing artworks indexed by our artifact.
 
 \begin{lstlisting}[language=, caption={17 Remaining Unconventional Format CIDs}, label={lst:17-bad-cids}] 
 QmU7kxXjA8mXRNEZi21joc62fCdYMgVDnErYCYr3EyH4sJ
@@ -654,7 +654,7 @@ The full snapshot download worked as well. To verify that the network call was w
     \label{fig:sample-snapshot}
 \end{figure}
 
-Additionally, the automatic classification was checked for correctness. It also passed, see \autoref{ig:sample-classfication}.
+Additionally, the automatic classification was checked for correctness. It also passed, see \autoref{fig:sample-classfication}.
 
 \begin{figure}[h]
     \centering
@@ -733,7 +733,7 @@ On participant stated the importance for this work, because networked crypto art
 In this section we will extract and analyse data from the artifact, with the goal of gaining insights into the future storage requirements of \texttt{ARKIVO}.
 Firstly we will look at the trend in terms of data stored over time.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.75\linewidth]{graph-arkivo-ipfs-time.png}
     \caption[IPFS Storage Over Time (Code-Based OBJKTs)]{IPFS Storage Over Time (Code-Based OBJKTs)}
@@ -743,28 +743,35 @@ Firstly we will look at the trend in terms of data stored over time.
 
 As can be seen in \autoref{fig:graph-ipfs-time}, there has been a significant slowing down of growth in terms of storage requirements, which is positive from a cost of storage perspective. Since \texttt{ARKIVO} does not store market data, it is impossible to determine how this compares to the slowing down in market activity.
 
-\begin{figure}[h]
-  \centering
-  \begin{subfigure}[b]{0.45\textwidth}
+
+\begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{graph-net-vs-nonnet-tokens.png}
-    \caption{Networked vs Non-Networked (Number of Tokens)}
+    \includegraphics[width=0.75\linewidth]{graph-net-vs-nonnet-tokens.png}
+    \caption[Networked vs Non-Networked (Number of Tokens)]{Networked vs Non-Networked (Number of Tokens)}
     \label{fig:graph-net-nonnet}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.45\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{graph-net-vs-nonnet-size.png}
-    \caption{Networked vs Non-Networked (Artifact Size)}
-    \label{fig:graph-net-vs-nonnet-size}
-  \end{subfigure}
-  \caption{Networked vs Non-Networked}
-  \label{fig:net-vs-nonnet}
 \end{figure}
 
-\autoref{fig:net-vs-nonnet} reveals that networked OBJKTs constitute a minority in terms of number of tokens minted, with only 6.5\% of tokens, however that figure more than doubles if we analyse it from an artifact size perspective. This suggests that even though small in relative number, network OBJKTs are on average larger in size. It must be noted that there is a discrepancy between the total number of tokens shown in \autoref{fig:graph-net-nonnet} (16,652) and the total number of tokens originally reported in \autoref{sub:rq1_mile4} (\nameref{sub:rq1_mile4}, page \pageref{sub:rq1_mile4}), 21,394. This discrepancy is due to the fact that these graphs exclude burned OBJKTs, which are \texttt{4,742} in total.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\linewidth]{graph-net-vs-nonnet-size.png}
+    \caption[Networked vs Non-Networked (Artifact Size)]{Networked vs Non-Networked (Artifact Size)}
+    \label{fig:net-vs-nonnet}
+\end{figure}
+
+
+\autoref{fig:graph-net-nonnet} reveals that networked OBJKTs constitute a minority in terms of number of tokens minted, with only 6.5\% of tokens, however that figure more than doubles if we analyse it from an artifact size perspective, see \autoref{fig:net-vs-nonnet}. This suggests that even though small in relative number, network OBJKTs are on average larger in size. 
+
 
 This data shows that it is feasible for \texttt{ARKIVO} to continue running on its current infrastructure, especially if we are able to offload snapshots to home nodes.
+
+\subsection{Burned OBJKTs}
+
+It must be noted that there is a discrepancy between the total number of tokens shown in \autoref{fig:graph-net-nonnet} (16,652) and the total number of tokens originally reported in \autoref{sub:rq1_mile4} (\nameref{sub:rq1_mile4}, page \pageref{sub:rq1_mile4}), 21,394. This discrepancy is due to the fact that these graphs exclude burned OBJKTs, which are \texttt{4,742} in total.
+
+A burned OBJKT is one that the artist intentionally removed from circulation, by transferring all editions to a well known \emph{burn} address. This address is not controlled by anyone, and therefore the editions are considered to be inaccessible, and can never be traded again. Aside from burning whole OBJKTs, it is also possible to only burn a fraction of the editions of an OBJKT, reducing its supply of editions. This action does not flag the OBJKT itself as burned.
+
 
 \section{Archiving ARKIVO}
 
@@ -844,7 +851,7 @@ As time passes, technology will continue to evolve. New hardware will run new op
 
 This inevitable evolution into emulated environments does represent an additional challenge for networked artworks, because in addition to emulating the artefact's code-base itself, the emulation environment must also simulate the network dependencies of the artwork, and this can pose a problem known to software developers as \emph{dependency hell}, where each dependency in turn depends on a number of other dependencies, leading to an ever increasing dependency tree. A solution to this problem seems unfeasible, if any of those dependencies, or their sub-dependencies, does not strictly follow the web3 architecture that makes projects easily duplicable.
 
-For this reason, the IOC model gains an even greater importance for the longevity of code-based networked artworks, because you can more easily generate the data expected by the artwork, or in the worst-case scenario, simply repeatedly inject the last known good snapshot of data for all future renderings.
+For this reason, Inversion of Control (IoC) \cite{fowlerInversionControl2005} and Dependency Injection (DI) \cite{martinOODesignQuality1994} models, popular in software development as a way to de-couple software components, gain an even greater importance for the longevity of code-based networked artworks, because you can more easily generate the data expected by the artwork, or in the worst-case scenario, simply repeatedly inject the last known good snapshot of data for all future renderings.
 
 \subsection{Beyond the Canvas}
 
